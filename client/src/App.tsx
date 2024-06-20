@@ -1,7 +1,9 @@
 
 // import './App.css'
 
-import { Login } from "./components/forms/Login"
+import { Route, Routes } from "react-router"
+import { WelcomeComponent } from "./components/WelcomeComponent"
+// import { Login } from "./components/forms/Login"
 import { AuthProvider } from "./providers/AuthProvider"
 import { IncomeAndExpenseProvider } from "./providers/IncomeAndExpenseProvider"
 
@@ -18,8 +20,9 @@ function App() {
       <div className="flex justify-center flex-col items-center lg:p-20 md:p-10 w-screen bg-[#fffcf6] space-y-5 min-h-screen ">
         <AuthProvider>
           <IncomeAndExpenseProvider>
-
-            <Login/>
+            <Routes>
+              <Route path="/" element={<WelcomeComponent />}></Route>
+            </Routes>
           </IncomeAndExpenseProvider>
         </AuthProvider>
       </div>

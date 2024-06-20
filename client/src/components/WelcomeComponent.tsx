@@ -1,8 +1,17 @@
+import { Login } from "./forms/Login"
+import { Signup } from "./forms/Signup"
 
 
 export const WelcomeComponent = () => {
 
     return(
-        <div>This is the welcome landing page</div>
+        <div> 
+            {/* <Login />
+            <Signup /> */}
+
+            this is the welcome component
+        </div>
+
+        // create the 
     )
 }
