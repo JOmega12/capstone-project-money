@@ -1,0 +1,12 @@
+6/15/24
+
+BACKEND: 
+- create the backend for python for the three endpoints: 
+    - user, expense, income
+- customize user to be username, and password
+    -create a jwt authentication for password
+
+
+FRONTEND:
+- refer to the github configuration to the coffee express for structure***
+- create the structure for the landing page, login/sign up and the dashboard
