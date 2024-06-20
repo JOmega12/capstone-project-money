@@ -1,0 +1,8 @@
+To see what dependencies you have instaleld without requirements you have installed:
+
+- First activate your virtual env
+- then `pip freeze > requirements.txt`
+- then write it down in your requirements.txt 
+
+- in another computer that you are working from:
+- ` pip install -r requirements.txt`
