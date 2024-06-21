@@ -15,9 +15,10 @@ function App() {
   // const [count, setCount] = useState(0)
 
   // bg-[#f4f4ec]
+  // font-Montserrat
   return (
     <>
-      <div className="flex justify-center flex-col items-center lg:p-20 md:p-10 w-screen bg-[#fffcf6] space-y-5 min-h-screen ">
+      <div className="flex justify-center flex-col items-center lg:p-20 md:p-10 w-screen bg-[#fffcf6] space-y-5 min-h-screen font-montserrat">
         <AuthProvider>
           <IncomeAndExpenseProvider>
             <Routes>

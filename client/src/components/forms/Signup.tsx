@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { TextInputs } from "../TextInputs";
 
 
-export const Signup = () => {
+export const SignUp = () => {
 
 
     const [usernameInput, setUsernameInput] = useState('');
@@ -24,22 +25,22 @@ export const Signup = () => {
 
     return(
         <form>
-        <div>
             <div>
-                <button></button>
-                <h2>Login</h2>
-            </div>
-            <div>
-                {/* <TextInputs 
-                    type="text"
-                    value={}
-                    onChange={}
-                    show={}
-                    message={}
-                /> */}
+                <div>
+                    <button></button>
+                    <h2>SignUp</h2>
+                </div>
+                <div>
+                    {/* <TextInputs 
+                        type="text"
+                        value={}
+                        onChange={}
+                        show={}
+                        message={}
+                    /> */}
 
+                </div>
             </div>
-        </div>
 
     </form>
     )

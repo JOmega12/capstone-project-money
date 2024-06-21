@@ -1,17 +1,50 @@
+import { useState } from "react"
 import { Login } from "./forms/Login"
-import { Signup } from "./forms/Signup"
+import { SignUp } from "./forms/SignUp";
 
 
 export const WelcomeComponent = () => {
 
-    return(
-        <div> 
-            {/* <Login />
-            <Signup /> */}
+    const [isLogin, setIsLogin] = useState(false);
 
-            this is the welcome component
+    const onButtonClick = (bool: boolean) => {
+        setIsLogin(bool)
+    }
+
+
+    const inputRadio = [
+        {
+            title: 'Signup',
+            value: isLogin,
+            checked: !isLogin,
+            onClick: () => onButtonClick(false)
+        },
+        {
+            title: 'Login',
+            value: !isLogin,
+            checked: isLogin,
+            onClick: () => onButtonClick(true)
+        }
+
+    ]
+
+    return(
+        <div>
+            <div>
+                {inputRadio.map((item) => (
+                    <label htmlFor="">
+                        <input 
+                            type="radio"
+                            checked={item.checked}
+                            onClick={item.onClick} 
+                        />
+                        {item.title}
+                    </label>
+                ))}
+            </div>
+            {isLogin ? (<Login/>) : (<SignUp/>)}
         </div>
 
-        // create the 
+
     )
 }
