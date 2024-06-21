@@ -11,7 +11,7 @@ type TextInputsType = {
 }
 
 
-export const TextInputs = ({label, onChange, value, show, message, type}: TextInputsType) => {
+export const TextInputs = ({label, onChange, value, show, message, type}: TextInputsType) => (
     <div className="flex flex-row">
         <label htmlFor="" className="w-32 text-lg mb-2 p-3">{label}</label>
         <input 
@@ -24,4 +24,4 @@ export const TextInputs = ({label, onChange, value, show, message, type}: TextIn
             {message}
         </div>) : null}
     </div>
-}
+)

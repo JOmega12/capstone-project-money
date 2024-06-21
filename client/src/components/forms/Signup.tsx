@@ -1,47 +1,78 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { TextInputs } from "../TextInputs";
+import { isPasswordValid } from "../validations/formValidations";
 
+const usernameErrorMessage = "Username not found";
+const passwordErrorMessage = "Password not found";
+const confirmPasswordErrorMessage = "Passwords are not the same";
 
 export const SignUp = () => {
+  const [usernameInput, setUsernameInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
 
+  const [error, setError] = useState(false);
 
-    const [usernameInput, setUsernameInput] = useState('');
-    const [passwordInput, setPasswordInput] = useState('');
-    const [confirmPass, setConfirmPass] = useState('')
-    
-    const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const usernameValid = usernameInput.length > 2;
+  const passwordValid = isPasswordValid(passwordInput);
+  const confirmPasswordValid = passwordInput === confirmPass;
 
+  const showUsernameError = !usernameValid && error;
+  const showPasswordError = !passwordValid && error;
+  const showConfirmPasswordError = !confirmPasswordValid && error;
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
-        if(e.key === "Enter") {
-          e.preventDefault();
-          handleSubmit(e);
-        }
-      }
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
 
+  return (
+    <form>
+      <div>
+        <div>
+          <h2>SignUp</h2>
+        </div>
+        <div>
+          <TextInputs
+            type="text"
+            label="Username"
+            value={usernameInput}
+            onChange={(e) => setUsernameInput(e.target.value)}
+            show={showUsernameError}
+            message={usernameErrorMessage}
+          />
+          <TextInputs
+            type="text"
+            label="Password"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            show={showPasswordError}
+            message={passwordErrorMessage}
+          />
+          <TextInputs
+            type="text"
+            label="Confirm Password"
+            value={confirmPass}
+            onChange={(e) => setConfirmPass(e.target.value)}
+            show={showConfirmPasswordError}
+            message={confirmPasswordErrorMessage}
+          />
 
-    return(
-        <form>
-            <div>
-                <div>
-                    <button></button>
-                    <h2>SignUp</h2>
-                </div>
-                <div>
-                    {/* <TextInputs 
-                        type="text"
-                        value={}
-                        onChange={}
-                        show={}
-                        message={}
-                    /> */}
-
-                </div>
-            </div>
-
+          
+<div className="flex flex-row gap-10 text-center cursor-pointer">
+            <input
+              type="submit"
+              value="Sign Up"
+              className="items-center h-14 w-full max-w-md border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-500 bg-green-500 hover:bg-green-600"
+            />
+          </div>
+        </div>
+      </div>
     </form>
-    )
-}
+  );
+};

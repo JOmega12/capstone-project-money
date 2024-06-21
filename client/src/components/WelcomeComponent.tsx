@@ -31,6 +31,9 @@ export const WelcomeComponent = () => {
     return(
         <div>
             <div>
+                <h1>WalletWhiz</h1>
+            </div>
+            <div>
                 {inputRadio.map((item) => (
                     <label htmlFor="">
                         <input 
@@ -41,8 +44,8 @@ export const WelcomeComponent = () => {
                         {item.title}
                     </label>
                 ))}
+                {isLogin ? (<Login/>) : (<SignUp/>)}
             </div>
-            {isLogin ? (<Login/>) : (<SignUp/>)}
         </div>
 
 

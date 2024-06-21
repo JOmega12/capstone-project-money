@@ -29,6 +29,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserInformation | null>(null);
   const isRegister = !!user;
 
+  
+
+
   return (
     <AuthContext.Provider
       value={{
