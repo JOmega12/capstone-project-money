@@ -14,12 +14,14 @@ export const WelcomeComponent = () => {
 
     const inputRadio = [
         {
+            id: 1,
             title: 'Signup',
             value: isLogin,
             checked: !isLogin,
             onClick: () => onButtonClick(false)
         },
         {
+            id: 2,
             title: 'Login',
             value: !isLogin,
             checked: isLogin,
@@ -35,10 +37,11 @@ export const WelcomeComponent = () => {
             </div>
             <div>
                 {inputRadio.map((item) => (
-                    <label htmlFor="">
+                    <label htmlFor="" key={item.id}>
                         <input 
                             type="radio"
                             checked={item.checked}
+                            readOnly
                             onClick={item.onClick} 
                         />
                         {item.title}
