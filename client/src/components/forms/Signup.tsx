@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router";
 import { TextInputs } from "../TextInputs";
 import { isPasswordValid } from "../validations/formValidations";
+import { useAuth } from "../../providers/AuthProvider";
 
 const usernameErrorMessage = "Username not found";
 const passwordErrorMessage = "Password not found";
 const confirmPasswordErrorMessage = "Passwords are not the same";
 
 export const SignUp = () => {
+  const {registerUser} = useAuth();
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
@@ -24,6 +26,25 @@ export const SignUp = () => {
   const showPasswordError = !passwordValid && error;
   const showConfirmPasswordError = !confirmPasswordValid && error;
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try{
+      registerUser({
+        username: usernameInput,
+        password: passwordInput
+      })
+
+      if(!usernameValid || !passwordValid || !confirmPasswordValid){
+        setError(true);
+      } else {
+        setError(false);
+        navigate("/dashboard")
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -32,7 +53,10 @@ export const SignUp = () => {
   };
 
   return (
-    <form>
+    <form
+      onSubmit={(e) => handleSubmit(e)}
+      onKeyDown={(e) => handleKeyDown(e)}
+    >
       <div>
         <div>
           <h2>SignUp</h2>

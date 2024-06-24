@@ -9,7 +9,7 @@ const passwordErrorMessage = "Password not found";
 const loginErrorMessage = "User is not registered";
 
 export const Login = () => {
-  const { user } = useAuth();
+  const { user, loginUser } = useAuth();
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState(false);
@@ -26,6 +26,24 @@ export const Login = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    
+    loginUser({
+      password: passwordInput,
+      username: usernameInput
+    })
+    .then((user) => {
+      if(!user) {
+        setError(true);
+        return;
+      } else {
+        localStorage.setItem("user", JSON.stringify(user));
+        setError(false);
+        navigate("/dashboard")
+      }
+    })
+
+
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
@@ -36,7 +54,13 @@ export const Login = () => {
   };
 
   return (
-    <form>
+    <form
+
+      onSubmit={(e) => handleSubmit(e)}
+      onKeyDown={(e) => {
+        handleKeyDown(e)
+      }}
+    >
       <div>
         <div>
           <h2>Login</h2>

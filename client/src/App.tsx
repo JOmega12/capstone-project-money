@@ -6,6 +6,7 @@ import { WelcomeComponent } from "./components/WelcomeComponent"
 // import { Login } from "./components/forms/Login"
 import { AuthProvider } from "./providers/AuthProvider"
 import { IncomeAndExpenseProvider } from "./providers/IncomeAndExpenseProvider"
+import { Dashboard } from "./components/dashboard/Dashboard"
 
 // import { Navbar } from "./Navbar"
 // import { AuthProvider } from "./providers/AuthProvider"
@@ -23,6 +24,7 @@ function App() {
           <IncomeAndExpenseProvider>
             <Routes>
               <Route path="/" element={<WelcomeComponent />}></Route>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
             </Routes>
           </IncomeAndExpenseProvider>
         </AuthProvider>

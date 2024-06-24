@@ -18,7 +18,7 @@ type TAuthContext = {
   loginUser: (
       userInfo: Pick<UserInformation, 'password' | 'username'>
   ) => Promise<UserInformation | undefined>;
-  // logoutUser: () => void;
+  logoutUser: () => void;
 };
 
 type AuthProviderProps = {
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   console.log(user, 'authprovider')
   const registerUser = async ({username, password} : UserInformation) => {
-    registerFetch({username, password}).then((user) => {
+    await registerFetch({username, password}).then((user) => {
       localStorage.setItem("user", JSON.stringify(user))
       return setUser(user)
     })
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const loginUser = async ({username, password}: Pick<UserInformation, 'username' |  'password'>): Promise<UserInformation | undefined> => {
     try {
-      const user = getUserFromServer({username, password}).catch(() => null);
+      const user = await getUserFromServer({username, password}).catch(() => null);
 
       if (!user) {
         throw new Error("there is no user taken from AuthProvider");
@@ -87,7 +87,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setUser,
         isRegister,
         registerUser,
-        loginUser
+        loginUser,
+        logoutUser
       }}
     >
       {children}
