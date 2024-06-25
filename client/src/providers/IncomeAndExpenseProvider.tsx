@@ -27,7 +27,8 @@ const MoneyContext = createContext<IncomeAndExpenseContextType | undefined> (und
 export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
     const [money, setMoney] = useState<IncomeAndExpenseType | null>(null);
-
+    const [payHistory, setPayHistory] = useState([]);
+    
     // console.log(money)
 
     // const refetch = () => {};
