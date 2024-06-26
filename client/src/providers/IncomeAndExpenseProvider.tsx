@@ -1,18 +1,10 @@
-import { Dispatch, FormEvent, ReactNode, SetStateAction, createContext, useContext, useState } from "react";
+import { Dispatch, FormEvent, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { IncomeAndExpenseType } from "../types/types";
+import { createNewIncomeAPI, getMoney } from "../api/getMoneyAPI";
 
 type IncomeAndExpenseContextType = {
-//   createMoney: (
-//     newMoney: Pick<
-//       IncomeAndExpenseType,
-//       | "incomeName"
-//       | "totalIncomeAmount"
-//       | "incomeDate"
-//       | "expenseName"
-//       | "totalExpenseAmount"
-//       | "expenseDate"
-//     >
-//   ) => Promise<IncomeAndExpenseType | undefined>;
+  createNewIncomeForm: (newIncome: Pick<IncomeAndExpenseType, "incomeName"| "totalIncomeAmount" | "incomeDate" >) => Promise<IncomeAndExpenseType | undefined>;
+  createNewExpenseForm: (newExpense: Pick<IncomeAndExpenseType, "expenseName" | "totalExpenseAmount" | "expenseDate">) => Promise<IncomeAndExpenseType | undefined>;
   money: IncomeAndExpenseType | null;
   setMoney: Dispatch<SetStateAction<IncomeAndExpenseType | null>>;
 };
@@ -46,9 +38,22 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     const pDay = day.toString().padStart(2,"0");
     const newPaddedDate = `${monthName} ${pDay}, ${year}`
 
-    // *this creates new income
-    const createNewIncomeForm = () => {
+    const refetch = () => {
+      getMoney().then(setMoney);
+    };
 
+    useEffect(() => {
+      refetch();
+    }, [])
+
+
+    // !do i need to do a pick on the createNewIncomeAPI?
+    // *this creates new income
+    const createNewIncomeForm = async ({incomeName, totalIncomeAmount, incomeDate} : Pick<IncomeAndExpenseType, "incomeName" | "totalIncomeAmount" | "incomeDate">): Promise <IncomeAndExpenseType | undefined > => {
+      try {
+        await createNewIncomeAPI({incomeName, totalIncomeAmount, incomeDate});
+        await refetch();
+      }
     }
     
     // *this create new expense
