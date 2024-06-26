@@ -10,7 +10,7 @@ export type IncomeType  = {
     id?: number;
     incomeName: string;
     totalIncomeAmount: number;
-    incomeDate: string;
+    incomeDate?: string;
 
 }
 
@@ -18,7 +18,7 @@ export type ExpenseType = {
     id?: number;
     expenseName : string;
     totalExpenseAmount: number;
-    expenseDate: string
+    expenseDate?: string
 }
 
 export type IncomeAndExpenseType = IncomeType & ExpenseType;

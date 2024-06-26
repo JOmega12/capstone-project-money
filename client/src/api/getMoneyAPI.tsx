@@ -35,7 +35,7 @@ export const patchIncomeSection = (income: IncomeType)=> {
 }
 
 export const deleteIncomeSection= async(id: number) => {
-    return fetch(config_json.baseUrl + "/incomes" + id, {
+    return fetch(config_json.baseUrl + "/incomes/" + id, {
         method: "DELETE",
     }).then((res) => {
         if(!res.ok) {
@@ -70,7 +70,7 @@ export const patchExpenseSection = (expense: ExpenseType) => {
 }
 
 export const deleteExpenseSection = async(id: number) => {
-    return fetch(config_json.baseUrl + "/incomes" + id, {
+    return fetch(config_json.baseUrl + "/incomes/" + id, {
         method: "DELETE"
     }).then((res) => {
         if(!res.ok){
