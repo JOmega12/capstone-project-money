@@ -1,10 +1,10 @@
 import { Dispatch, FormEvent, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
-import { IncomeAndExpenseType } from "../types/types";
+import { ExpenseType, IncomeAndExpenseType, IncomeType } from "../types/types";
 import { createNewIncomeAPI, getMoney } from "../api/getMoneyAPI";
 
 type IncomeAndExpenseContextType = {
-  createNewIncomeForm: (newIncome: Pick<IncomeAndExpenseType, "incomeName"| "totalIncomeAmount" | "incomeDate" >) => Promise<IncomeAndExpenseType | undefined>;
-  createNewExpenseForm: (newExpense: Pick<IncomeAndExpenseType, "expenseName" | "totalExpenseAmount" | "expenseDate">) => Promise<IncomeAndExpenseType | undefined>;
+  createNewIncomeForm: (newIncome: Pick<IncomeType, "incomeName"| "totalIncomeAmount" | "incomeDate" >) => Promise<IncomeType | undefined>;
+  createNewExpenseForm: (newExpense: Pick<ExpenseType, "expenseName" | "totalExpenseAmount" | "expenseDate">) => Promise<ExpenseType | undefined>;
   money: IncomeAndExpenseType | null;
   setMoney: Dispatch<SetStateAction<IncomeAndExpenseType | null>>;
 };
@@ -49,15 +49,26 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
     // !do i need to do a pick on the createNewIncomeAPI?
     // *this creates new income
-    const createNewIncomeForm = async ({incomeName, totalIncomeAmount, incomeDate} : Pick<IncomeAndExpenseType, "incomeName" | "totalIncomeAmount" | "incomeDate">): Promise <IncomeAndExpenseType | undefined > => {
+    const createNewIncomeForm = async ({incomeName, totalIncomeAmount, incomeDate} : Pick<IncomeType, "incomeName" | "totalIncomeAmount" | "incomeDate">): Promise <IncomeType | undefined > => {
       try {
         await createNewIncomeAPI({incomeName, totalIncomeAmount, incomeDate});
         await refetch();
+
+        const newMoney = money;
+        if(newMoney) {
+          return newMoney
+        } else {
+          return undefined
+        }
+
+      } catch(err){
+        console.error("Could not create New Money In Provider", err);
+        return undefined
       }
     }
     
     // *this create new expense
-    const createNewExpenseForm = () => {
+    const createNewExpenseForm = async() => {
 
     }
 
@@ -101,7 +112,8 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   <MoneyContext.Provider 
     value={{
         money,
-        setMoney
+        setMoney,
+        createNewIncomeForm
   }}>
     {children}
   </MoneyContext.Provider>

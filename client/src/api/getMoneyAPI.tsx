@@ -1,4 +1,5 @@
-import { IncomeAndExpenseType } from "../types/types";
+// import { IncomeAndExpenseType } from "../types/types";
+import { ExpenseType, IncomeType } from "../types/types";
 import { config_json } from "./config"
 
 
@@ -9,7 +10,7 @@ export const getMoney = () => {
 }
 
 
-export const createNewIncomeAPI = ({incomeName, totalIncomeAmount, incomeDate}: IncomeAndExpenseType) => {
+export const createNewIncomeAPI = ({incomeName, totalIncomeAmount, incomeDate}: IncomeType) => {
     fetch(config_json.baseUrl + "/incomes", {
         method: "POST",
         headers: {
@@ -20,7 +21,7 @@ export const createNewIncomeAPI = ({incomeName, totalIncomeAmount, incomeDate}: 
 }
 
 
-export const createNewExpenseAPI = ({expenseName, totalExpenseAmount, expenseDate}:IncomeAndExpenseType) => {
+export const createNewExpenseAPI = ({expenseName, totalExpenseAmount, expenseDate}: ExpenseType) => {
     fetch(config_json.baseUrl + "/incomes", {
         method: "POST",
         headers: {
