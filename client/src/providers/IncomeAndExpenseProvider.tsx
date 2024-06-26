@@ -1,6 +1,6 @@
 import { Dispatch, FormEvent, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { ExpenseType, IncomeAndExpenseType, IncomeType } from "../types/types";
-import { createNewIncomeAPI, getMoney } from "../api/getMoneyAPI";
+import { createNewExpenseAPI, createNewIncomeAPI, getMoney } from "../api/getMoneyAPI";
 
 type IncomeAndExpenseContextType = {
   createNewIncomeForm: (newIncome: Pick<IncomeType, "incomeName"| "totalIncomeAmount" | "incomeDate" >) => Promise<IncomeType | undefined>;
@@ -68,15 +68,27 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     }
     
     // *this create new expense
-    const createNewExpenseForm = async() => {
+    const createNewExpenseForm = async({expenseName, totalExpenseAmount, expenseDate}:Pick<ExpenseType, "expenseName" | "totalExpenseAmount" | "expenseDate">): Promise<ExpenseType |undefined> => {
 
+      try {
+        await createNewExpenseAPI({expenseName, totalExpenseAmount, expenseDate});
+        await refetch();
+
+        const newMoney = money;
+        if(newMoney) {
+          return newMoney
+        }else {
+          return undefined
+      }
+    }catch(err) {
+      console.error("Could not create new Expensen in Provider", err);
+      return undefined
     }
-
+  }
 
     const handleTotalMoneyCalculations = () => {
       const totalMoney = totalIncomeAmount - totalExpenseAmount;
     }
-
 
 
     // *this creates the transaction receipt for income and adds to total amount
@@ -113,7 +125,8 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     value={{
         money,
         setMoney,
-        createNewIncomeForm
+        createNewIncomeForm,
+        createNewExpenseForm
   }}>
     {children}
   </MoneyContext.Provider>

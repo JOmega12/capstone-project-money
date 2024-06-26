@@ -6,7 +6,6 @@ export type UserInformation = {
 }
 
 
-
 export type IncomeType  = {
     id?: number;
     incomeName: string;
