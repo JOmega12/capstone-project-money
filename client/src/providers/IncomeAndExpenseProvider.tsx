@@ -1,12 +1,12 @@
 import { Dispatch, FormEvent, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
-import { ExpenseType, IncomeAndExpenseType, IncomeType } from "../types/types";
-import { createNewExpenseAPI, createNewIncomeAPI, getMoney } from "../api/getMoneyAPI";
+import { Transaction } from "../types/types";
+import { createTransactionAPI, getMoney } from "../api/getMoneyAPI";
+import { useAuth } from "./AuthProvider";
 
 type IncomeAndExpenseContextType = {
-  createNewIncomeForm: (newIncome: Pick<IncomeType, "incomeName"| "totalIncomeAmount" | "incomeDate" >) => Promise<IncomeType | undefined>;
-  createNewExpenseForm: (newExpense: Pick<ExpenseType, "expenseName" | "totalExpenseAmount" | "expenseDate">) => Promise<ExpenseType | undefined>;
-  money: IncomeAndExpenseType | null;
-  setMoney: Dispatch<SetStateAction<IncomeAndExpenseType | null>>;
+  createNewTransactionForm: (transaction: Pick<Transaction, "transactionName"| "transactionAmount" | "createdAt" >) => Promise<Transaction | undefined>;
+  money: Transaction | null;
+  setMoney: Dispatch<SetStateAction<Transaction | null>>;
 };
 
 type MoneyProviderProps = {
@@ -18,17 +18,11 @@ const MoneyContext = createContext<IncomeAndExpenseContextType | undefined> (und
 
 export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
-    const [money, setMoney] = useState<IncomeAndExpenseType | null>(null);
-    const [payHistory, setPayHistory] = useState([]);
-    const [incomeName, setIncomeName] = useState('');
-    const [totalIncomeAmount, setTotalIncomeAmount] = useState(0);
-    const [expenseName, setExpenseName] = useState('');
-    const [totalExpenseAmount, setTotalExpenseAmount] = useState(0);
-    
-    // console.log(money)
-
-    // const refetch = () => {};
-
+    const { user } = useAuth()
+    const [money, setMoney] = useState<Transaction | null>(null);
+    const [payHistory, setPayHistory] = useState<Transaction[]>([]);
+    const [transactionName, setTransactionName] = useState('');
+    const [transactionAmount, setTransactionAmount] = useState(0);
 
     // date functions
     const dateObj = new Date();
@@ -47,11 +41,10 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     }, [])
 
 
-    // !do i need to do a pick on the createNewIncomeAPI?
     // *this creates new income
-    const createNewIncomeForm = async ({incomeName, totalIncomeAmount, incomeDate} : Pick<IncomeType, "incomeName" | "totalIncomeAmount" | "incomeDate">): Promise <IncomeType | undefined > => {
+    const createNewTransactionForm = async ({transactionName, transactionAmount, createdAt} : Pick<Transaction, "transactionName" | "transactionAmount" | "createdAt">): Promise <Transaction | undefined > => {
       try {
-        await createNewIncomeAPI({incomeName, totalIncomeAmount, incomeDate});
+        await createTransactionAPI({transactionName, transactionAmount, createdAt});
         await refetch();
 
         const newMoney = money;
@@ -62,61 +55,30 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         }
 
       } catch(err){
-        console.error("Could not create New Money In Provider", err);
+        console.error("Could not create Transaction In Provider", err);
         return undefined
       }
     }
-    
-    // *this create new expense
-    const createNewExpenseForm = async({expenseName, totalExpenseAmount, expenseDate}:Pick<ExpenseType, "expenseName" | "totalExpenseAmount" | "expenseDate">): Promise<ExpenseType |undefined> => {
 
-      try {
-        await createNewExpenseAPI({expenseName, totalExpenseAmount, expenseDate});
-        await refetch();
-
-        const newMoney = money;
-        if(newMoney) {
-          return newMoney
-        }else {
-          return undefined
-      }
-    }catch(err) {
-      console.error("Could not create new Expensen in Provider", err);
-      return undefined
-    }
-  }
-
+  
     const handleTotalMoneyCalculations = () => {
       const totalMoney = totalIncomeAmount - totalExpenseAmount;
     }
 
 
-    // *this creates the transaction receipt for income and adds to total amount
-    const handleIncomeFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    // *this creates the transaction receipt for income/expense and adds to total amount
+    const handleTransactionFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const historyIncomeItems = {
-        incomeName: incomeName,
-        totalIncomeAmount: totalIncomeAmount,
-        incomeDate: newPaddedDate,
+      const historyItems = {
+        transactionName: transactionName,
+        transactionAmount: transactionAmount,
+        createdAt: newPaddedDate,
       }
 
-      // ! i get a type error
-      // setPayHistory([...payHistory, historyItems])
+      setPayHistory([...payHistory, historyItems])
 
       // once submitted, resets all the values/states of the form
-
-    }
-
-    // *this creates the transaction receipt for expense  and adds to total amount
-    const handleExpenseFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-
-      const historyExpenseItems = {
-        expenseName: expenseName,
-        totalExpenseAmount: totalExpenseAmount,
-        expenseDate: newPaddedDate
-      }
 
     }
 
@@ -125,8 +87,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     value={{
         money,
         setMoney,
-        createNewIncomeForm,
-        createNewExpenseForm
+        createNewTransactionForm
   }}>
     {children}
   </MoneyContext.Provider>

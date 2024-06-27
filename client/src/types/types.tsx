@@ -5,32 +5,14 @@ export type UserInformation = {
     password: string,
 }
 
-
-export type IncomeType  = {
+export type Transaction = {
     id?: number;
-    incomeName: string;
-    totalIncomeAmount: number;
-    incomeDate?: string;
-
+    transactionName: string;
+    transactionAmount: number;
+    createdAt?: string;
 }
 
-export type ExpenseType = {
-    id?: number;
-    expenseName : string;
-    totalExpenseAmount: number;
-    expenseDate?: string
-}
-
-export type IncomeAndExpenseType = IncomeType & ExpenseType;
 
 
 
-// export type IncomeAndExpenseType = {
-//     id?: number;
-//     incomeName: string;
-//     totalIncomeAmount: number;
-//     incomeDate?: string;
-//     expenseName : string;
-//     totalExpenseAmount: number;
-//     expenseDate?: string
-// }
+

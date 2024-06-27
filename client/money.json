@@ -13,49 +13,65 @@
       "password": "iAmCeo"
     }
   ],
-  "incomes": [
+  "transaction": [
     {
       "id": 1,
       "userId": 1,
-      "incomeName": "Freelance",
-      "totalIncomeAmount": 5000,
-      "incomeDate": "2024-01-01",
-      "expenseName": "Buffalo Wild Wings",
-      "totalExpenseAmount": -2000,
-      "expenseDate": "2024-01-01"
+      "transactionName": "Freelance",
+      "transactionAmount": 5000,
+      "createdAt": "2024-01-01"
     },
     {
       "id": 2,
       "userId": 1,
-      "incomeName": "Freelance",
-      "totalIncomeAmount": 2000,
-      "incomeDate": "2024-01-01",
-      "expenseName": "Buffalo Wild Wings",
-      "totalExpenseAmount": -500,
-      "expenseDate": "2024-01-01"
+      "transactionName": "Buffalo Wild Wings",
+      "transactionAmount": -300,
+      "createdAt": "2024-01-01"
     },
     {
       "id": 3,
       "userId": 2,
-      "incomeName": "Freelance",
-      "totalIncomeAmount": 2000,
-      "incomeDate": "2024-01-01",
-      "expenseName": "Buffalo Wild Wings",
-      "totalExpenseAmount": -1000,
-      "expenseDate": "2024-01-01"
+      "transactionName": "W2 Amazon Form",
+      "transactionAmount": 1000,
+      "createdAt": "2024-02-02"
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "transactionName": "Grocery Store",
+      "transactionAmount": -200,
+      "createdAt": "2024-02-03"
     }
   ],
   "budget_categories": [
     {
       "id": 1,
+      "userId":1,
       "name": "Housing"
     },
     {
       "id": 2,
+      "userId": 1,
       "name": "Food"
     },
     {
       "id": 3,
+      "userId": 1,
+      "name": "Utilities"
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "name": "Housing"
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "name": "Food"
+    },
+    {
+      "id": 6,
+      "userId": 2,
       "name": "Utilities"
     }
   ],
