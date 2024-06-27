@@ -1,13 +1,13 @@
 {
   "money-users": [
     {
-      "id": "1",
+      "id": 1,
       "username": "jonHigger",
       "email": "jon@jon.com",
       "password": "jonIsAwesome"
     },
     {
-      "id": "2",
+      "id": 2,
       "username": "nathanSev",
       "email": "nathan@nathan.com",
       "password": "iAmCeo"
@@ -15,7 +15,7 @@
   ],
   "incomes": [
     {
-      "id": "1",
+      "id": 1,
       "userId": 1,
       "incomeName": "Freelance",
       "totalIncomeAmount": 5000,
@@ -25,7 +25,7 @@
       "expenseDate": "2024-01-01"
     },
     {
-      "id": "2",
+      "id": 2,
       "userId": 1,
       "incomeName": "Freelance",
       "totalIncomeAmount": 2000,
@@ -35,7 +35,7 @@
       "expenseDate": "2024-01-01"
     },
     {
-      "id": "3",
+      "id": 3,
       "userId": 2,
       "incomeName": "Freelance",
       "totalIncomeAmount": 2000,
@@ -47,41 +47,41 @@
   ],
   "budget_categories": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Housing"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Food"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Utilities"
     }
   ],
   "user_budget_categories_junction": [
     {
-      "id": "1",
+      "id": 1,
       "incomeId": 1,
       "budget_categoryId": 1
     },
     {
-      "id": "2",
+      "id": 2,
       "incomeId": 1,
       "budget_categoryId": 2
     },
     {
-      "id": "3",
+      "id": 3,
       "incomeId": 2,
       "budget_categoryId": 2
     },
     {
-      "id": "4",
+      "id": 4,
       "incomeId": 1,
       "budget_categoryId": 1
     },
     {
-      "id": "5",
+      "id": 5,
       "incomeId": 2,
       "budget_categoryId": 1
     }

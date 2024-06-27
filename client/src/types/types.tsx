@@ -22,3 +22,15 @@ export type ExpenseType = {
 }
 
 export type IncomeAndExpenseType = IncomeType & ExpenseType;
+
+
+
+// export type IncomeAndExpenseType = {
+//     id?: number;
+//     incomeName: string;
+//     totalIncomeAmount: number;
+//     incomeDate?: string;
+//     expenseName : string;
+//     totalExpenseAmount: number;
+//     expenseDate?: string
+// }
