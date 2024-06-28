@@ -12,7 +12,10 @@ export const getUserFromServer = ({username}:UserInformation) => {
         }
         return res.json()
     })
-    .then((users) => users.find((user: UserInformation) => user.username === username))
+    .then((users) => users.find((user: UserInformation) => {
+        console.log(user, 'test')
+        return user.username === username
+    }))
     .then((user) => {
         if(!user) {
             throw new Error ('user not found post find ')

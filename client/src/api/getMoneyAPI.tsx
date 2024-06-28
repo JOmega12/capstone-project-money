@@ -1,4 +1,5 @@
 // import { IncomeAndExpenseType } from "../types/types";
+import { useAuth } from "../providers/AuthProvider";
 import { Transaction } from "../types/types";
 import { config_json } from "./config"
 
@@ -10,12 +11,19 @@ export const getMoney = () => {
 }
 
 export const createTransactionAPI = ({transactionName, transactionAmount, createdAt}: Transaction) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { user } = useAuth();
+
+    if(!user) {
+        throw new Error ("user is not logged in getMoneyAPI ")
+    }
+
     return fetch(config_json.baseUrl + "/transaction", {
         method: "POST",
         headers: {
             "content-type": "application/json"
         },
-        body: JSON.stringify({transactionName, transactionAmount, createdAt})
+        body: JSON.stringify({transactionName, transactionAmount, createdAt, userId: user.id})
     })
 }
 

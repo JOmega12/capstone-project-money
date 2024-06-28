@@ -1,13 +1,13 @@
 {
   "money-users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "jonHigger",
       "email": "jon@jon.com",
       "password": "jonIsAwesome"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "nathanSev",
       "email": "nathan@nathan.com",
       "password": "iAmCeo"
@@ -15,28 +15,28 @@
   ],
   "transaction": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "transactionName": "Freelance",
       "transactionAmount": 5000,
       "createdAt": "2024-01-01"
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": 1,
       "transactionName": "Buffalo Wild Wings",
       "transactionAmount": -300,
       "createdAt": "2024-01-01"
     },
     {
-      "id": 3,
+      "id": "3",
       "userId": 2,
       "transactionName": "W2 Amazon Form",
       "transactionAmount": 1000,
       "createdAt": "2024-02-02"
     },
     {
-      "id": 4,
+      "id": "4",
       "userId": 2,
       "transactionName": "Grocery Store",
       "transactionAmount": -200,
@@ -45,59 +45,59 @@
   ],
   "budget_categories": [
     {
-      "id": 1,
-      "userId":1,
+      "id": "1",
+      "userId": 1,
       "name": "Housing"
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": 1,
       "name": "Food"
     },
     {
-      "id": 3,
+      "id": "3",
       "userId": 1,
       "name": "Utilities"
     },
     {
-      "id": 4,
+      "id": "4",
       "userId": 2,
       "name": "Housing"
     },
     {
-      "id": 5,
+      "id": "5",
       "userId": 2,
       "name": "Food"
     },
     {
-      "id": 6,
+      "id": "6",
       "userId": 2,
       "name": "Utilities"
     }
   ],
   "user_budget_categories_junction": [
     {
-      "id": 1,
+      "id": "1",
       "incomeId": 1,
       "budget_categoryId": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "incomeId": 1,
       "budget_categoryId": 2
     },
     {
-      "id": 3,
+      "id": "3",
       "incomeId": 2,
       "budget_categoryId": 2
     },
     {
-      "id": 4,
+      "id": "4",
       "incomeId": 1,
       "budget_categoryId": 1
     },
     {
-      "id": 5,
+      "id": "5",
       "incomeId": 2,
       "budget_categoryId": 1
     }
