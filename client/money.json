@@ -41,6 +41,25 @@
       "transactionName": "Grocery Store",
       "transactionAmount": -200,
       "createdAt": "2024-02-03"
+    },
+    {
+      "id": "2b73",
+      "transactionName": "Test!",
+      "transactionAmount": 1000,
+      "createdAt": "2024-01-03"
+    },
+    {
+      "id": "e18c",
+      "userId": 2,
+      "transactionName": "Test!",
+      "transactionAmount": 1000,
+      "createdAt": "2024-01-03"
+    },
+    {
+      "id": "577a",
+      "transactionName": "Test!",
+      "transactionAmount": 1000,
+      "createdAt": "2024-01-03"
     }
   ],
   "budget_categories": [

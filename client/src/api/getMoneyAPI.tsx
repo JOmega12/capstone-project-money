@@ -10,6 +10,10 @@ export const getMoney = () => {
     })
 }
 
+
+// howto login postman and and how to show usedId in transaction
+// how to patch 
+
 export const createTransactionAPI = ({transactionName, transactionAmount, createdAt}: Transaction) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { user } = useAuth();
@@ -27,7 +31,18 @@ export const createTransactionAPI = ({transactionName, transactionAmount, create
     })
 }
 
-export const patchTransactionSection = async (transaction: Transaction)=> {
+// Partial or an Omit 
+export const patchTransactionSection = async (transaction: Transaction) => {
+    
+    const { transactionName, transactionAmount, createdAt } = transaction;
+
+    // empty string check 
+
+    const transactionUpdate = {
+        transactionName,
+        transactionAmount,
+        createdAt
+    }; 
 
     try {
         const response = await fetch(`${config_json.baseUrl}/transaction/${transaction.id}`, {
@@ -35,11 +50,7 @@ export const patchTransactionSection = async (transaction: Transaction)=> {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                transactionName: transaction.transactionName,
-                transactionAmount: transaction.transactionAmount,
-                createdAt: transaction.createdAt
-            })
+            body: JSON.stringify(transactionUpdate)
         });
 
         if(!response.ok) {
@@ -47,7 +58,7 @@ export const patchTransactionSection = async (transaction: Transaction)=> {
             throw new Error (`Error: ${response.status}${response.statusText} - ${errorText}`)
         }
         return response.json();
-    }catch(error){
+    } catch(error){
         console.error("Failed to patch transaction section", error)
         throw error
     }
