@@ -4,8 +4,8 @@ import { Transaction } from "../types/types";
 import { config_json } from "./config"
 
 
-export const getMoney = () => {
-    return fetch(config_json.baseUrl + '/transaction').then((res) => {
+export const getMoney = (userId:number) => {
+    return fetch(`${config_json.baseUrl}/transaction?userId=${userId}`).then((res) => {
         return res.json();
     })
 }
@@ -15,7 +15,7 @@ export const getMoney = () => {
 // how to patch 
 
 export const createTransactionAPI = ({transactionName, transactionAmount, createdAt}: Transaction) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+
     const { user } = useAuth();
 
     if(!user) {
@@ -36,10 +36,9 @@ export const patchTransactionSection = async (transaction: Transaction) => {
     
     const { transactionName, transactionAmount, createdAt } = transaction;
 
-    // !empty string check 
     // !Need the schema from the backend 
 
-    if(!transactionName || !transactionAmount) {
+    if(!transactionName.length || !transactionAmount.length) {
         throw new Error ("You need to have fields on the input")
     }
 

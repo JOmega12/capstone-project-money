@@ -4,6 +4,7 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -22,7 +23,13 @@ type IncomeAndExpenseContextType = {
   money: Transaction | null;
   setMoney: Dispatch<SetStateAction<Transaction | null>>;
 
-  handleTransactionFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleTransactionIncomeFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleTransactionExpenseFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
+
+  transactionName: string | undefined;
+  transactionAmount: number | undefined;
+  totalIncome: number | undefined;
+  totalExpense: number | undefined;
 };
 
 type MoneyProviderProps = {
@@ -40,6 +47,10 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const [transactionName, setTransactionName] = useState("");
   const [transactionAmount, setTransactionAmount] = useState(0);
 
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [totalExpense, setTotalExpense] = useState(0)
+
+
   const userId = user?.id;
   // date functions
   const dateObj = new Date();
@@ -49,15 +60,17 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const pDay = day.toString().padStart(2, "0");
   const newPaddedDate = `${monthName} ${pDay}, ${year}`;
 
-  const refetch = () => {
-    getMoney().then(setMoney);
-  };
+  const refetch = useCallback(() => {
+    if(userId) {
+      getMoney(userId).then(setMoney);
+    }
+  }, [userId]);
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [refetch]);
 
-  // *this creates new income
+  // *this creates new income/expense
   const createNewTransactionForm = async ({
     transactionName,
     transactionAmount,
@@ -88,24 +101,44 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     }
   };
 
-  const handleTotalMoneyCalculations = () => {
-    const totalMoney = totalIncomeAmount - totalExpenseAmount;
-  };
-
   // *this creates the transaction receipt for income/expense and adds to total amount
-  const handleTransactionFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleTransactionIncomeFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const historyItems = {
+    const new_transaction = {
+      userId: userId,
       transactionName,
       transactionAmount,
       createdAt: newPaddedDate,
     };
 
-    setPayHistory([...payHistory, historyItems]);
+    await createNewTransactionForm(new_transaction)
+
+    setPayHistory([...payHistory, new_transaction]);
+    setTotalIncome(totalIncome + transactionAmount)
+
+    setTransactionName("");
+    setTransactionAmount(0);
 
     // once submitted, resets all the values/states of the form
   };
+
+  const handleTransactionExpenseFormSubmit = (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const new_transaction = {
+      userId: userId,
+      transactionName,
+      transactionAmount,
+      createdAt: newPaddedDate,
+    };
+
+    setPayHistory([...payHistory, new_transaction])
+    setTotalExpense(totalExpense + transactionAmount)
+
+    setTransactionName("");
+    setTransactionAmount(0);
+  }
 
   return (
     <MoneyContext.Provider
@@ -113,7 +146,12 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         money,
         setMoney,
         createNewTransactionForm,
-        handleTransactionFormSubmit,
+        handleTransactionIncomeFormSubmit,
+        handleTransactionExpenseFormSubmit,
+        transactionName,
+        transactionAmount,
+        totalIncome,
+        totalExpense
       }}
     >
       {children}
