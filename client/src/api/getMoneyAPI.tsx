@@ -36,7 +36,12 @@ export const patchTransactionSection = async (transaction: Transaction) => {
     
     const { transactionName, transactionAmount, createdAt } = transaction;
 
-    // empty string check 
+    // !empty string check 
+    // !Need the schema from the backend 
+
+    if(!transactionName || !transactionAmount) {
+        throw new Error ("You need to have fields on the input")
+    }
 
     const transactionUpdate = {
         transactionName,
