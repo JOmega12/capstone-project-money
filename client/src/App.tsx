@@ -19,12 +19,12 @@ function App() {
   // font-Montserrat
   return (
     <>
-      <div className="flex justify-center flex-col items-center lg:p-20 md:p-10 w-screen bg-[#fffcf6] space-y-5 min-h-screen font-montserrat">
+      <div className="flex justify-center flex-col items-center min-[320px]:p-10 lg:p-20 md:p-10 w-screen bg-[#fffcf6] space-y-5 min-h-screen font-montserrat">
         <AuthProvider>
           <IncomeAndExpenseProvider>
             <Routes>
-              <Route path="/" element={<WelcomeComponent />}></Route>
-              <Route path="/dashboard" element={<Dashboard />}></Route>
+              {/* <Route path="/" element={<WelcomeComponent />}></Route> */}
+              <Route path="/" element={<Dashboard />}></Route>
             </Routes>
           </IncomeAndExpenseProvider>
         </AuthProvider>

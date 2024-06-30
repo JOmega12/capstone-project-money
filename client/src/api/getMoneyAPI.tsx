@@ -16,6 +16,7 @@ export const getMoney = (userId:number) => {
 
 export const createTransactionAPI = ({transactionName, transactionAmount, createdAt}: Transaction) => {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { user } = useAuth();
 
     if(!user) {
@@ -38,7 +39,7 @@ export const patchTransactionSection = async (transaction: Transaction) => {
 
     // !Need the schema from the backend 
 
-    if(!transactionName.length || !transactionAmount.length) {
+    if(!transactionName.length || !transactionAmount) {
         throw new Error ("You need to have fields on the input")
     }
 

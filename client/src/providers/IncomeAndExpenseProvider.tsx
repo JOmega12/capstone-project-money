@@ -101,7 +101,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     }
   };
 
-  // *this creates the transaction receipt for income/expense and adds to total amount
+  // *this creates the transaction receipt for income/ and adds to total amount
   const handleTransactionIncomeFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -123,6 +123,8 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     // once submitted, resets all the values/states of the form
   };
 
+
+  // *this creates the transaction receipt for income/ and adds to total amount
   const handleTransactionExpenseFormSubmit = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
