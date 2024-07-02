@@ -19,7 +19,9 @@ function App() {
   // font-Montserrat
   return (
     <>
-      <div className="flex justify-center flex-col items-center min-[320px]:p-10 lg:p-20 md:p-10 w-screen bg-[#fffcf6] space-y-5 min-h-screen font-montserrat">
+      <div className="flex justify-center flex-col items-center min-[320px]:px-10 lg:px-6 md:px-10
+      min-[320px]:my-2 lg:my-2 md:my-2
+      w-screen bg-[#fffcf6] space-y-5 min-h-screen font-montserrat">
         <AuthProvider>
           <IncomeAndExpenseProvider>
             <Routes>

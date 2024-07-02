@@ -3,7 +3,7 @@
 
 export const Goal = () => {
     return(
-        <div className="GoalAndChart">
+        <div className="GoalAndChart border-yellow-400 border">
             <div>
                 <div>
                     <h1>$15000</h1>
