@@ -1,10 +1,14 @@
 // import { Link } from "react-router-dom"
+// import FontAwesome
 
+import { faBars } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export const Navbar = () => {
     return(
         <div className="Navbar">
-            <div>
+            <div className="flex gap-1">
+                <FontAwesomeIcon icon={faBars}/>
                 <div>Hamburger</div>
                 <div>Logo</div>
             </div>
