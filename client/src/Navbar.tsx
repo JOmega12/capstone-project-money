@@ -7,7 +7,7 @@ const NavLinks = () => {
   const activeUnderline = "active:underline hover:underline";
 
   return (
-    <nav className="flex flex-col items-center">
+    <nav className="flex flex-col items-center justify-between gap-10 p-6 mt-6">
       <NavLink to="/dashboard" className={activeUnderline}>
         Dashboard
       </NavLink>
@@ -43,9 +43,9 @@ export const Navbar = () => {
             )}
             </button>
         </div>
-        <div>Logo</div>
+        <div className="font-lato font-extrabold ">WalletWhiz</div>
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden lg:flex justify-center">
         <NavLinks />
       </div>
       {isOpen && (
