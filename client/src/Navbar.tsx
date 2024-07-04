@@ -20,6 +20,9 @@ const NavLinks = () => {
       <NavLink to="/categories" className={activeUnderline}>
         Categories
       </NavLink>
+      <div className="mt-10">
+        <button>Sign Out</button>
+      </div>
     </nav>
   );
 };
@@ -33,8 +36,8 @@ export const Navbar = () => {
 
   return (
     <div className="Navbar">
-      <div className="flex gap-1 items-center justify-center m-2 ">
-        <div className="lg:hidden">
+      <div className="flex gap-1 items-center justify-center m-2 md:hidden">
+        <div className="md:hidden">
           <button onClick={() => toggleNavbar()}>
             {isOpen ? (
               <FontAwesomeIcon icon={faTimes} className="p-2" />
@@ -45,16 +48,16 @@ export const Navbar = () => {
         </div>
         <div className="font-lato font-extrabold ">WalletWhiz</div>
       </div>
-      <div className="hidden lg:flex justify-center">
+      <div className="hidden md:flex justify-center">
         <NavLinks />
       </div>
       {isOpen && (
-        <div className="flex flex-col items-center lg:hidden">
+        <div className="pt-10 fixed inset-0 bg-white z-50 flex flex-col items-center md:hidden">
+          <button onClick={() => toggleNavbar()}>
+              <FontAwesomeIcon icon={faTimes} className="p-2 text-3xl"/>
+          </button>
           <h2>Hello name!</h2>
           <NavLinks />
-          <div>
-            <button>Sign Out</button>
-          </div>
         </div>
       )}
     </div>

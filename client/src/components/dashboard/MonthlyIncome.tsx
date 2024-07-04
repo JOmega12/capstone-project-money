@@ -3,7 +3,7 @@ export const MonthlyIncome = () => {
 
     return(
         <div className="border-green-400 border p-4 w-full">
-            <div className="flex flex-row justify-center gap-40">
+            <div className="flex flex-col md:flex-row justify-center gap-40 max-[765px]:items-center">
                 <div className="">
                     <h3>Monthly Income</h3>
                     <div>
