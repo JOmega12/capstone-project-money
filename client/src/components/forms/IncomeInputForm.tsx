@@ -8,7 +8,9 @@ export const IncomeInputForm = () => {
             <header className="flex flex-col md:w-1/4 border-red-400 border">
                 <Navbar />
             </header>
-        This is income input form
+            <div className="incomeBody">
+                
+            </div>
         </section>
     )
 }

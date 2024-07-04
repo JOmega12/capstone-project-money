@@ -21,3 +21,18 @@ export const testLogin = [
         "password": "Test"
     }
 ]
+
+export const transactionLabels = [
+    {
+        labelName: "Transaction1",
+        labelAmount: "Amount1",
+        labelCategory: 'Category1',
+        labelDate: 'June 1, 2024'
+    },
+    {
+        labelName: "Transaction2",
+        labelAmount: "Amount2",
+        labelCategory: 'Category2',
+        labelDate: 'June 2, 2024'
+    },
+]

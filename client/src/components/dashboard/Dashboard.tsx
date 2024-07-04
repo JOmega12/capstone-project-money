@@ -1,7 +1,7 @@
 import { Navbar } from "../../Navbar"
 import { Goal } from "./Goal"
 import { MonthlyIncome } from "./MonthlyIncome"
-import { Transactions } from "./Transactions"
+import { Transactions } from "../Transactions"
 
 
 export const Dashboard = () => {
