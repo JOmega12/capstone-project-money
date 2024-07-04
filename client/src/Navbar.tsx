@@ -35,13 +35,13 @@ export const Navbar = () => {
     <div className="Navbar">
       <div className="flex gap-1 items-center justify-center m-2 ">
         <div className="lg:hidden">
-            <button onClick={() => toggleNavbar()}>
+          <button onClick={() => toggleNavbar()}>
             {isOpen ? (
-                <FontAwesomeIcon icon={faTimes} className="p-2" />
+              <FontAwesomeIcon icon={faTimes} className="p-2" />
             ) : (
-                <FontAwesomeIcon icon={faBars} className="p-2" />
+              <FontAwesomeIcon icon={faBars} className="p-2" />
             )}
-            </button>
+          </button>
         </div>
         <div className="font-lato font-extrabold ">WalletWhiz</div>
       </div>
@@ -51,7 +51,7 @@ export const Navbar = () => {
       {isOpen && (
         <div className="flex flex-col items-center lg:hidden">
           <h2>Hello name!</h2>
-            <NavLinks />
+          <NavLinks />
           <div>
             <button>Sign Out</button>
           </div>
