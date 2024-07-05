@@ -8,6 +8,7 @@ const NavLinks = () => {
 
   return (
     <nav className="flex flex-col items-center justify-between gap-10 p-6 mt-6">
+      <h2 className="text-center">Hello name!</h2>
       <NavLink to="/dashboard" className={activeUnderline}>
         Dashboard
       </NavLink>
@@ -56,7 +57,6 @@ export const Navbar = () => {
           <button onClick={() => toggleNavbar()}>
               <FontAwesomeIcon icon={faTimes} className="p-2 text-3xl"/>
           </button>
-          <h2>Hello name!</h2>
           <NavLinks />
         </div>
       )}
