@@ -16,7 +16,7 @@ export const ExpenseDash = () => {
             <div className="py-2 md:w-full lg:px-2">
                 <div className="m-10 text-center flex justify-center items-center gap-10">
                     <h2 className="text-3xl ">Expense</h2>
-                    <Link to={"/add-income"} className="border border-blue-700 font-bold ">
+                    <Link to={"/add-expense"} className="border border-blue-700 font-bold ">
                         <FontAwesomeIcon icon={faPlus}
                         className="p-2 text-4xl text-blue-700"
                         />
