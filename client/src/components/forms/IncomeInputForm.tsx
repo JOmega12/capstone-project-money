@@ -38,6 +38,7 @@ export const IncomeInputForm = () => {
             <IncomeAndExpenseInputs 
             label={`Income Name`}
             value={transactionName}
+            onChange={() => setTransactionName(e.target.value)}
             
             />
         </div>
