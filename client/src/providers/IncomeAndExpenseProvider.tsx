@@ -26,9 +26,9 @@ type IncomeAndExpenseContextType = {
   handleTransactionIncomeFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
   handleTransactionExpenseFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
 
-  transactionName: string | undefined;
+  transactionName: string ;
   setTransactionName: Dispatch<SetStateAction<string>>;
-  transactionAmount: number | undefined;
+  transactionAmount: number;
   setTransactionAmount: Dispatch<SetStateAction<number>>;
 
   totalIncome: number | undefined;

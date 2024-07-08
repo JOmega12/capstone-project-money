@@ -6,10 +6,10 @@ import { ChangeEvent } from "react";
 type TextInputsType = {
     label: string;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    value: string | undefined;
+    value: string | number | undefined;
     show: boolean;
     message: string;
-    type?: 'password' | 'text'
+    type?: 'password' | 'text' | 'number'
 }
 
 
@@ -24,8 +24,8 @@ export const IncomeAndExpenseInputs = ({label, onChange, value, show, message, t
                 value={value}
             />
         </div>
-        {/* {show ? (<div className=" mt-2 text-red-500">
+        {show ? (<div className=" mt-2 text-red-500">
             {message}
-        </div>) : null} */}
+        </div>) : null}
     </div>
 )
