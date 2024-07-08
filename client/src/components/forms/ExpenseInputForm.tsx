@@ -13,7 +13,7 @@ const transactionAmountErrorMessage = "There must be number";
 
 export const ExpenseInputForm = () => {
 
-    const {transactionName, setTransactionName, transactionAmount, setTransactionAmount} = useMoney();
+    const {transactionName, setTransactionName, transactionAmount, setTransactionAmount, handleTransactionExpenseFormSubmit} = useMoney();
 
     // const [transactionName, setTransactionName] = useState("");
     // const [transactionAmount, setTransactionAmount] = useState(0);
@@ -27,7 +27,7 @@ export const ExpenseInputForm = () => {
   
     const handleTransactionAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
       const value = parseFloat(e.target.value);
-      setTransactionAmount(isNaN(value) ? 0 : value);
+      setTransactionAmount(value);
     };
 
 
@@ -39,7 +39,9 @@ export const ExpenseInputForm = () => {
           </h2>
           <Navbar />
         </header>
-        <div className="py-2 flex flex-col justify-center w-full">
+        <form className="py-2 flex flex-col justify-center w-full"
+        onSubmit={(e) => handleTransactionExpenseFormSubmit(e)}
+        >
           <div className="flex flex-col md:flex-row gap-10 justify-center items-center mb-10">
             <Link to={"/expense"}>
               <FontAwesomeIcon
@@ -47,7 +49,7 @@ export const ExpenseInputForm = () => {
                 className="text-red-500 text-3xl" 
               />
             </Link>
-            <h2 className="text-3xl ">Add Income</h2>
+            <h2 className="text-3xl ">Add Expense</h2>
           </div>
           <div className="flex flex-col justify-center items-center w-full">
               <IncomeAndExpenseInputs 
@@ -66,8 +68,11 @@ export const ExpenseInputForm = () => {
               show={transactionAmountValid}
               message={transactionAmountErrorMessage}
               />
+              <div className="hover:bg-blue-600 ">
+                <input type="submit" />
+              </div>
           </div>
-        </div>
+        </form>
       </section>
     )
 }
