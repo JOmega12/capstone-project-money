@@ -14,12 +14,12 @@ import { createTransactionAPI, getMoney } from "../api/getMoneyAPI";
 import { useAuth } from "./AuthProvider";
 
 type IncomeAndExpenseContextType = {
-  createNewTransactionForm: (
-    transaction: Pick<
-      Transaction,
-      "userId" | "transactionName" | "transactionAmount" | "createdAt"
-    >
-  ) => Promise<Transaction | undefined>;
+  // createNewTransactionForm: (
+  //   transaction: Pick<
+  //     Transaction,
+  //     "userId" | "transactionName" | "transactionAmount" | "createdAt"
+  //   >
+  // ) => Promise<Transaction | undefined>;
   money: Transaction | null;
   setMoney: Dispatch<SetStateAction<Transaction | null>>;
 
@@ -27,9 +27,20 @@ type IncomeAndExpenseContextType = {
   handleTransactionExpenseFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
 
   transactionName: string | undefined;
+  setTransactionName: Dispatch<SetStateAction<string>>;
   transactionAmount: number | undefined;
+  setTransactionAmount: Dispatch<SetStateAction<number>>;
+
   totalIncome: number | undefined;
+  setTotalIncome: Dispatch<SetStateAction<number>>;
   totalExpense: number | undefined;
+  setTotalExpense: Dispatch<SetStateAction<number>>;
+
+  newPaddedDate: string | undefined;
+  payHistory: (Transaction | undefined) [];
+
+
+  setPayHistory: Dispatch<SetStateAction<Transaction[]>>;
 };
 
 type MoneyProviderProps = {
@@ -44,11 +55,11 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const { user } = useAuth();
   const [money, setMoney] = useState<Transaction | null>(null);
   const [payHistory, setPayHistory] = useState<Transaction[]>([]);
-  const [transactionName, setTransactionName] = useState("");
-  const [transactionAmount, setTransactionAmount] = useState(0);
+  const [transactionName, setTransactionName] = useState<string>("");
+  const [transactionAmount, setTransactionAmount] = useState<number>(0);
 
-  const [totalIncome, setTotalIncome] = useState(0);
-  const [totalExpense, setTotalExpense] = useState(0)
+  const [totalIncome, setTotalIncome] = useState<number>(0);
+  const [totalExpense, setTotalExpense] = useState<number>(0)
 
 
   const userId = user?.id;
@@ -101,6 +112,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     }
   };
 
+
   // *this creates the transaction receipt for income/ and adds to total amount
   const handleTransactionIncomeFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -147,13 +159,23 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
       value={{
         money,
         setMoney,
-        createNewTransactionForm,
+
         handleTransactionIncomeFormSubmit,
         handleTransactionExpenseFormSubmit,
+
         transactionName,
+        setTransactionName,
         transactionAmount,
+        setTransactionAmount,
+
         totalIncome,
-        totalExpense
+        setTotalIncome,
+        totalExpense,
+        setTotalExpense,
+        newPaddedDate,
+
+        payHistory,
+        setPayHistory,
       }}
     >
       {children}
