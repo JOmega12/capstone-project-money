@@ -6,3 +6,9 @@ To see what dependencies you have instaleld without requirements you have instal
 
 - in another computer that you are working from:
 - ` pip install -r requirements.txt`
+
+
+To get into virtual environment:
+.\venv\Scripts\activate
+
+.\.venv\Scripts\activate
