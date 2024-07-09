@@ -9,13 +9,13 @@ CHOICES = [
     ('shelter', 'Shelter')
 ]
 
-class User(AbstractUser):
+class CustomUser(AbstractUser):
     pass
 
 class Transaction(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     transactionName = models.CharField(max_length=20)
-    transactionAmount = models.DecimalField(max_digits=20)
+    transactionAmount = models.DecimalField(max_digits=20, decimal_places=2)
     createdAt= models.DateField()
     categoryType = models.CharField(max_length=20, default ='no_category', choices=CHOICES)
     
