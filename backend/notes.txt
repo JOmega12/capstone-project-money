@@ -12,3 +12,15 @@ To get into virtual environment:
 .\venv\Scripts\activate
 
 .\.venv\Scripts\activate
+
+
+To start project:
+`django-admin startproject testAdmin .` 
+
+In order to have a better, clean reusable code, it is better to have separate apps within a project.
+Meaning, each app is an endpoint itself that connects to one another where the main controller (startproject) is the one that controls the urls
+
+
+On Creating User Models for user:
+- When creating user models, AbstractBaseUser creates a very flexible way for the end user. You can basically customize the way logins/signups are compared to:
+- the AbstractUser which uses Django's own model with slight tweaks here and there 
