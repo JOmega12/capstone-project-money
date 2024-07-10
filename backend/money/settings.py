@@ -33,6 +33,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'money',
     'rest_framework',
+    'users',
+    'transactions',
+    'budget_categories',
+    'user_budget_categories_junction'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

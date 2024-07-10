@@ -21,6 +21,13 @@ In order to have a better, clean reusable code, it is better to have separate ap
 Meaning, each app is an endpoint itself that connects to one another where the main controller (startproject) is the one that controls the urls
 
 
+After creating the app, register to admin of your Models from models.py
+
+Then in the URL
+
+views in app folder is how you query the data(much like PRISMA ORM)
+
+
 On Creating User Models for user:
 - When creating user models, AbstractBaseUser creates a very flexible way for the end user. You can basically customize the way logins/signups are compared to:
 - the AbstractUser which uses Django's own model with slight tweaks here and there 
