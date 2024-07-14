@@ -28,15 +28,17 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
 # Application definition
 
 INSTALLED_APPS = [
-    'money',
     'rest_framework',
+    'money',
     'users',
     'transactions',
     'budget_categories',
-    'user_budget_categories_junction'
+    'user_budget_categories_junction',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

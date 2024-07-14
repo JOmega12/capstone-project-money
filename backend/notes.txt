@@ -31,3 +31,10 @@ views in app folder is how you query the data(much like PRISMA ORM)
 On Creating User Models for user:
 - When creating user models, AbstractBaseUser creates a very flexible way for the end user. You can basically customize the way logins/signups are compared to:
 - the AbstractUser which uses Django's own model with slight tweaks here and there 
+
+
+
+python manage.py runserver -> site/admin
+jensenadmin
+admin@admin.com
+pythonproject
