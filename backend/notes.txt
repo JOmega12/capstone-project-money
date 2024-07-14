@@ -38,3 +38,28 @@ python manage.py runserver -> site/admin
 jensenadmin
 admin@admin.com
 pythonproject
+
+
+on Serializers:
+- ModelSerializers is basic, .Serializers is more customized form of code
+-ModelSerializrs are more simple to setup
+
+
+
+
+on Views basic attributes: 
+
+- this is what a basic serializer looks like:
+`
+from django.contrib.auth.models import User
+from myapp.serializers import UserSerializer
+from rest_framework import generics
+from rest_framework.permissions import IsAdminUser
+
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
+`
+
+
