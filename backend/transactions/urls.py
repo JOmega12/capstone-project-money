@@ -7,6 +7,6 @@ from .views import TransactionList, TransactionDetail
 
 #as_view is for showing the information as a GET request 
 urlpatterns = [
-    path('money/', TransactionList.as_view(), name='transaction_list'),
-    path('money/<int:pk>', TransactionDetail.as_view(), name='transaction_detail')
+    path('api/', TransactionList.as_view(), name='transaction_list'),
+    path('api/<int:pk>', TransactionDetail.as_view(), name='transaction_detail')
 ]
