@@ -29,4 +29,19 @@ class TransactionDetail(APIView):
             return None
         
     def get(self, request, pk):
-        transactions 
+        transaction = self.get_object(pk)
+        serializer = TransactionSerializer(transaction)
+        return Response(serializer.data)
+    
+    def put(self, request, pk):
+        transaction = self.get_object(pk)
+        serializer = TransactionSerializer(transaction, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk):
+        transaction = self.get_object(pk)
+        transaction.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
