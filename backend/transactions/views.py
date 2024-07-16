@@ -1,14 +1,32 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .models import Transaction
 from .serializers import TransactionSerializer
 
 # Create your views here.
 #!need to learn more about generics and ListCreateAPIView
-class TransactionList(generics.ListCreateAPIView):
-    queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
+class TransactionList(APIView):
 
-class TransactionDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset =Transaction.objects.all()
-    serializer_class= TransactionSerializer
+    def get(self, request):
+        transactions = Transaction.objects.all()
+        serializer = TransactionSerializer(transactions, many=True)
+        return Response(serializer.data)
+        
+    def post(self, request):
+        serializer = TransactionSerializer(data = request.data)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class TransactionDetail(APIView):
+    def get_object(self, pk):
+        try: 
+            return Transaction.objects.get(pk=pk)
+        except Transaction.DoesNotExist: 
+            return None
+        
+    def get(self, request, pk):
+        transactions 
