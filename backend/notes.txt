@@ -62,10 +62,11 @@ class UserList(generics.ListCreateAPIView):
     permission_classes = [IsAdminUser]
 `
 
+The urls are fine, but the what I learned is that the Views are more important because they show what type is going on under the hood
 
-Writing down what I think Im doing wrong for folders: transaction and users
-    - problem is not showing the api from GET requests
-    - Could be in views.py and urls.py in transaction and users own folders
-    - then having trouble to show the current users and transactions in the urls 
-    - something tells me that it is in the views.py 
-    - user serializer needs to be changed to login and register
+
+
+
+Look at 
+
+https://testdriven.io/blog/django-custom-user-model/
