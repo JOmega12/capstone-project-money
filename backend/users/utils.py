@@ -8,5 +8,11 @@ import jwt
 # inspiration
 def generate_access_token(user):
     payload = {
-        
+        'payload': user.user_id,
+        'exp': datetime() + timedelta(days=1),
+        'iat': datetime(),
     }
+    
+    access_token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
+    
+    return access_token
