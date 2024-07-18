@@ -72,3 +72,40 @@ class UserLoginView(APIView):
 
 class UserViewAPI(APIView):
     authentication_classes = (TokenAuthentication,)
+    permission_classes = (AllowAny,)
+    
+    def get(self, request):
+        
+        user_token = request.COOKIES.get('access_token')
+        
+        if not user_token:
+            raise AuthenticationFailed('Unauthenticated User')
+        
+        payload = jwt.decode(user_token, settings.SECRET_KEY, algorithms=['HS256'])
+        
+        user_model = get_user_model()
+        user = user_model.objects.filter(user_id=payload['user_id'].first())
+        user_serializer= UserViewAPI(user)
+        return Response(user_serializer.data)
+    
+    
+
+class UserLogoutViewAPI(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (AllowAny,)
+    
+    def get(self, request):
+        user_token = request.COOKIES.get('access_token', None)
+        if user_token:
+            response = Response()
+            response.delete_cookie('access_token')
+            response.data = {
+                'message': 'Logged out successfully'
+            }
+            return Response
+        
+        response = Response()
+        response.data = {
+            'Message': "User is already logged out"
+        }
+        return Response
