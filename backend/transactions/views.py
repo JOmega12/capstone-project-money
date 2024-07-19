@@ -6,7 +6,10 @@ from .models import Transaction
 from .serializers import TransactionSerializer
 
 # Create your views here.
-#!need to learn more about generics and ListCreateAPIView
+#How to add authentication that the user after logged in can add/delete
+
+
+#* it has something to do with permissions 
 class TransactionList(APIView):
 
     def get(self, request):
