@@ -70,3 +70,19 @@ The urls are fine, but the what I learned is that the Views are more important b
 Look at 
 
 https://testdriven.io/blog/django-custom-user-model/
+
+
+
+
+endpoints:
+for users/
+
+/api/login
+/api/register
+/api
+/api/logout
+
+
+for transactions/ :
+api/
+api/<int:pk>

@@ -23,6 +23,13 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return db_instance
     
 class UserLoginSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(max_length= 100, read_only = True)
+    
+    username = serializers.CharField(max_length= 100)
     password = serializers.CharField(max_length= 100, min_length=6, style={'input_type': 'password'})
     token = serializers.CharField(max_length = 255, read_only= True)
+    
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'password', 'token']
+        
+        

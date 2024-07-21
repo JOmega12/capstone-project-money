@@ -1,16 +1,15 @@
 
 from django.conf import settings
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import jwt
 
-
-# see if you can get an idea of how to create your own payload from the backend in javascript as
-# inspiration
 def generate_access_token(user):
+    
+    now = datetime.now(timezone.utc)
     payload = {
-        'payload': user.user_id,
-        'exp': datetime() + timedelta(days=1),
-        'iat': datetime(),
+        'payload': user.id,
+        'exp': now + timedelta(days=1),
+        'iat': now,
     }
     
     access_token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')

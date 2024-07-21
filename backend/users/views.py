@@ -39,6 +39,36 @@ class UserRegistrationView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# class UserLoginView(APIView):
+#     serializer_class = UserLoginSerializer
+#     authentication_classes = (TokenAuthentication,)
+#     permission_classes = (AllowAny,)
+    
+#     def post(self, request):
+#         username = request.data.get('username', None)
+#         user_password = request.data.get('password', None)
+        
+#         if not user_password:
+#             raise AuthenticationFailed('A User password is needed')
+        
+#         if not username:
+#             raise AuthenticationFailed('A Username is required')
+        
+#         user_instance = authenticate(username=username, password = user_password)
+        
+#         if user_instance.is_active:
+#             user_access_token = generate_access_token(user_instance)
+#             response = Response()
+#             response.set_cookie(key='access_token', value= user_access_token, httponly=True)
+#             response.data = {
+#                 'access_token': user_access_token
+#             }
+#             return response
+        
+#         return Response({
+#             'Message': "Something Went Wrong"
+#         })
+        
 class UserLoginView(APIView):
     serializer_class = UserLoginSerializer
     authentication_classes = (TokenAuthentication,)
@@ -54,20 +84,22 @@ class UserLoginView(APIView):
         if not username:
             raise AuthenticationFailed('A Username is required')
         
-        user_instance = authenticate(username=username, password = user_password)
+        user_instance = authenticate(username=username, password=user_password)
         
-        if user_instance.is_active:
-            user_access_token = generate_access_token(user_instance)
-            response = Response()
-            response.set_cookie(key='access_token', value= user_access_token, httponly=True)
-            response.data = {
-                'access_token': user_access_token
-            }
-            return response
+        if user_instance is None:
+            raise AuthenticationFailed('Invalid username or password')
         
-        return Response({
-            'Message': "Something Went Wrong"
-        })
+        if not user_instance.is_active:
+            raise AuthenticationFailed('User account is deactivated')
+        
+        user_access_token = generate_access_token(user_instance)
+        response = Response()
+        response.set_cookie(key='access_token', value=user_access_token, httponly=True)
+        response.data = {
+            'access_token': user_access_token
+        }
+        return response
+
         
 
 class UserViewAPI(APIView):

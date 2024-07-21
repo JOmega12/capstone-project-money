@@ -4,16 +4,16 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Transaction
 from .serializers import TransactionSerializer
-
+from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
 # Create your views here.
-#How to add authentication that the user after logged in can add/delete
 
-
-#* it has something to do with permissions 
 class TransactionList(APIView):
 
+    permission_classes = []
+
     def get(self, request):
-        transactions = Transaction.objects.all()
+        transactions = Transaction.objects.filter(userId = request.user)
         serializer = TransactionSerializer(transactions, many=True)
         return Response(serializer.data)
         
@@ -21,16 +21,18 @@ class TransactionList(APIView):
         serializer = TransactionSerializer(data = request.data)
         
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(userId = request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TransactionDetail(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    
     def get_object(self, pk):
-        try: 
-            return Transaction.objects.get(pk=pk)
-        except Transaction.DoesNotExist: 
-            return None
+        transaction = get_object_or_404(Transaction, pk=pk, userId=self.request.user)
+        self.check_object_permissions(self.request, transaction) 
+        return transaction
         
     def get(self, request, pk):
         transaction = self.get_object(pk)
