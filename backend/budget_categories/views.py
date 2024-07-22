@@ -9,3 +9,8 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
+class Budget_categories_List(APIView):
+    pass
+
+class Budget_categories_Detail(APIView):
+    pass

@@ -64,7 +64,12 @@ class UserList(generics.ListCreateAPIView):
 
 The urls are fine, but the what I learned is that the Views are more important because they show what type is going on under the hood
 
+An example of separating REST structure in transactions/views.py:
+The Views separating TransactionList and TransactionDetail emphasize two different functions.
 
+The TransactionList lists all the data and posts data on creating a new transaction. 
+
+The TransactionDetail is responsible for single transactions such as retrieving, updateed, or deleting. Emphasized via using a primary foreign key that is specific to the user
 
 
 Look at 
@@ -84,5 +89,10 @@ for users/
 
 
 for transactions/ :
+api/
+api/<int:pk>
+
+
+for budget-categories/ :
 api/
 api/<int:pk>
