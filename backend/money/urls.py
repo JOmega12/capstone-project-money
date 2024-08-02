@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('transactions/', include('transactions.urls')),
-    path('budget_categories', include('budget_categories.urls')),
-    # path('user_budget_categories_junction', include('user_budget_categories_junction.urls'))
+    path('budget_categories/', include('budget_categories.urls')),
+    path('user_budget_categories_junction/', include('user_budget_categories_junction.urls'))
 ]

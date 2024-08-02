@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
-class UserBudgetCategoriesJunctionList(APIView);
+class UserBudgetCategoriesJunctionList(APIView):
     permission_classes = []
     
     def get(self, request):
