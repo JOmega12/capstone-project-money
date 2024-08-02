@@ -30,13 +30,24 @@ class UserBudgetCategoriesJunctionDetail(APIView):
     permission_classes = [IsAuthenticated]
     
     def get_object(self, pk):
-        pass
+        userBudgetCategoriesJunction = get_object_or_404(UserBudgetCategoryJunction, pk = pk, userId= self.request.user)
+        self.check_object_permissions(self.request, userBudgetCategoriesJunction)
+        return userBudgetCategoriesJunction
     
     def get(self, request, pk):
-        pass
+        userBudgetCategoriesJunction = self.get_object(pk)
+        serializer = UserBudgetCategoryJunctionSerializer(userBudgetCategoriesJunction)
+        return Response(serializer.data)
     
     def put(self, request, pk):
-        pass
+        userBudgetCategoryJunction = self.get_object(pk)
+        serializer = UserBudgetCategoryJunctionSerializer(userBudgetCategoryJunction, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, pk):
-        pass
+        userBudgetCategoryJunction = self.get_object(pk)
+        userBudgetCategoryJunction.delete()
+        return Response(status = status.HTTP_204_NO_CONTENT)
