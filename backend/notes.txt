@@ -96,3 +96,8 @@ api/<int:pk>
 for budget-categories/ :
 api/
 api/<int:pk>
+
+
+for user_budget_categories_junction/:
+api/
+api/<int:pk>

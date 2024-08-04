@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 
 
 class UserBudgetCategoriesJunctionList(APIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     
     def get(self, request):
         userBudgetCatJunction = UserBudgetCategoryJunction.objects.filter(userId = request.user)
