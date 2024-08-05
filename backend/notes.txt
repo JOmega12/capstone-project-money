@@ -38,7 +38,7 @@ python manage.py runserver -> site/admin
 jensenadmin
 admin@admin.com
 pythonproject
-
+Test12345
 
 on Serializers:
 - ModelSerializers is basic, .Serializers is more customized form of code
@@ -101,3 +101,8 @@ api/<int:pk>
 for user_budget_categories_junction/:
 api/
 api/<int:pk>
+
+
+
+testingadmin
+Testingpassword

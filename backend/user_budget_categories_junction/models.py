@@ -9,4 +9,4 @@ class UserBudgetCategoryJunction(models.Model):
     budget_category_id = models.ForeignKey(Budget_categories, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"{self.user} - {self.budget_category}"
+        return f"{self.userId} - {self.budget_category_id}"
