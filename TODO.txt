@@ -1,4 +1,3 @@
-6/15/24
 
 BACKEND: 
 - create the backend for python for the three endpoints: 
@@ -10,3 +9,12 @@ BACKEND:
 FRONTEND:
 - refer to the github configuration to the coffee express for structure***
 - create the structure for the landing page, login/sign up and the dashboard
+
+
+Need to:
+refactor the IncomeProvider so that it takes the total transaction and be able to update the state of the object when accessed later and when relogged in, the total still stays the same
+
+Backend todo:
+- connect the backend to frontend using CORS
+    - fetch the data from the frontend side
+    - make a separate compzonent to test if the code is receiving data from the backend

@@ -29,7 +29,7 @@ function App() {
         <AuthProvider>
           <IncomeAndExpenseProvider>
             <Routes>
-              {/* <Route path="/" element={<WelcomeComponent />}></Route> */}
+              <Route path="/" element={<WelcomeComponent />}></Route>
               <Route path="/income" element={<IncomeDash/>}></Route>
               <Route path="/add-income" element={<IncomeInputForm/>}></Route>
               
