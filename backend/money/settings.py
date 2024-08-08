@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'transactions',
     'budget_categories',
     'user_budget_categories_junction',
+    'dummyData',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -64,7 +65,10 @@ ROOT_URLCONF = 'money.urls'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    ]
 
 TEMPLATES = [
     {

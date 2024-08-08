@@ -102,6 +102,12 @@ api/<int:pk>
 
 
 
+for example/:
+api/ 
+** this also gets to show the items and post request
+**post request on Postman
+
+
 testingadmin
 Testingpassword
 
