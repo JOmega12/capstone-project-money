@@ -18,3 +18,12 @@ Backend todo:
 - connect the backend to frontend using CORS
     - fetch the data from the frontend side
     - make a separate compzonent to test if the code is receiving data from the backend
+
+
+    
+Currently struggling with connecting the backend to front end.
+I created a fetch on WelcomeComponent and then i am testing the transactions/ endpoint to see if the data will fetch. 
+
+Will need to put in the headers for the token to see if it goes through
+
+I also have a feeling I need to reconfigure my settings.py for allowed sites as well as maybe creating a dummy test endpoint data from django to be relayed to the front end to see if the data is parsing through

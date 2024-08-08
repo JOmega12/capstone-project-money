@@ -32,7 +32,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const isRegister = !!user;
 
 
-  console.log(user, 'authprovider')
+
+  // console.log(user, 'authprovider')
   const registerUser = async ({username, password} : UserInformation) => {
     await registerFetch({username, password}).then((user) => {
       localStorage.setItem("user", JSON.stringify(user))

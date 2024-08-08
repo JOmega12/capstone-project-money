@@ -45,8 +45,6 @@ on Serializers:
 -ModelSerializrs are more simple to setup
 
 
-
-
 on Views basic attributes: 
 
 - this is what a basic serializer looks like:
@@ -106,3 +104,5 @@ api/<int:pk>
 
 testingadmin
 Testingpassword
+
+
