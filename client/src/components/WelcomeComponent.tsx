@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useState, useEffect } from "react"
 // import { Login } from "./forms/Login"
 // import { SignUp } from "./forms/SignUp";
@@ -29,19 +30,33 @@ export const WelcomeComponent = () => {
     //     }
     // ]
 
-    const fetchData = async () => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api`);
-            if (!response.ok) {
-                throw new Error("something wrong Welcome COmp")
-            }
-            const result = await response.json();
-            console.log(result);
-            setData(result);
+    const fetchData =  async() => {
+        // ?1st attempt
+        // try {
+        //     const response = await fetch(`${import.meta.env.VITE_API_URL}/example/api/`);
+        //     if (!response.ok) {
+        //         throw new Error("something wrong Welcome COmp")
+        //     }
+        //     const result = await response.json();
+        //     console.log(result);
+        //     return result
+        //     setData(result);
 
-        } catch(e) {
-            console.error('Error fetch', e)
-        }
+        // } catch(e) {
+        //     console.error('Error fetch', e)
+        // }
+
+
+        // ? 2nd attempt
+        // const response = await axios.get(`${import.meta.env.VITE_API_URL}/example/api/`, {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     }
+        // });
+        // console.log(response.data, 'response');
+        // setData(response.data)
+
+        
     }
 
     useEffect(() => {
@@ -71,11 +86,11 @@ export const WelcomeComponent = () => {
         // </div>
 
     <>
-        {data.length > 0 ? (
-            data.map(user => <div key={user.id}>{user.username}</div>)
+        {/* {data.length > 0 ? (
+            data.map(item => <div key={data.length}>{item}</div>)
         ): (
             <p>No data found</p>
-        )}
+        )} */}
     </>
     )
 }
