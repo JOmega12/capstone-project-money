@@ -32,28 +32,28 @@ export const WelcomeComponent = () => {
 
     const fetchData =  async() => {
         // ?1st attempt
-        // try {
-        //     const response = await fetch(`${import.meta.env.VITE_API_URL}/example/api/`);
-        //     if (!response.ok) {
-        //         throw new Error("something wrong Welcome COmp")
-        //     }
-        //     const result = await response.json();
-        //     console.log(result);
-        //     return result
-        //     setData(result);
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/example/api/`);
+            if (!response.ok) {
+                throw new Error("something wrong Welcome COmp")
+            }
+            const result = await response.json();
+            // console.log(result);
+            setData(result);
 
-        // } catch(e) {
-        //     console.error('Error fetch', e)
-        // }
+        } catch(e) {
+            console.error('Error fetch', e)
+        }
 
 
         // ? 2nd attempt
+        // console.log("axios url", `${import.meta.env.VITE_API_URL}/example/api/`); 
         // const response = await axios.get(`${import.meta.env.VITE_API_URL}/example/api/`, {
         //     headers: {
         //         'Content-Type': 'application/json',
         //     }
         // });
-        // console.log(response.data, 'response');
+        // console.log("Axios response", response.data);
         // setData(response.data)
 
         
@@ -62,7 +62,6 @@ export const WelcomeComponent = () => {
     useEffect(() => {
         fetchData()
     }, [])
-
 
     return(
         // <div>
@@ -91,6 +90,12 @@ export const WelcomeComponent = () => {
         ): (
             <p>No data found</p>
         )} */}
+        {data.map(item =>
+            <div key={item.user_id}>
+                <p>{item.user_id}</p>
+                <p>{item.name}</p>
+            </div>
+        )}
     </>
     )
 }
