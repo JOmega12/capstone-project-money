@@ -12,6 +12,7 @@ import { ExpenseInputForm } from "./components/forms/ExpenseInputForm"
 import { Categories } from "./components/Categories"
 import { IncomeDash } from "./components/IncomeAndExpense/IncomeDash"
 import { ExpenseDash } from "./components/IncomeAndExpense/ExpenseDash"
+import { TestComponent } from "./components/TestComponent"
 
 // import { Navbar } from "./Navbar"
 // import { AuthProvider } from "./providers/AuthProvider"
@@ -32,11 +33,11 @@ function App() {
               <Route path="/" element={<WelcomeComponent />}></Route>
               <Route path="/income" element={<IncomeDash/>}></Route>
               <Route path="/add-income" element={<IncomeInputForm/>}></Route>
-              
               <Route path="expense" element={<ExpenseDash/>}></Route>
               <Route path="/add-expense" element={<ExpenseInputForm/>}></Route>
               <Route path="/categories" element={<Categories/>}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/test-server" element={<TestComponent/>}></Route>
             </Routes>
           </IncomeAndExpenseProvider>
         </AuthProvider>

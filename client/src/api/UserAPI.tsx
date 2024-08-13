@@ -5,7 +5,7 @@ import { config_json } from "./config";
 
 // login
 export const getUserFromServer = ({username}:UserInformation) => {
-    return fetch(config_json.baseUrl + "/money-users")
+    return fetch(config_json.baseUrl + "/users/login/")
     .then((res) => {
         if(!res.ok) {
             throw new Error('Could not get User from getUserServer()')
@@ -26,7 +26,7 @@ export const getUserFromServer = ({username}:UserInformation) => {
 
 // Signup
 export const registerFetch = ({username, password}: UserInformation) => {
-return fetch(config_json.baseUrl + "/money-users", {
+return fetch(config_json.baseUrl + "/api", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
