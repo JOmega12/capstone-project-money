@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 
 class TransactionList(APIView):
 
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         transactions = Transaction.objects.filter(userId = request.user)
