@@ -4,12 +4,16 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Transaction
 from .serializers import TransactionSerializer
-from rest_framework.permissions import IsAuthenticated
+
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.shortcuts import get_object_or_404
+
+
 # Create your views here.
 
 class TransactionList(APIView):
-
+    authentication_classes = [TokenAuthentication,]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -26,6 +30,7 @@ class TransactionList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TransactionDetail(APIView):
+    authentication_classes = [TokenAuthentication,]
     permission_classes = [IsAuthenticated]
     
     
@@ -36,8 +41,10 @@ class TransactionDetail(APIView):
         
     def get(self, request, pk):
         transaction = self.get_object(pk)
+        print(transaction, 'transaction')
         serializer = TransactionSerializer(transaction)
         return Response(serializer.data)
+        # return Response({"user": str(request.user)})
     
     def put(self, request, pk):
         transaction = self.get_object(pk)
