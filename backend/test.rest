@@ -1,0 +1,18 @@
+
+
+#this is to get the users when you login/signup and your own token
+POST http://127.0.0.1:8000/users/api/login/
+Content-Type: application/json
+
+{"username": "jensenadmin", "password": "Test12345"}
+
+
+POST http://127.0.0.1:8000/users/api/login
+
+
+
+#This is to get Transactions 
+
+# GET http://127.0.0.1:8000/transactions/api/
+# Content-Type:  application/json
+

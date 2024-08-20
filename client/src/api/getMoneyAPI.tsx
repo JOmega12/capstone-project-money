@@ -2,6 +2,7 @@
 import { useAuth } from "../providers/AuthProvider";
 import { Transaction } from "../types/types";
 import { config_json } from "./config"
+import { getToken } from "./UserAPI";
 
 
 export const getMoney = (userId:number) => {
@@ -18,6 +19,7 @@ export const createTransactionAPI = ({transactionName, transactionAmount, create
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { user } = useAuth();
+    const token = getToken();
 
     if(!user) {
         throw new Error ("user is not logged in getMoneyAPI ")
@@ -26,7 +28,8 @@ export const createTransactionAPI = ({transactionName, transactionAmount, create
     return fetch(config_json.baseUrl + "/transaction", {
         method: "POST",
         headers: {
-            "content-type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({transactionName, transactionAmount, createdAt, userId: user.id})
     })

@@ -27,7 +27,6 @@ export const Login = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    
     loginUser({
       password: passwordInput,
       username: usernameInput

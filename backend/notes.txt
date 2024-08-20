@@ -112,3 +112,9 @@ testingadmin
 Testingpassword
 
 
+8/19/24
+What I am finding and struggling: JWT tokens and trying to get the tokens to receive and then be able to access users own data
+
+I created a separated project that only has two endpoint Items and Users and Im trying to get the users to register a token. 
+
+If I cannot figure out how to get the access tokens for jwt, i will change strategy to using Django's own token authentication to move the project forward
