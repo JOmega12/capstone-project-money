@@ -118,3 +118,6 @@ What I am finding and struggling: JWT tokens and trying to get the tokens to rec
 I created a separated project that only has two endpoint Items and Users and Im trying to get the users to register a token. 
 
 If I cannot figure out how to get the access tokens for jwt, i will change strategy to using Django's own token authentication to move the project forward
+
+
+8/20/24
