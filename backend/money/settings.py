@@ -60,7 +60,7 @@ MIDDLEWARE = [
     # 'django.middleware.common.CommonMiddleware',
 ]
 
-# ROOT_URLCONF = 'money.urls'
+ROOT_URLCONF = 'money.urls'
 
 # CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ALLOW_ALL_ORIGINS = True
