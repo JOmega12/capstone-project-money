@@ -1,10 +1,10 @@
 from django.db import models
-from users.models import CustomUser
+from django.contrib.auth.models import User
 # Create your models here.
 
 
 class Budget_categories(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models. CASCADE)
+    user = models.ForeignKey(User, on_delete=models. CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100)
     
     def __str__(self): 
