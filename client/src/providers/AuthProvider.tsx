@@ -8,7 +8,9 @@ import {
   useState,
 } from "react";
 import { UserInformation } from "../types/types";
-import { getUserFromServer, registerFetch } from "../api/UserAPI";
+// import { getUserFromServer, registerFetch } from "../api/UserAPI";
+import { jwtDecode } from "jwt-decode";
+
 
 type TAuthContext = {
   user: UserInformation | null;
@@ -28,39 +30,31 @@ type AuthProviderProps = {
 const AuthContext = createContext<TAuthContext | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<UserInformation | null>(null);
+
+  const [authToken, setAuthToken] = useState(() => {
+    const token =localStorage.getItem('authToken');
+    return token ? JSON.parse(token) : null;
+  })
+  const [user, setUser] = useState<UserInformation | null>(()=>{
+    const token = localStorage.getItem('authToken');
+    return token ? jwtDecode(token) : null
+  });
+
+  const [loading, setLoading] = useState(true);
   const isRegister = !!user;
+
 
 
 
   // console.log(user, 'authprovider')
   const registerUser = async ({username, password} : UserInformation) => {
-    await registerFetch({username, password}).then((user) => {
-      localStorage.setItem("user", JSON.stringify(user))
-      return setUser(user)
+    const response = await fetch("http://localhost:8000/users/register/", {
+      
     })
   }
 
   const loginUser = async ({username, password}: Pick<UserInformation, 'username' |  'password'>): Promise<UserInformation | undefined> => {
-    try {
-      const user = await getUserFromServer({username, password}).catch(() => null);
 
-      if (!user) {
-        throw new Error("there is no user taken from AuthProvider");
-      }
-      if(user.username !== username) {
-        throw new Error("The current username is incorrect/ does not exist")
-      }
-      if(user?.password !== password) {
-        throw new Error("The current password is incorrect")
-      }
-
-      localStorage.setItem("user", JSON.stringify(user));
-      setUser(user);
-      return user
-    } catch(e) {
-      console.error("Error while logging in. Authprovider Problem")
-    }
   }
 
   const logoutUser = () => {
