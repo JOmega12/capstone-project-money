@@ -71,23 +71,43 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const loginUser = async ({username, password}: Pick<UserInformation, 'username' |  'password'>): Promise<UserInformation | undefined> => {
 
+    const response = await fetch("http://localhost:8000/users/token/", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username, password})
+    })
+
+    const data = await response.json();
+
+    if(response.status === 200) {
+      setAuthToken(data);
+      setUser(jwtDecode(data.access));
+      localStorage.setItem('authToken', JSON.stringify(data))
+    } else {
+      alert("Something went wrong in Login User Context")
+      throw new Error('Something Went Wrong in Login AuthProvider Context')
+    }
   }
 
   const logoutUser = () => {
+    console.log("You've been logged out")
+    setAuthToken(null)
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("authToken");
   }
 
 
   useEffect(() => {
-    const maybeUser = localStorage.getItem("user");
-    if(maybeUser){
-      try{
-        setUser(JSON.parse(maybeUser))
-      } catch(err) {
-        console.log("Error parsing data", err)
-      }
-    }
+    // const maybeUser = localStorage.getItem("authToken");
+    // if(maybeUser){
+    //   try{
+    //     setUser(JSON.parse(maybeUser))
+    //   } catch(err) {
+    //     console.log("Error parsing data", err)
+    //   }
+    // }
   }, [])
 
 
