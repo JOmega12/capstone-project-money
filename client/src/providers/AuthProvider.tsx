@@ -49,8 +49,24 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   // console.log(user, 'authprovider')
   const registerUser = async ({username, password} : UserInformation) => {
     const response = await fetch("http://localhost:8000/users/register/", {
-      
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({username, password})
     })
+
+    const data = await response.json();
+
+    if(response.status === 200) {
+      setAuthToken(data)
+      setUser(jwtDecode(data.access))
+      localStorage.setItem('authToken', JSON.stringify(data))
+    } else {
+      alert("Something went wrong in the Register Context")
+      throw new Error(`Something went wrong in the Register Context`)
+    }
+    
   }
 
   const loginUser = async ({username, password}: Pick<UserInformation, 'username' |  'password'>): Promise<UserInformation | undefined> => {
