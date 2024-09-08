@@ -16,6 +16,8 @@ import { jwtDecode } from "jwt-decode";
 type TAuthContext = {
   user: UserInformation | null;
   setUser: Dispatch<SetStateAction<UserInformation | null>>;
+
+  
   isRegister: boolean;
   registerUser: (user: UserInformation) => Promise<void>;
   updateToken: () => Promise<void>
@@ -50,7 +52,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   // console.log(user, 'authprovider')
   const registerUser = async ({username, password} : UserInformation) => {
-    const response = await fetch("http://localhost:8000/users/register/", {
+    const response = await fetch("http://localhost:8000/users/api/register/", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -73,16 +75,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const loginUser = async ({username, password}: Pick<UserInformation, 'username' |  'password'>): Promise<UserInformation | undefined> => {
 
-    const response = await fetch("http://localhost:8000/users/token/", {
+    const response = await fetch("http://localhost:8000/users/api/token/", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({username, password})
     })
-
+    console.log(response, 'response')
     const data = await response.json();
-
+    // console.log(data, 'data in login')
     if(response.status === 200) {
       setAuthToken(data);
       const decodeUser: UserInformation = jwtDecode(data.access)
@@ -105,9 +107,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 
   // double check useCallBack function and see if it works
-  const updateToken = useCallback( async() => {
+  const updateToken = async() => {
     console.log('Token Updated');
-    const response = await fetch("http://localhost:8000/users/token/refresh/", {
+    const response = await fetch("http://localhost:8000/users/api/token/refresh/", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -126,28 +128,28 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     if(loading) {
       setLoading(false);
     }
-  }, [authToken, loading] )
+  }
 
 
 
-  useEffect(() => {
-
-    if (loading) {
-      updateToken()
-    }
-    const fourMin = 1000 * 60 * 4;
-    const interval = setInterval(() => {
-      if(authToken){
-        updateToken()
-      }
-    }, fourMin);
-    return () => clearInterval(interval)
-  }, [authToken, loading, updateToken])
+  // useEffect(() => {
+  //   if (loading) {
+  //     updateToken()
+  //   }
+  //   const fourMin = 1000 * 60 * 4;
+  //   const interval = setInterval(() => {
+  //     if(authToken){
+  //       updateToken()
+  //     }
+  //   }, fourMin);
+  //   return () => clearInterval(interval)
+  // }, [authToken, loading])
 
 
   return (
     <AuthContext.Provider
       value={{
+        authToken,
         user,
         setUser,
         isRegister,

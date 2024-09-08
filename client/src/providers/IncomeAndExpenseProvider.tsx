@@ -80,7 +80,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
   const getUserMoney = async() => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/items/api/", {
+      const response = await fetch("http://localhost:8000/transactions/api/", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -106,54 +106,58 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
 
 
-  const refetch = useCallback(() => {
-    if(userId) {
-      getMoney(userId).then(setMoney);
+  const refetch = async() => {
+    const data = await getUserMoney();
+    if(data){
+      setMoney(data)
     }
-  }, [userId]);
+  };
 
   useEffect(() => {
     refetch();
-  }, [refetch]);
+  }, []);
 
 
 
 
+  // const createNewTransaction = () => {
+    
+  // }
 
 
 
 
   // !this might not work because the api is not connected
   // *this creates new income/expense
-  const createNewTransactionForm = async ({
-    transactionName,
-    transactionAmount,
-    createdAt,
-    userId,
-  }: Pick<
-    Transaction,
-    "userId" | "transactionName" | "transactionAmount" | "createdAt"
-  >): Promise<Transaction | undefined> => {
-    try {
-      await createTransactionAPI({
-        userId,
-        transactionName,
-        transactionAmount,
-        createdAt,
-      });
-      await refetch();
+  // const createNewTransactionForm = async ({
+  //   transactionName,
+  //   transactionAmount,
+  //   createdAt,
+  //   userId,
+  // }: Pick<
+  //   Transaction,
+  //   "userId" | "transactionName" | "transactionAmount" | "createdAt"
+  // >): Promise<Transaction | undefined> => {
+  //   try {
+  //     await createTransactionAPI({
+  //       userId,
+  //       transactionName,
+  //       transactionAmount,
+  //       createdAt,
+  //     });
+  //     await refetch();
 
-      const newMoney = money;
-      if (newMoney) {
-        return newMoney;
-      } else {
-        return undefined;
-      }
-    } catch (err) {
-      console.error("Could not create Transaction In Provider", err);
-      return undefined;
-    }
-  };
+  //     const newMoney = money;
+  //     if (newMoney) {
+  //       return newMoney;
+  //     } else {
+  //       return undefined;
+  //     }
+  //   } catch (err) {
+  //     console.error("Could not create Transaction In Provider", err);
+  //     return undefined;
+  //   }
+  // };
 
 
   // *this creates the transaction receipt for income/ and adds to total amount

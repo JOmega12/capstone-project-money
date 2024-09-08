@@ -12,7 +12,9 @@ import { ExpenseInputForm } from "./components/forms/ExpenseInputForm"
 import { Categories } from "./components/Categories"
 import { IncomeDash } from "./components/IncomeAndExpense/IncomeDash"
 import { ExpenseDash } from "./components/IncomeAndExpense/ExpenseDash"
-import { TestComponent } from "./components/TestComponent"
+import { TestComponent } from "./components/testFolder/TestComponent"
+import { LoginTest } from "./components/testFolder/LoginTest"
+import { RegisterTest } from "./components/testFolder/RegisterTest"
 
 // import { Navbar } from "./Navbar"
 // import { AuthProvider } from "./providers/AuthProvider"
@@ -37,7 +39,11 @@ function App() {
               <Route path="/add-expense" element={<ExpenseInputForm/>}></Route>
               <Route path="/categories" element={<Categories/>}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
+              {/* Test Routes in the bottom */}
               <Route path="/test-server" element={<TestComponent/>}></Route>
+              <Route path="/test-login" element={<LoginTest/>}></Route>
+              <Route path="/test-Register" element={<RegisterTest/>}></Route>
+
             </Routes>
           </IncomeAndExpenseProvider>
         </AuthProvider>
