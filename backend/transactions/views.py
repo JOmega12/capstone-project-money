@@ -18,7 +18,7 @@ from .serializers import TransactionSerializer
 @permission_classes([IsAuthenticated])
 def getTransaction(request):
     user = request.user
-    transactions = user.transactions.all()
+    transactions = user.transaction_set.all()
     serializer = TransactionSerializer(transactions, many=True)
     return Response(serializer.data)
 
@@ -36,50 +36,31 @@ def createTransaction(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# !check if works
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def updateTransaction(request, pk):
+    try: 
+        transaction = Transaction.objects.get(pk= pk, user= request.user)
+    except Transaction.DoesNotExist:
+        Response({"error": "Transaction is not found or no permission"})
+    
+    serializer = TransactionSerializer(transaction, data = request.data, partial = True)
+    
+    if(serializer.is_valid()):
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
-# class TransactionList(APIView):
-#     authentication_classes = [TokenAuthentication,]
-#     permission_classes = [IsAuthenticated]
 
-#     def get(self, request):
-#         transactions = Transaction.objects.filter(userId = request.user)
-#         serializer = TransactionSerializer(transactions, many=True)
-#         return Response(serializer.data)
-        
-#     def post(self, request):
-#         serializer = TransactionSerializer(data = request.data)
-        
-#         if serializer.is_valid():
-#             serializer.save(userId = request.user)
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# class TransactionDetail(APIView):
-#     authentication_classes = [TokenAuthentication,]
-#     permission_classes = [IsAuthenticated]
+#! check if works
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteTransaction(request, pk):
+    try: 
+        transaction = Transaction.objects.get(pk = pk, user = request.user)
+    except Transaction.DoesNotExist:
+        return Response({"error": "Item is not found or No permission"}, status= status.HTTP_404_NOT_FOUND)
     
-    
-#     def get_object(self, pk):
-#         transaction = get_object_or_404(Transaction, pk=pk, userId=self.request.user)
-#         self.check_object_permissions(self.request, transaction) 
-#         return transaction
-        
-#     def get(self, request, pk):
-#         transaction = self.get_object(pk)
-#         print(transaction, 'transaction')
-#         serializer = TransactionSerializer(transaction)
-#         return Response(serializer.data)
-#         # return Response({"user": str(request.user)})
-    
-#     def put(self, request, pk):
-#         transaction = self.get_object(pk)
-#         serializer = TransactionSerializer(transaction, data = request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-#     def delete(self, request, pk):
-#         transaction = self.get_object(pk)
-#         transaction.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
+    transaction.delete()
+    return Response({"Message": "Item Deleted Successfully"}, status= status.HTTP_200_OK)
