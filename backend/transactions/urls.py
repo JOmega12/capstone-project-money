@@ -5,6 +5,6 @@ from . import views
 urlpatterns = [
     path('api/', views.getTransaction, name='transaction_list'),
     path('api/create/', views.createTransaction, name='create_transaction'),
-    path('api/<int:pk>/update/', views.getTransaction, name='transaction_list'),
-    path('api/<int:pk>/delete/', views.getTransaction, name='transaction_list'),
+    path('api/<int:pk>/update/', views.updateTransaction, name='update_transaction'),
+    path('api/<int:pk>/delete/', views.deleteTransaction, name='delete_transaction'),
 ]
