@@ -36,7 +36,6 @@ def createTransaction(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# !check if works
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
 def updateTransaction(request, pk):
@@ -53,7 +52,6 @@ def updateTransaction(request, pk):
     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
 
-#! check if works
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def deleteTransaction(request, pk):
