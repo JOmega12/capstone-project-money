@@ -3,6 +3,7 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -17,6 +18,7 @@ type TAuthContext = {
   setUser: Dispatch<SetStateAction<UserInformation | null>>;
   isRegister: boolean;
   registerUser: (user: UserInformation) => Promise<void>;
+  updateToken: () => Promise<void>
   loginUser: (
       userInfo: Pick<UserInformation, 'password' | 'username'>
   ) => Promise<UserInformation | undefined>;
@@ -83,11 +85,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     if(response.status === 200) {
       setAuthToken(data);
-      setUser(jwtDecode(data.access));
-      localStorage.setItem('authToken', JSON.stringify(data))
+      const decodeUser: UserInformation = jwtDecode(data.access)
+      setUser(decodeUser);
+      localStorage.setItem('authToken', JSON.stringify(data));
+      return decodeUser
     } else {
       alert("Something went wrong in Login User Context")
       throw new Error('Something Went Wrong in Login AuthProvider Context')
+      // return undefined
     }
   }
 
@@ -99,16 +104,45 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
 
+  // double check useCallBack function and see if it works
+  const updateToken = useCallback( async() => {
+    console.log('Token Updated');
+    const response = await fetch("http://localhost:8000/users/token/refresh/", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({'refresh': authToken?.refresh})
+    })
+
+    const data = await response.json();
+    if(response.status === 200) {
+      setAuthToken(data);
+      setUser(jwtDecode(data.access));
+      localStorage.setItem("authToken", JSON.stringify(data))
+    } else {
+      logoutUser()
+    }
+    if(loading) {
+      setLoading(false);
+    }
+  }, [authToken, loading] )
+
+
+
   useEffect(() => {
-    // const maybeUser = localStorage.getItem("authToken");
-    // if(maybeUser){
-    //   try{
-    //     setUser(JSON.parse(maybeUser))
-    //   } catch(err) {
-    //     console.log("Error parsing data", err)
-    //   }
-    // }
-  }, [])
+
+    if (loading) {
+      updateToken()
+    }
+    const fourMin = 1000 * 60 * 4;
+    const interval = setInterval(() => {
+      if(authToken){
+        updateToken()
+      }
+    }, fourMin);
+    return () => clearInterval(interval)
+  }, [authToken, loading, updateToken])
 
 
   return (
@@ -119,6 +153,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         isRegister,
         registerUser,
         loginUser,
+        updateToken,
         logoutUser
       }}
     >

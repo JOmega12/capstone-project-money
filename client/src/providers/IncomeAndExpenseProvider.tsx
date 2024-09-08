@@ -52,7 +52,11 @@ const MoneyContext = createContext<IncomeAndExpenseContextType | undefined>(
 );
 
 export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
-  const { user } = useAuth();
+  
+  // getting the user authToken to get the items
+  const { user, authToken, logoutUser } = useAuth();
+
+
   const [money, setMoney] = useState<Transaction | null>(null);
   const [payHistory, setPayHistory] = useState<Transaction[]>([]);
   const [transactionName, setTransactionName] = useState<string>("");
@@ -60,6 +64,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
   const [totalIncome, setTotalIncome] = useState<number>(0);
   const [totalExpense, setTotalExpense] = useState<number>(0)
+
 
 
   const userId = user?.id;
@@ -71,6 +76,36 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const pDay = day.toString().padStart(2, "0");
   const newPaddedDate = `${monthName} ${pDay}, ${year}`;
 
+
+
+  const getUserMoney = async() => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/items/api/", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + String(authToken.access)
+        }
+      });
+      if(!response.ok) {
+        throw new Error(`HTTP error!: ${response.status}`)
+      }
+      if(response.statusText === 'Unauthorized'){
+        logoutUser()
+      }
+
+      const data = await response.json();
+      console.log(response, 'response in item and expense provider');
+      console.log(data, 'data in income and expense provider')
+      return data;
+    }catch(e) {
+      console.log(e);
+      return null;
+    }
+  }
+
+
+
   const refetch = useCallback(() => {
     if(userId) {
       getMoney(userId).then(setMoney);
@@ -81,6 +116,14 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     refetch();
   }, [refetch]);
 
+
+
+
+
+
+
+
+  // !this might not work because the api is not connected
   // *this creates new income/expense
   const createNewTransactionForm = async ({
     transactionName,
