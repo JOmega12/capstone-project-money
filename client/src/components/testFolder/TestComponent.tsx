@@ -48,10 +48,10 @@ export const TestComponent = () => {
              ): (
                 <p>No Transactions Available</p>
              )}
-        
-            
-        {/* get Transactions */}
+
         </div>
+
+        {/* !TODO: DO THIS NEXT */}
         <div className="mt-10">
             <p>Wanna Track Your Money?</p>
         {/* Make transactions */}

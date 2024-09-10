@@ -171,7 +171,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
       createdAt: newPaddedDate,
     };
 
-    await createNewTransactionForm(new_transaction)
+    // await createNewTransactionForm(new_transaction)
 
     setPayHistory([...payHistory, new_transaction]);
     setTotalIncome(totalIncome + transactionAmount)
