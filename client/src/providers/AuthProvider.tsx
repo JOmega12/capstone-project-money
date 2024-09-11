@@ -3,7 +3,6 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -13,10 +12,15 @@ import { UserInformation } from "../types/types";
 import { jwtDecode } from "jwt-decode";
 
 
+type AuthTokenType = {
+  refresh: string | null,
+  access: string | null
+}
+
 type TAuthContext = {
   user: UserInformation | null;
   setUser: Dispatch<SetStateAction<UserInformation | null>>;
-
+  authToken: AuthTokenType | null
   
   isRegister: boolean;
   registerUser: (user: UserInformation) => Promise<void>;
@@ -47,7 +51,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(true);
   const isRegister = !!user;
 
-
+// console.log(authToken, 'authToken in auth')
 
 
   // console.log(user, 'authprovider')
@@ -132,18 +136,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 
 
-  // useEffect(() => {
-  //   if (loading) {
-  //     updateToken()
-  //   }
-  //   const fourMin = 1000 * 60 * 4;
-  //   const interval = setInterval(() => {
-  //     if(authToken){
-  //       updateToken()
-  //     }
-  //   }, fourMin);
-  //   return () => clearInterval(interval)
-  // }, [authToken, loading])
+  useEffect(() => {
+    if (loading) {
+      updateToken()
+    }
+    const fourMin = 1000 * 60 * 4;
+    const interval = setInterval(() => {
+      if(authToken){
+        updateToken()
+      }
+    }, fourMin);
+    return () => clearInterval(interval)
+  }, [authToken, loading])
 
 
   return (

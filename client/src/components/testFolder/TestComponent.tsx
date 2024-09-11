@@ -1,16 +1,13 @@
-import { useState, useEffect } from "react"
 import { useAuth } from "../../providers/AuthProvider"
 import { LoginTest } from "./LoginTest";
-import { HeaderTest } from "./HeaderTes";
 import { RegisterTest } from "./RegisterTest";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 
 
 export const TestComponent = () => {
 
-    const {user, logoutUser, authToken} = useAuth();
+    const {user, logoutUser} = useAuth();
     const {money} = useMoney();
-    console.log(authToken.access, 'authToken')
     console.log(money, 'money')
     return(
     <>

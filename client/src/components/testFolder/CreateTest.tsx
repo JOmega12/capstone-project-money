@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 
 
 export const CreateTest = () => {
+
+    const { createNewTransactionForm } = useMoney();
     const [transactionName, setTransactionName] = useState("");
     const [transactionAmount, setTransactionAmount] = useState(0)
 
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-
+        createNewTransactionForm()
         // add Income API button
     }
     return(

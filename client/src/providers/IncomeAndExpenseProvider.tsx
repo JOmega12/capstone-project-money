@@ -4,13 +4,12 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 import { Transaction } from "../types/types";
-import { createTransactionAPI, getMoney } from "../api/getMoneyAPI";
+// import { createTransactionAPI, getMoney } from "../api/getMoneyAPI";
 import { useAuth } from "./AuthProvider";
 
 type IncomeAndExpenseContextType = {
@@ -23,6 +22,10 @@ type IncomeAndExpenseContextType = {
   money: Transaction | null;
   setMoney: Dispatch<SetStateAction<Transaction | null>>;
 
+  createNewTransactionForm: (
+    transactionInfo: Pick<Transaction, 'transactionName' | 'transactionAmount'>
+) => Promise<Transaction | undefined>,
+  
   handleTransactionIncomeFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
   handleTransactionExpenseFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
 
@@ -80,11 +83,15 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
   const getUserMoney = async() => {
     try {
+      // if (!authToken) {
+      //   console.error("authToken is null");
+      //   return;
+      // }
       const response = await fetch("http://localhost:8000/transactions/api/", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': "Bearer " + String(authToken.access)
+          'Authorization': "Bearer " + String(authToken?.access)
         }
       });
       if(!response.ok) {
@@ -95,16 +102,14 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
       }
 
       const data = await response.json();
-      console.log(response, 'response in item and expense provider');
-      console.log(data, 'data in income and expense provider')
+      // console.log(response, 'response in item and expense provider');
+      // console.log(data, 'data in income and expense provider')
       return data;
     }catch(e) {
       console.log(e);
       return null;
     }
   }
-
-
 
   const refetch = async() => {
     const data = await getUserMoney();
@@ -120,44 +125,52 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
 
 
-  // const createNewTransaction = () => {
-    
-  // }
-
-
-
-
-  // !this might not work because the api is not connected
   // *this creates new income/expense
-  // const createNewTransactionForm = async ({
-  //   transactionName,
-  //   transactionAmount,
-  //   createdAt,
-  //   userId,
-  // }: Pick<
-  //   Transaction,
-  //   "userId" | "transactionName" | "transactionAmount" | "createdAt"
-  // >): Promise<Transaction | undefined> => {
-  //   try {
-  //     await createTransactionAPI({
-  //       userId,
-  //       transactionName,
-  //       transactionAmount,
-  //       createdAt,
-  //     });
-  //     await refetch();
+  const createNewTransactionForm = async ({
+    transactionName,
+    transactionAmount
+  }: Pick<
+    Transaction,
+    "transactionName" | "transactionAmount"
+  >): Promise<Transaction | undefined> => {
 
-  //     const newMoney = money;
-  //     if (newMoney) {
-  //       return newMoney;
-  //     } else {
-  //       return undefined;
-  //     }
-  //   } catch (err) {
-  //     console.error("Could not create Transaction In Provider", err);
-  //     return undefined;
-  //   }
-  // };
+    try {
+
+      const response = await fetch('', {
+        method : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + String(authToken?.access)
+        },
+        body: JSON.stringify({transactionName, transactionAmount})
+      });
+
+      if(!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`)
+      }
+
+      const data = await response.json();
+      await refetch();
+      return data
+      // await createTransactionAPI({
+      //   userId,
+      //   transactionName,
+      //   transactionAmount,
+      //   createdAt,
+      // });
+      // await refetch();
+
+      // const newMoney = money;
+      // if (newMoney) {
+      //   return newMoney;
+      // } else {
+      //   return undefined;
+      // }
+    } catch (err) {
+      console.log("Could not create Transaction In Provider", err);
+      return undefined;
+    }
+  };
 
 
   // *this creates the transaction receipt for income/ and adds to total amount
@@ -171,7 +184,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
       createdAt: newPaddedDate,
     };
 
-    // await createNewTransactionForm(new_transaction)
+    await createNewTransactionForm(new_transaction)
 
     setPayHistory([...payHistory, new_transaction]);
     setTotalIncome(totalIncome + transactionAmount)
@@ -207,6 +220,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         money,
         setMoney,
 
+        createNewTransactionForm,
         handleTransactionIncomeFormSubmit,
         handleTransactionExpenseFormSubmit,
 
