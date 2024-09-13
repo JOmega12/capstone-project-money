@@ -10,6 +10,7 @@ export type Transaction = {
     userId: number | undefined;
     transactionName: string;
     transactionAmount: number;
+    transactionType?: string;
     createdAt?: string;
 }
 

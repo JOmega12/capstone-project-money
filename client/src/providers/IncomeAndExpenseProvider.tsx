@@ -1,6 +1,6 @@
 import {
   Dispatch,
-  FormEvent,
+  // FormEvent,
   ReactNode,
   SetStateAction,
   createContext,
@@ -13,21 +13,15 @@ import { Transaction } from "../types/types";
 import { useAuth } from "./AuthProvider";
 
 type IncomeAndExpenseContextType = {
-  // createNewTransactionForm: (
-  //   transaction: Pick<
-  //     Transaction,
-  //     "userId" | "transactionName" | "transactionAmount" | "createdAt"
-  //   >
-  // ) => Promise<Transaction | undefined>;
   money: Transaction | null;
   setMoney: Dispatch<SetStateAction<Transaction | null>>;
 
   createNewTransactionForm: (
-    transactionInfo: Pick<Transaction, 'transactionName' | 'transactionAmount'>
-) => Promise<Transaction | undefined>,
+    transactionInfo: Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType'>
+  ) => Promise<Transaction | undefined>,
   
-  handleTransactionIncomeFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  handleTransactionExpenseFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  // handleTransactionIncomeFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  // handleTransactionExpenseFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
 
   transactionName: string ;
   setTransactionName: Dispatch<SetStateAction<string>>;
@@ -70,7 +64,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
 
 
-  const userId = user?.id;
+  // const userId = user?.id;
   // date functions
   const dateObj = new Date();
   const day = dateObj.getUTCDate();
@@ -78,7 +72,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const monthName = dateObj.toLocaleString("default", { month: "long" });
   const pDay = day.toString().padStart(2, "0");
   const newPaddedDate = `${monthName} ${pDay}, ${year}`;
-
 
 
   const getUserMoney = async() => {
@@ -122,21 +115,21 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   // *this creates new income/expense
   const createNewTransactionForm = async ({
     transactionName,
-    transactionAmount
+    transactionAmount,
+    transactionType
   }: Pick<
     Transaction,
-    "transactionName" | "transactionAmount"
+    "transactionName" | "transactionAmount" | "transactionType"
   >): Promise<Transaction | undefined> => {
 
     try {
-
       const response = await fetch('http://127.0.0.1:8000/transactions/api/create/', {
         method : 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + String(authToken?.access)
         },
-        body: JSON.stringify({transactionName, transactionAmount})
+        body: JSON.stringify({transactionName, transactionAmount, transactionType})
       });
 
       if(!response.ok) {
@@ -155,45 +148,49 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
 
   // *this creates the transaction receipt for income/ and adds to total amount
-  const handleTransactionIncomeFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleTransactionIncomeFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
-    const new_transaction = {
-      userId: userId,
-      transactionName,
-      transactionAmount,
-      createdAt: newPaddedDate,
-    };
+  //   const new_transaction = {
+  //     userId: userId,
+  //     transactionName,
+  //     transactionAmount,
+  //     transactionType,
+  //     createdAt: newPaddedDate,
+  //   };
 
-    await createNewTransactionForm(new_transaction)
+  //   await createNewTransactionForm(new_transaction)
 
-    setPayHistory([...payHistory, new_transaction]);
-    setTotalIncome(totalIncome + transactionAmount)
+  //   setPayHistory([...payHistory, new_transaction]);
+  //   setTotalIncome(totalIncome + transactionAmount)
 
-    setTransactionName("");
-    setTransactionAmount(0);
+  //   setTransactionName("");
+  //   setTransactionAmount(0);
 
-    // once submitted, resets all the values/states of the form
-  };
+  //   // once submitted, resets all the values/states of the form
+  // };
 
 
   // *this creates the transaction receipt for income/ and adds to total amount
-  const handleTransactionExpenseFormSubmit = (e:FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleTransactionExpenseFormSubmit = (e:FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
-    const new_transaction = {
-      userId: userId,
-      transactionName,
-      transactionAmount,
-      createdAt: newPaddedDate,
-    };
+  //   const new_transaction = {
+  //     userId: userId,
+  //     transactionName,
+  //     transactionAmount,
+  //     createdAt: newPaddedDate,
+  //   };
 
-    setPayHistory([...payHistory, new_transaction])
-    setTotalExpense(totalExpense + transactionAmount)
+  //   setPayHistory([...payHistory, new_transaction])
+  //   setTotalExpense(totalExpense + transactionAmount)
 
-    setTransactionName("");
-    setTransactionAmount(0);
-  }
+  //   setTransactionName("");
+  //   setTransactionAmount(0);
+  // }
+
+
+
 
   return (
     <MoneyContext.Provider
@@ -202,8 +199,8 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         setMoney,
 
         createNewTransactionForm,
-        handleTransactionIncomeFormSubmit,
-        handleTransactionExpenseFormSubmit,
+        // handleTransactionIncomeFormSubmit,
+        // handleTransactionExpenseFormSubmit,
 
         transactionName,
         setTransactionName,

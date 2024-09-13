@@ -137,13 +137,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 
   useEffect(() => {
+
+    const checkTokenExpiry = () => {
+      if(authToken?.access){
+        const decodedToken = jwtDecode(authToken.access);
+        const currentTime = Date.now() / 1000;
+        const tokenExpiryTime = decodedToken?.exp;
+
+        if(tokenExpiryTime && tokenExpiryTime - currentTime < 60) {
+          updateToken()
+        }
+      }
+    }
+
     if (loading) {
-      updateToken()
+      checkTokenExpiry()
     }
     const fourMin = 1000 * 60 * 4;
     const interval = setInterval(() => {
       if(authToken){
-        updateToken()
+        checkTokenExpiry();
       }
     }, fourMin);
     return () => clearInterval(interval)
