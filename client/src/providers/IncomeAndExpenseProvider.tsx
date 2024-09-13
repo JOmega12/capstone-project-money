@@ -19,9 +19,6 @@ type IncomeAndExpenseContextType = {
   createNewTransactionForm: (
     transactionInfo: Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType'>
   ) => Promise<Transaction | undefined>,
-  
-  // handleTransactionIncomeFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  // handleTransactionExpenseFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
 
   transactionName: string ;
   setTransactionName: Dispatch<SetStateAction<string>>;
@@ -51,7 +48,7 @@ const MoneyContext = createContext<IncomeAndExpenseContextType | undefined>(
 export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   
   // getting the user authToken to get the items
-  const { user, authToken, logoutUser } = useAuth();
+  const {authToken, logoutUser } = useAuth();
 
 
   const [money, setMoney] = useState<Transaction | null>(null);
@@ -145,50 +142,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
       return undefined;
     }
   };
-
-
-  // *this creates the transaction receipt for income/ and adds to total amount
-  // const handleTransactionIncomeFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   const new_transaction = {
-  //     userId: userId,
-  //     transactionName,
-  //     transactionAmount,
-  //     transactionType,
-  //     createdAt: newPaddedDate,
-  //   };
-
-  //   await createNewTransactionForm(new_transaction)
-
-  //   setPayHistory([...payHistory, new_transaction]);
-  //   setTotalIncome(totalIncome + transactionAmount)
-
-  //   setTransactionName("");
-  //   setTransactionAmount(0);
-
-  //   // once submitted, resets all the values/states of the form
-  // };
-
-
-  // *this creates the transaction receipt for income/ and adds to total amount
-  // const handleTransactionExpenseFormSubmit = (e:FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   const new_transaction = {
-  //     userId: userId,
-  //     transactionName,
-  //     transactionAmount,
-  //     createdAt: newPaddedDate,
-  //   };
-
-  //   setPayHistory([...payHistory, new_transaction])
-  //   setTotalExpense(totalExpense + transactionAmount)
-
-  //   setTransactionName("");
-  //   setTransactionAmount(0);
-  // }
-
 
 
 

@@ -20,6 +20,16 @@ export const TestComponent = () => {
 
   console.log(totalIncome);
 
+  const totalExpense =
+  money
+    .filter((item) => item.transactionType === "expense")
+    .reduce((acc, item) => acc + parseFloat(item.transactionAmount), 0) || 0;
+
+
+  console.log(totalExpense);
+
+  const netAmount = totalIncome - totalExpense;
+  console.log(netAmount, 'net')
   return (
     <>
       <div>
@@ -59,7 +69,9 @@ export const TestComponent = () => {
           )}
         </div>
         <div className="mt-10">
-          <h2>Your Total So Far:</h2>
+          <h2>Your Total So Far: {netAmount}</h2>
+          <p>Income: {totalIncome}</p>
+          <p>Expense: {totalExpense}</p>
         </div>
         {/* !TODO: DO THIS NEXT */}
         <div className="mt-10">
