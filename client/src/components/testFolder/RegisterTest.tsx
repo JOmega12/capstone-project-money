@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { useAuth } from "../../providers/AuthProvider";
+import { useAuth } from "../../providers/AuthProvider";
 
 
 export const RegisterTest = () => {
@@ -7,13 +7,13 @@ export const RegisterTest = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // const { registerUser }= useAuth();
+    const { registerUser }= useAuth();
 
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
-        // registerUser(username, password)
+        registerUser({username: username, password: password})
     }
     return(
         <form onSubmit={handleSubmit}>

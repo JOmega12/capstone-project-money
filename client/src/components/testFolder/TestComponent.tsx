@@ -2,13 +2,13 @@ import { useAuth } from "../../providers/AuthProvider"
 import { LoginTest } from "./LoginTest";
 import { RegisterTest } from "./RegisterTest";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
+import { CreateTest } from "./CreateTest";
 
 
 export const TestComponent = () => {
 
     const {user, logoutUser} = useAuth();
     const {money} = useMoney();
-    console.log(money, 'money')
     return(
     <>
     <div>
@@ -51,7 +51,7 @@ export const TestComponent = () => {
         {/* !TODO: DO THIS NEXT */}
         <div className="mt-10">
             <p>Wanna Track Your Money?</p>
-        {/* Make transactions */}
+             <CreateTest />
         </div>
 
     </div>

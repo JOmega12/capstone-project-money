@@ -83,10 +83,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
   const getUserMoney = async() => {
     try {
-      // if (!authToken) {
-      //   console.error("authToken is null");
-      //   return;
-      // }
       const response = await fetch("http://localhost:8000/transactions/api/", {
         method: 'GET',
         headers: {
@@ -123,8 +119,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   }, []);
 
 
-
-
   // *this creates new income/expense
   const createNewTransactionForm = async ({
     transactionName,
@@ -136,7 +130,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
     try {
 
-      const response = await fetch('', {
+      const response = await fetch('http://127.0.0.1:8000/transactions/api/create/', {
         method : 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -152,20 +146,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
       const data = await response.json();
       await refetch();
       return data
-      // await createTransactionAPI({
-      //   userId,
-      //   transactionName,
-      //   transactionAmount,
-      //   createdAt,
-      // });
-      // await refetch();
 
-      // const newMoney = money;
-      // if (newMoney) {
-      //   return newMoney;
-      // } else {
-      //   return undefined;
-      // }
     } catch (err) {
       console.log("Could not create Transaction In Provider", err);
       return undefined;
