@@ -36,7 +36,6 @@ export const Login = () => {
         setError(true);
         return;
       } else {
-        localStorage.setItem("user", JSON.stringify(user));
         setError(false);
         navigate("/dashboard")
       }

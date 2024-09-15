@@ -54,7 +54,7 @@ export const SignUp = () => {
 
   return (
     <form
-      onSubmit={(e) => handleSubmit(e)}
+      onSubmit={handleSubmit}
       onKeyDown={(e) => handleKeyDown(e)}
     >
       <div>

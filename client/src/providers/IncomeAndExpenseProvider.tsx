@@ -26,9 +26,8 @@ type IncomeAndExpenseContextType = {
   setTransactionAmount: Dispatch<SetStateAction<number>>;
 
   totalIncome: number | undefined;
-  setTotalIncome: Dispatch<SetStateAction<number>>;
   totalExpense: number | undefined;
-  setTotalExpense: Dispatch<SetStateAction<number>>;
+  netAmount: number | undefined;
 
   newPaddedDate: string | undefined;
   payHistory: (Transaction | undefined) [];
@@ -48,18 +47,13 @@ const MoneyContext = createContext<IncomeAndExpenseContextType | undefined>(
 export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   
   // getting the user authToken to get the items
-  const {authToken, logoutUser } = useAuth();
+  const {authToken, logoutUser, user } = useAuth();
 
 
   const [money, setMoney] = useState<Transaction | null>(null);
   const [payHistory, setPayHistory] = useState<Transaction[]>([]);
   const [transactionName, setTransactionName] = useState<string>("");
   const [transactionAmount, setTransactionAmount] = useState<number>(0);
-
-  const [totalIncome, setTotalIncome] = useState<number>(0);
-  const [totalExpense, setTotalExpense] = useState<number>(0)
-
-
 
   // const userId = user?.id;
   // date functions
@@ -144,16 +138,41 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   };
 
 
+  // * this code block is used to calculate the amount of income and expense
+  // * this also would help for later chart
+  let totalIncome = 0;
+  let totalExpense = 0;
+
+  if (user && money) {
+    if (!Array.isArray(money)) {
+      console.error("Money is not an array", money);
+      return null;
+    }
+
+    totalIncome =
+      money
+        .filter((item) => item.transactionType === "income")
+        .reduce((acc, item) => acc + parseFloat(item.transactionAmount), 0) ||
+      0;
+
+
+    totalExpense =
+      money
+        .filter((item) => item.transactionType === "expense")
+        .reduce((acc, item) => acc + parseFloat(item.transactionAmount), 0) ||
+      0;
+
+  }
+
+  const netAmount = totalIncome - totalExpense;
+
 
   return (
     <MoneyContext.Provider
       value={{
         money,
         setMoney,
-
         createNewTransactionForm,
-        // handleTransactionIncomeFormSubmit,
-        // handleTransactionExpenseFormSubmit,
 
         transactionName,
         setTransactionName,
@@ -161,9 +180,8 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         setTransactionAmount,
 
         totalIncome,
-        setTotalIncome,
         totalExpense,
-        setTotalExpense,
+        netAmount,
         newPaddedDate,
 
         payHistory,

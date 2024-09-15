@@ -9,7 +9,6 @@ export const CreateTest = () => {
     const [transactionAmount, setTransactionAmount] = useState(0);
     const [transactionType, setTransactionType] = useState<"income" | "expense">();
 
-    // !cant submit new form or new transaction
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         createNewTransactionForm({transactionName: transactionName, transactionAmount: transactionAmount, transactionType: transactionType})

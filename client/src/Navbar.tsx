@@ -2,13 +2,20 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "./providers/AuthProvider";
 
 const NavLinks = () => {
   const activeUnderline = "active:underline hover:underline";
 
+  const {user} = useAuth();
   return (
     <nav className="flex flex-col items-center justify-between gap-10 p-6 mt-6">
-      <h2 className="text-center">Hello name!</h2>
+      {user? (
+        <h2 className="text-center">Hello {user.username}!</h2>
+      ): (
+        <h2>Hello, please login</h2>
+      )}
+
       <NavLink to="/dashboard" className={activeUnderline}>
         Dashboard
       </NavLink>

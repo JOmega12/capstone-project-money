@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(true);
   const isRegister = !!user;
 
-// console.log(authToken, 'authToken in auth')
+// console.log(user, 'user in authProvider')
 
 
   // console.log(user, 'authprovider')

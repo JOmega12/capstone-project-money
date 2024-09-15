@@ -6,30 +6,9 @@ import { CreateTest } from "./CreateTest";
 
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
-  const { money } = useMoney();
-
-  if (!Array.isArray(money)) {
-    console.error("Money is not an array", money);
-    return null;
-  }
-
-  const totalIncome =
-    money
-      .filter((item) => item.transactionType === "income")
-      .reduce((acc, item) => acc + parseFloat(item.transactionAmount), 0) || 0;
-
-  console.log(totalIncome);
-
-  const totalExpense =
-  money
-    .filter((item) => item.transactionType === "expense")
-    .reduce((acc, item) => acc + parseFloat(item.transactionAmount), 0) || 0;
+  const { money, totalIncome, totalExpense, netAmount } = useMoney();
 
 
-  console.log(totalExpense);
-
-  const netAmount = totalIncome - totalExpense;
-  console.log(netAmount, 'net')
   return (
     <>
       <div>
@@ -68,11 +47,15 @@ export const TestComponent = () => {
             <p>No Transactions Available</p>
           )}
         </div>
-        <div className="mt-10">
-          <h2>Your Total So Far: {netAmount}</h2>
-          <p>Income: {totalIncome}</p>
-          <p>Expense: {totalExpense}</p>
-        </div>
+        {user ? (
+          <div className="mt-10">
+            <h2>Your Total So Far: {netAmount}</h2>
+            <p>Income: {totalIncome}</p>
+            <p>Expense: {totalExpense}</p>
+          </div>
+        ) : (
+          <p>User Not logged in to see total money</p>
+        )}
         {/* !TODO: DO THIS NEXT */}
         <div className="mt-10">
           <p>Wanna Track Your Money?</p>
