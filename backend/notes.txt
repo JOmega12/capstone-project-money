@@ -129,3 +129,6 @@ django classes? vs django functional?
 
 
 also to previous notes, I used jwtTokens, but isntead of scouringl what people did, I used the documentation and supplemented the og docs with youtube tutorials that implemented the jwt token logins -> functional programming
+
+
+Current problem: how to create generic categories for each user to use and how they can create their own categories specific to their own data/account
