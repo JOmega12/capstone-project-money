@@ -75,6 +75,9 @@
       "name": "Utilities"
     }
   ],
+  // refactor many to one
+  // generic categories available to users
+  // if i logged in i have my own generic categories
   "user_budget_categories_junction": [
     {
       "id": "1",

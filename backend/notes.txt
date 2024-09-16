@@ -120,4 +120,12 @@ I created a separated project that only has two endpoint Items and Users and Im 
 If I cannot figure out how to get the access tokens for jwt, i will change strategy to using Django's own token authentication to move the project forward
 
 
-8/20/24
+9/16/2024
+I highlight the benefits of the functional vs classes
+
+demonstates the curiosity for django that is usually class based 
+
+django classes? vs django functional?
+
+
+also to previous notes, I used jwtTokens, but isntead of scouringl what people did, I used the documentation and supplemented the og docs with youtube tutorials that implemented the jwt token logins -> functional programming

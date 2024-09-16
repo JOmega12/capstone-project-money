@@ -60,10 +60,10 @@ export const Login = () => {
       }}
     >
       <div>
-        <div>
-          <h2>Login</h2>
+        <div >
+          <h2 >Login</h2>
         </div>
-        <div>
+        <div className="items-center">
           <TextInputs
             type="text"
             label="Username:"

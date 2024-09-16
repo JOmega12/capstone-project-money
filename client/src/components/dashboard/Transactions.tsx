@@ -1,6 +1,5 @@
-// import { transactionLabels } from "./testItems";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
-import { transactionLabels } from "../testItems"
+// import { transactionLabels } from "../testItems"
 
 
 export const Transactions = () => {
