@@ -7,7 +7,7 @@ import { useAuth } from "./providers/AuthProvider";
 const NavLinks = () => {
   const activeUnderline = "active:underline hover:underline";
 
-  const {user} = useAuth();
+  const {user, logoutUser} = useAuth();
   return (
     <nav className="flex flex-col items-center justify-between gap-10 p-6 mt-6">
       {user? (
@@ -28,8 +28,8 @@ const NavLinks = () => {
       <NavLink to="/categories" className={activeUnderline}>
         Categories
       </NavLink>
-      <div className="mt-10">
-        <button>Sign Out</button>
+      <div>
+        <button className="mt-10 hover:underline" onClick={logoutUser}>Sign Out</button>
       </div>
     </nav>
   );
