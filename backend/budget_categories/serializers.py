@@ -6,4 +6,4 @@ class Budget_categoriesSerializers(serializers.Serializer):
     
     class Meta:
         model: Budget_categories
-        fields = ['id', 'user', 'name']
+        fields = ['id', 'name', 'is_custom']

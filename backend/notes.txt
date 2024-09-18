@@ -132,3 +132,10 @@ also to previous notes, I used jwtTokens, but isntead of scouringl what people d
 
 
 Current problem: how to create generic categories for each user to use and how they can create their own categories specific to their own data/account
+
+
+Potential solution: using signals in Djangos
+
+9/17/2024
+
+After some research I came across how signals could be used in django because it listens to creating a user and then each user will automatically have a predisposed amount of categories and can add their own categories specific to the transaction
