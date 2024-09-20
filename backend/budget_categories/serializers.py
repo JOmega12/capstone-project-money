@@ -6,4 +6,5 @@ class Budget_categoriesSerializers(serializers.Serializer):
     
     class Meta:
         model: Budget_categories
-        fields = ['id', 'name', 'is_custom']
+        fields = '__all__'
+
