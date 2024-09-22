@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import Budget_categories_Detail, Budget_categories_List
+
+from . import views
 
 urlpatterns = [
-    # path('api/', Budget_categories_List.as_view(), name='budgetList'),
-    # path('api/<int:pk>', Budget_categories_Detail.as_view(), name='budgetDetail')
+    path('api/', views.getCategories, name='categories_list')
 ]

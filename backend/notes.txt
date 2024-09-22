@@ -139,3 +139,11 @@ Potential solution: using signals in Djangos
 9/17/2024
 
 After some research I came across how signals could be used in django because it listens to creating a user and then each user will automatically have a predisposed amount of categories and can add their own categories specific to the transaction
+
+
+9/21/2024
+
+Since for each category, has many Transactions, it would show how many transactions are in each category when you FETCH(GET) for the category ( i know it's a word vomit)
+
+As a result, you would see the Transaciton model have a category on its own but the category model doesn't.
+In the category_budget serializer.py, the transactionSerializer is there for each category I am able to serialze and include all the transactions related to each category when I retrieve or return the data

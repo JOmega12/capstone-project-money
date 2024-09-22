@@ -8,7 +8,6 @@ export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
   const { money, totalIncome, totalExpense, netAmount } = useMoney();
 
-
   return (
     <>
       <div>

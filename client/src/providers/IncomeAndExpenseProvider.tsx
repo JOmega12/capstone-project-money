@@ -83,7 +83,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
       const data = await response.json();
       // console.log(response, 'response in item and expense provider');
-      // console.log(data, 'data in income and expense provider')
+      console.log(data, 'data in income and expense provider')
       return data;
     }catch(e) {
       console.log(e);

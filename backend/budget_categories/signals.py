@@ -8,5 +8,5 @@ def create_default_categories(sender, instance, created, **kwargs):
     if created:
         predef_categories = ['Food', 'Transport', 'Utilities', 'Entertainment']
         for category in predef_categories:
-            Budget_categories.object.create(name=category, user= instance, is_custom = False)
+            Budget_categories.objects.create(name=category, user= instance, is_custom = False)
 
