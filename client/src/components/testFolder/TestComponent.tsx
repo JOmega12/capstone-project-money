@@ -55,10 +55,14 @@ export const TestComponent = () => {
         ) : (
           <p>User Not logged in to see total money</p>
         )}
-        {/* !TODO: DO THIS NEXT */}
         <div className="mt-10">
           <p>Wanna Track Your Money?</p>
           <CreateTest />
+        </div>
+
+        <div className="mt-10">
+          <p className="m-6">Categories for user</p>
+          <p className="m-6" >Create Your Category</p>
         </div>
       </div>
     </>
