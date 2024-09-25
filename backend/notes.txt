@@ -147,3 +147,12 @@ Since for each category, has many Transactions, it would show how many transacti
 
 As a result, you would see the Transaciton model have a category on its own but the category model doesn't.
 In the category_budget serializer.py, the transactionSerializer is there for each category I am able to serialze and include all the transactions related to each category when I retrieve or return the data
+
+
+
+9/22/2024
+need to create patch and delete for transactions
+
+and
+
+create frontend endpoints for budget categories(get, create,patch, delete)

@@ -107,10 +107,10 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const createNewTransactionForm = async ({
     transactionName,
     transactionAmount,
-    transactionType
+    transactionType, category
   }: Pick<
     Transaction,
-    "transactionName" | "transactionAmount" | "transactionType"
+    "transactionName" | "transactionAmount" | "transactionType" | 'category'
   >): Promise<Transaction | undefined> => {
 
     try {
@@ -120,7 +120,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + String(authToken?.access)
         },
-        body: JSON.stringify({transactionName, transactionAmount, transactionType})
+        body: JSON.stringify({transactionName, transactionAmount, transactionType, category})
       });
 
       if(!response.ok) {
@@ -136,6 +136,22 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
       return undefined;
     }
   };
+
+
+  const fixTransaction = async({transactionName,
+    transactionAmount, transactionType, category}:Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType'>): Promise<Transaction | undefined> => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/transactions/api/<int:pk>/update/", {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + String(authToken?.access)
+        }
+      })
+    } catch(e){
+      console.log(e);
+    }
+  }
 
 
   // * this code block is used to calculate the amount of income and expense

@@ -11,6 +11,7 @@ export type Transaction = {
     transactionName: string;
     transactionAmount: number;
     transactionType?: string;
+    category?: [];
     createdAt?: string;
 }
 
