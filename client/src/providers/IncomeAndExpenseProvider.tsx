@@ -17,8 +17,14 @@ type IncomeAndExpenseContextType = {
   setMoney: Dispatch<SetStateAction<Transaction | null>>;
 
   createNewTransactionForm: (
-    transactionInfo: Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType'>
+    transactionInfo: Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType' | 'category'>
   ) => Promise<Transaction | undefined>,
+
+  fixTransaction: ( id:number,
+    transactionInfo: Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType' | 'category'>
+  ) => Promise<Transaction | undefined>
+
+  deleteTransaction: (id: number) => Promise<Response>,
 
   transactionName: string ;
   setTransactionName: Dispatch<SetStateAction<string>>;
@@ -138,19 +144,41 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   };
 
 
-  const fixTransaction = async({transactionName,
-    transactionAmount, transactionType, category}:Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType'>): Promise<Transaction | undefined> => {
+  const fixTransaction = async(id:number, {transactionName,
+    transactionAmount, transactionType, category}:Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType' | 'category'>): Promise<Transaction | undefined> => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/transactions/api/<int:pk>/update/", {
+      const response = await fetch(`http://127.0.0.1:8000/transactions/api/${id}/update/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + String(authToken?.access)
-        }
-      })
+        },
+        body: JSON.stringify({transactionName, transactionAmount,transactionType, category})
+      });
+
+      console.log(response, 'response in fix Transactions')
+      if(!response.ok){
+        throw new Error(`HTTP error: ${response.status}`)
+      }
+
+      const data = await response.json();
+      console.log(data, 'data in fix Transactions')
+      await refetch();
+      return data;
     } catch(e){
       console.log(e);
     }
+  }
+
+  const deleteTransaction = async(id: number) => {
+    return fetch(`http://127.0.0.1:8000/transactions/api/${id}/delete/`, {
+      method: "DELETE",
+    }).then((res) => {
+      if(!res.ok){
+        throw new Error("Failed to delete a transaction" + id);
+      }
+      return res
+    })
   }
 
 
@@ -189,6 +217,8 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         money,
         setMoney,
         createNewTransactionForm,
+        fixTransaction,
+        deleteTransaction,
 
         transactionName,
         setTransactionName,
