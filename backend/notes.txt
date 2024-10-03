@@ -156,3 +156,9 @@ need to create patch and delete for transactions
 and
 
 create frontend endpoints for budget categories(get, create,patch, delete)
+
+
+
+10/3/2024
+
+fixed transactionTypes issue where the backend would not show the full models of Transaction like transactionType. Found out that transactionType in models.py/transactions has a comma after which created a tuple, which is a collection of objects separated by commas

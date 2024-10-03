@@ -41,6 +41,10 @@ export const TestComponent = () => {
                 <p className="text-xl">{item.transactionAmount}</p>
                 <p>{item.transactionType}</p>
                 <p>{item.createdAt}</p>
+                <div>
+                  {/* do an onclick event for deleting the transaction */}
+                  <p className="text-red-700">DELETE</p>
+                </div>
               </div>
             ))
           ) : (
