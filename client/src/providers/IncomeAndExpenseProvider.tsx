@@ -199,7 +199,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         .reduce((acc, item) => acc + parseFloat(item.transactionAmount), 0) ||
       0;
 
-
     totalExpense =
       money
         .filter((item) => item.transactionType === "expense")

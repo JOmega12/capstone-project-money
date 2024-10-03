@@ -11,7 +11,11 @@ export const CreateTest = () => {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        createNewTransactionForm({transactionName: transactionName, transactionAmount: transactionAmount, transactionType: transactionType})
+        createNewTransactionForm({transactionName: transactionName, transactionAmount: transactionAmount, transactionType: transactionType});
+        setTransactionName("");
+        setTransactionAmount(0)
+        setTransactionType(undefined);
+
     }
     return(
         <>
