@@ -6,8 +6,13 @@ import { CreateTest } from "./CreateTest";
 
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
-  const { money, totalIncome, totalExpense, netAmount } = useMoney();
+  const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId } = useMoney();
 
+
+  const handleSaveChanges = async(id:number, updatedItem: any) => {
+    await fixTransaction(id, updatedItem);
+    setEditingId(null);
+}
   
   return (
     <>
@@ -43,7 +48,8 @@ export const TestComponent = () => {
                 <p>{item.createdAt}</p>
                 <div>
                   {/* do an onclick event for deleting the transaction */}
-                  <p className="text-red-700">DELETE</p>
+                  {/* <p className="text-green-700 hover:cursor-pointer">CHANGE</p> */}
+                  <p className="text-red-700 hover:cursor-pointer">DELETE</p>
                 </div>
               </div>
             ))

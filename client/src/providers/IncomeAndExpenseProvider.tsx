@@ -38,6 +38,8 @@ type IncomeAndExpenseContextType = {
   newPaddedDate: string | undefined;
   payHistory: (Transaction | undefined) [];
 
+  editingId: number | null;
+  setEditingId: Dispatch<SetStateAction<number | null>> ;
 
   setPayHistory: Dispatch<SetStateAction<Transaction[]>>;
 };
@@ -61,6 +63,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const [transactionName, setTransactionName] = useState<string>("");
   const [transactionAmount, setTransactionAmount] = useState<number>(0);
 
+  const [editingId, setEditingId] = useState<number | null>(null);
   // const userId = user?.id;
   // date functions
   const dateObj = new Date();
@@ -145,7 +148,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
 
   const fixTransaction = async(id:number, {transactionName,
-    transactionAmount, transactionType, category}:Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType' | 'category'>): Promise<Transaction | undefined> => {
+    transactionAmount, transactionType}:Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType'>): Promise<Transaction | undefined> => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/transactions/api/${id}/update/`, {
         method: 'PATCH',
@@ -153,7 +156,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + String(authToken?.access)
         },
-        body: JSON.stringify({transactionName, transactionAmount,transactionType, category})
+        body: JSON.stringify({transactionName, transactionAmount,transactionType})
       });
 
       console.log(response, 'response in fix Transactions')
@@ -223,6 +226,9 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         setTransactionName,
         transactionAmount,
         setTransactionAmount,
+
+        editingId,
+        setEditingId,
 
         totalIncome,
         totalExpense,
