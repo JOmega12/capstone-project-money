@@ -3,16 +3,18 @@ import { LoginTest } from "./LoginTest";
 import { RegisterTest } from "./RegisterTest";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 import { CreateTest } from "./CreateTest";
+import { EditFormTest } from "./EditFormTest";
+import { Transaction } from "../../types/types";
 
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
   const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId } = useMoney();
 
 
-  const handleSaveChanges = async(id:number, updatedItem: any) => {
+  const handleSaveChanges = async(id:number, updatedItem: Transaction) => {
     await fixTransaction(id, updatedItem);
     setEditingId(null);
-}
+  }
   
   return (
     <>
@@ -39,24 +41,42 @@ export const TestComponent = () => {
         <div className="mt-10">
           <p>Wanna See Your Money?</p>
 
+
           {Array.isArray(money) && user ? (
             money.map((item) => (
               <div key={item.id} className="m-2">
-                <p>{item.transactionName}</p>
-                <p className="text-xl">{item.transactionAmount}</p>
-                <p>{item.transactionType}</p>
-                <p>{item.createdAt}</p>
-                <div>
-                  {/* do an onclick event for deleting the transaction */}
-                  {/* <p className="text-green-700 hover:cursor-pointer">CHANGE</p> */}
-                  <p className="text-red-700 hover:cursor-pointer">DELETE</p>
-                </div>
+                {editingId === item.id ? (
+                  <EditFormTest
+                    item={item}
+                    onSave={handleSaveChanges}
+                    onCancel={() => setEditingId(null)}
+                  />
+                ): 
+                (
+                <>                
+                  <p>{item.transactionName}</p>
+                  <p className="text-xl">{item.transactionAmount}</p>
+                  <p>{item.transactionType}</p>
+                  <p>{item.createdAt}</p>
+                  <div>
+                    {/* do an onclick event for deleting the transaction */}
+                    <p className="text-green-700 hover:cursor-pointer"
+                    onClick={() => setEditingId(item.id)}
+                    >
+                      CHANGE
+                    </p>
+                    <p className="text-red-700 hover:cursor-pointer">DELETE</p>
+                  </div>
+                </>
+                )}
               </div>
             ))
           ) : (
             <p>No Transactions Available</p>
           )}
         </div>
+
+
         {user ? (
           <div className="mt-10">
             <h2>Your Total So Far: {netAmount}</h2>
@@ -66,6 +86,8 @@ export const TestComponent = () => {
         ) : (
           <p>User Not logged in to see total money</p>
         )}
+
+
         <div className="mt-10">
           <p>Wanna Track Your Money?</p>
           <CreateTest />

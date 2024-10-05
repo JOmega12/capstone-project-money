@@ -6,7 +6,7 @@ export type UserInformation = {
 }
 
 export type Transaction = {
-    id?: number;
+    id: number;
     userId?: number | undefined;
     transactionName: string;
     transactionAmount: number;

@@ -5,7 +5,7 @@ import { Transaction } from "../../types/types";
 
 type editFormType = {
     item: Transaction;
-    onSave:(updatedItem: Transaction) => void;
+    onSave:(id: number, updatedItem: Transaction) => void;
     onCancel: () => void
 }
 
@@ -30,7 +30,7 @@ export const EditFormTest = ({item, onSave, onCancel}: editFormType) => {
 
     const handleSave = () => {
         if(onSave){
-            onSave(editForm)
+            onSave(item.id, editForm)
         }
     }
 
