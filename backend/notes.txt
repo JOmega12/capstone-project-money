@@ -177,4 +177,5 @@ Things that still need to do on top of above:
 
 10/5/2024
 - fixed check mark issue
+- added delete functionality
 - 

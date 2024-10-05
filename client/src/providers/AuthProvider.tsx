@@ -51,10 +51,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(true);
   const isRegister = !!user;
 
-// console.log(user, 'user in authProvider')
-
-
-  // console.log(user, 'authprovider')
   const registerUser = async ({username, password} : UserInformation) => {
     const response = await fetch("http://localhost:8000/users/api/register/", {
       method: "POST",

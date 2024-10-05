@@ -67,14 +67,12 @@ export const TestComponent = () => {
                   <p>{item.transactionType}</p>
                   <p>{item.createdAt}</p>
                   <div>
-                    {/* do an onclick event for deleting the transaction */}
                     <p className="text-green-700 hover:cursor-pointer"
                     onClick={() => setEditingId(item.id)}
                     >
                       CHANGE
                     </p>
                     <p className="text-red-700 hover:cursor-pointer"
-                      // onClick={() => deleteTransaction(item.id)}
                       onClick={()=> deleteThisTransaction(item.id)}
                     >DELETE</p>
                   </div>

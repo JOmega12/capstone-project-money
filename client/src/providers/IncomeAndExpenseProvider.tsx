@@ -57,7 +57,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   // getting the user authToken to get the items
   const {authToken, logoutUser, user } = useAuth();
 
-
   const [money, setMoney] = useState<Transaction | null>(null);
   const [payHistory, setPayHistory] = useState<Transaction[]>([]);
   const [transactionName, setTransactionName] = useState<string>("");
