@@ -36,15 +36,14 @@ export const EditFormTest = ({item, onSave, onCancel}: editFormType) => {
 
 
 
-
     return(
-        <div className="flex">
+        <div className="flex flex-col gap-2">
             <input type="text" name="transactionName" value={editForm.transactionName} onChange={handleFormChange} placeholder="Transaction Name"/>
-            <input type="text" name="transactionAmount" value={editForm.transactionName} onChange={handleFormChange} placeholder="Transaction Name"/>
+            <input type="text" name="transactionAmount" value={editForm.transactionAmount} onChange={handleFormChange} placeholder="Transaction Amount"/>
             <label htmlFor="">
                 <input type="radio"
+                    name="transactionType"
                     value={'income'}
-                    name="income"
                     checked={editForm.transactionType === 'income'}
                     onChange={handleFormChange}
                 />
@@ -52,7 +51,7 @@ export const EditFormTest = ({item, onSave, onCancel}: editFormType) => {
             </label>
             <label htmlFor="">
                 <input type="radio" 
-                    name="expense"
+                    name="transactionType"
                     value={'expense'}
                     checked={editForm.transactionType === 'expense'}
                     onChange={handleFormChange}

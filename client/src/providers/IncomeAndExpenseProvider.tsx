@@ -176,10 +176,14 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const deleteTransaction = async(id: number) => {
     return fetch(`http://127.0.0.1:8000/transactions/api/${id}/delete/`, {
       method: "DELETE",
+      headers: {
+        'Authorization': 'Bearer ' + String(authToken?.access)
+      }
     }).then((res) => {
       if(!res.ok){
         throw new Error("Failed to delete a transaction" + id);
       }
+      console.log("The Transaction has been deleted!")
       return res
     })
   }

@@ -8,12 +8,20 @@ import { Transaction } from "../../types/types";
 
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
-  const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId } = useMoney();
+  const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId, deleteTransaction } = useMoney();
 
 
   const handleSaveChanges = async(id:number, updatedItem: Transaction) => {
     await fixTransaction(id, updatedItem);
     setEditingId(null);
+  }
+
+  const deleteThisTransaction = (id: number) => {
+
+    if(id){
+      deleteTransaction(id)
+      window.location.reload();
+    }
   }
   
   return (
@@ -65,7 +73,10 @@ export const TestComponent = () => {
                     >
                       CHANGE
                     </p>
-                    <p className="text-red-700 hover:cursor-pointer">DELETE</p>
+                    <p className="text-red-700 hover:cursor-pointer"
+                      // onClick={() => deleteTransaction(item.id)}
+                      onClick={()=> deleteThisTransaction(item.id)}
+                    >DELETE</p>
                   </div>
                 </>
                 )}
@@ -89,7 +100,7 @@ export const TestComponent = () => {
 
 
         <div className="mt-10">
-          <p>Wanna Track Your Money?</p>
+          <p>Add Your Money</p>
           <CreateTest />
         </div>
 

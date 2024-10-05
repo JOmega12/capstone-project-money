@@ -173,3 +173,8 @@ However, there is a bug where i cannot change the value and needs to changed
 Things that still need to do on top of above:
 - create a delete functionality for transaction
 - create frontend endpoints for budget categories(get, create,patch, delete)
+
+
+10/5/2024
+- fixed check mark issue
+- 
