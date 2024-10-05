@@ -162,3 +162,14 @@ create frontend endpoints for budget categories(get, create,patch, delete)
 10/3/2024
 
 fixed transactionTypes issue where the backend would not show the full models of Transaction like transactionType. Found out that transactionType in models.py/transactions has a comma after which created a tuple, which is a collection of objects separated by commas
+
+
+10/4/2024
+
+Implemented a change feature where user can change the name, amount and transaction type.
+
+However, there is a bug where i cannot change the value and needs to changed
+
+Things that still need to do on top of above:
+- create a delete functionality for transaction
+- create frontend endpoints for budget categories(get, create,patch, delete)
