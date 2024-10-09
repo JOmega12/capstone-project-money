@@ -17,3 +17,8 @@ export type Transaction = {
 
 
 
+export type Budget_categories = {
+    id: number;
+    userId: number | undefined;
+    is_custom: boolean
+}

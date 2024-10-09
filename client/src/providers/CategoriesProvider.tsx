@@ -15,10 +15,15 @@ type CategoryContextType = {
     // createNewCategory: () => Promise<Transaction | undefined >
 }
 
+
+type CategoryProviderProps = {
+    children: ReactNode;
+};
+
 const CategoryContext = createContext<CategoryContextType | undefined>(undefined);
 
 
-export const CategoriesProvider = ({children}: ReactNode) => {
+export const CategoriesProvider = ({children}: CategoryProviderProps) => {
     
     const {authToken} = useAuth();
     
@@ -64,8 +69,28 @@ export const CategoriesProvider = ({children}: ReactNode) => {
         }
     }
 
-    const fixCategory = () => {
+    const fixCategory = async(id: number) => {
 
+        try {
+            const response = await fetch('http://127.0.0.1:8000/budget_categories/api/update/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + String(authToken?.access)
+                },
+                body: JSON.stringify({});
+            });
+            console.log(response, 'response in fix Categories')
+
+            if(!response.ok){
+                throw new Error(`HTTP error: ${response.status}`)
+            }
+
+            const data = await response.json();
+            console.log(data, 'data in fix category')
+        }catch(e) {
+            console.log(e)
+        }
     }
 
     return(

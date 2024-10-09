@@ -179,3 +179,8 @@ Things that still need to do on top of above:
 - fixed check mark issue
 - added delete functionality
 - 
+
+
+
+10/9/2024
+- new bug when you login the refresh token does not refresh (user)
