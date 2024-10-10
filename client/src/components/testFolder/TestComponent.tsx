@@ -5,11 +5,12 @@ import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 import { CreateTest } from "./CreateTest";
 import { EditFormTest } from "./EditFormTest";
 import { Transaction } from "../../types/types";
+import { useCategory } from "../../providers/CategoriesProvider";
 
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
   const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId, deleteTransaction } = useMoney();
-
+  const { categories } = useCategory();
 
   const handleSaveChanges = async(id:number, updatedItem: Transaction) => {
     await fixTransaction(id, updatedItem);
@@ -103,7 +104,19 @@ export const TestComponent = () => {
         </div>
 
         <div className="mt-10">
-          <p className="m-6">Categories for user</p>
+          <div>
+            <p className="m-6">Categories for user</p>
+            
+            {Array.isArray(categories) && user ? categories.map((item)=> (
+              <p>{item.name}</p>
+            )): 
+            (<>
+             <p>No categories </p>
+            </>
+            )
+            }
+          </div>
+
           <p className="m-6" >Create Your Category</p>
         </div>
       </div>

@@ -19,6 +19,7 @@ export type Transaction = {
 
 export type Budget_categories = {
     id: number;
+    name: string;
     userId: number | undefined;
-    is_custom: boolean
+    is_custom: boolean;
 }
