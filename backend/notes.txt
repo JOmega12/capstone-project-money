@@ -183,7 +183,7 @@ Things that still need to do on top of above:
 
 
 10/9/2024
-- new bug when you login the refresh token does not refresh (user)
+- new bug when you login the refresh token does not refresh for frontend(user)
 
 - I need to create the createCategory and then be able to GET the categories with their transactions and show the transactions for the specific userID there
 - Also need to:
