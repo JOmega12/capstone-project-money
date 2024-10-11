@@ -13,6 +13,7 @@ import { Categories } from "./components/Categories"
 import { IncomeDash } from "./components/IncomeAndExpense/IncomeDash"
 import { ExpenseDash } from "./components/IncomeAndExpense/ExpenseDash"
 import { TestComponent } from "./components/testFolder/TestComponent"
+import { CategoriesProvider } from "./providers/CategoriesProvider"
 
 // import { Navbar } from "./Navbar"
 // import { AuthProvider } from "./providers/AuthProvider"
@@ -29,6 +30,7 @@ function App() {
       w-screen bg-[#fffcf6] space-y-5 min-h-screen font-montserrat">
         <AuthProvider>
           <IncomeAndExpenseProvider>
+            <CategoriesProvider>
             <Routes>
               <Route path="/" element={<WelcomeComponent />}></Route>
               <Route path="/income" element={<IncomeDash/>}></Route>
@@ -41,6 +43,7 @@ function App() {
               <Route path="/test-server" element={<TestComponent/>}></Route>
 
             </Routes>
+            </CategoriesProvider>
           </IncomeAndExpenseProvider>
         </AuthProvider>
       </div>

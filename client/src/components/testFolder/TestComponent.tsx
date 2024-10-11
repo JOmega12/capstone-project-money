@@ -84,6 +84,8 @@ export const TestComponent = () => {
           ) : (
             <p>No Transactions Available</p>
           )}
+
+          
         </div>
 
 
@@ -108,7 +110,7 @@ export const TestComponent = () => {
             <p className="m-6">Categories for user</p>
             
             {Array.isArray(categories) && user ? categories.map((item)=> (
-              <p>{item.name}</p>
+              <p>{item.transactions}</p>
             )): 
             (<>
              <p>No categories </p>

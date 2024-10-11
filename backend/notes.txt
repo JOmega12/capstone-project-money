@@ -192,4 +192,8 @@ Things that still need to do on top of above:
 
 10/10/2024
 Curent problem:
-- Cannot get the data from the category provider to show 
+- Cannot get the data from the category provider to show
+-Fixed: the provider was not in the direct line
+
+
+Curent problem, how to add the transaction to the category and then also show the transactions when youre looking inside the category
