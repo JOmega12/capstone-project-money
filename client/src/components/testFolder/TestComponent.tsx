@@ -67,6 +67,7 @@ export const TestComponent = () => {
                   <p className="text-xl">{item.transactionAmount}</p>
                   <p>{item.transactionType}</p>
                   <p>{item.createdAt}</p>
+                  <p>**category name**</p>
                   <div>
                     <p className="text-green-700 hover:cursor-pointer"
                     onClick={() => setEditingId(item.id)}
