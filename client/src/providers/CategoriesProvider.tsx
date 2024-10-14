@@ -61,7 +61,6 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
     }, [])
 
 
-    console.log(categories, 'categoires');
     const createNewCategory = async({name, userId, is_custom}: Pick<Budget_categories, "name" | "userId" | "is_custom" >): Promise<Budget_categories | undefined> => {
 
         try{

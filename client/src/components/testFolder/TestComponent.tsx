@@ -77,7 +77,7 @@ export const TestComponent = () => {
                   <p className="text-xl">{item.transactionAmount}</p>
                   <p>{item.transactionType}</p>
                   <p>{item.createdAt}</p>
-                  <p>{getCategoryName(item.category)}</p>
+                  <p>Category Name: {getCategoryName(item.category)}</p>
                   <div>
                     <p className="text-green-700 hover:cursor-pointer"
                     onClick={() => setEditingId(item.id)}
@@ -123,20 +123,21 @@ export const TestComponent = () => {
             {Array.isArray(categories) && user ? categories.map((category)=> (
               <>              
                 <p>Category Name: {category.name}</p>
-                <h4>Transaction name:</h4>
-                <ul>
-                  {Array.isArray(money) && user ? (
-                    money.filter((transaction) => transaction.category === category.id)
-                    .map((transaction) => (
-                      <li key={transaction.id}>
-                        <p>{transaction.transactionName}</p>
-                      </li>
-                    ))
-                  ): (
-                    <p>No Transactions Available</p>
-                  )}
+                <div>
+                  <ul>
+                    {Array.isArray(money) && user ? (
+                      money.filter((transaction) => transaction.category === category.id)
+                      .map((transaction) => (
+                        <li key={transaction.id}>
+                          <p>Transaction Name: {transaction.transactionName}</p>
+                        </li>
+                      ))
+                    ): (
+                      <p>No Transactions Available</p>
+                    )}
 
-                </ul>
+                  </ul>
+                </div>
               </>
             )): 
             (<>

@@ -6,18 +6,19 @@ import { Transaction } from "../../types/types";
 type editFormType = {
     item: Transaction;
     onSave:(id: number, updatedItem: Transaction) => void;
-    onCancel: () => void
+    onCancel: () => void;
+    categories: Transaction[];
 }
 
 
-export const EditFormTest = ({item, onSave, onCancel}: editFormType) => {
+export const EditFormTest = ({item, onSave, onCancel, categories}: editFormType) => {
 
     const [editForm, setEditForm] = useState({
         transactionName: item.transactionName || "",
         transactionAmount: item.transactionAmount || 0,
         transactionType: item.transactionType || "",
-        id:item.id
-        // category: ""
+        id:item.id,
+        category: item.category || 0,
     })
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,6 +58,15 @@ export const EditFormTest = ({item, onSave, onCancel}: editFormType) => {
                     onChange={handleFormChange}
                 />
                 Expense
+            </label>
+            {/* How do i change this with the choices of the categories i created than the id that is associated with the category name */}
+            <label htmlFor="">
+                <input type="text" 
+                    name="category"
+                    value={editForm.category}
+                    onChange={handleFormChange}
+                />
+                Category Name:
             </label>
             {/* props */}
             <button onClick={handleSave}>Save</button>

@@ -238,8 +238,16 @@ But in the category section is shows:
 
 Meaning the id of the category in the transaction is associated to this data point
 
-And I was having a hard time trying to get the name associated with the NUMBER
+And I was having a hard time trying to get the name of the category in Transaction associated with the NUMBER of the category id
 
 So, I created a helper function that would compare the id of the categories id and the categoryId so that if they were equal, it would show the category name
 
 I am going to do the same for the transactions as well
+
+
+
+
+Things that are currently being worked on:
+- Trying to change/PATCH the Categories within the transactions
+- Create, Patch, and Delete Category endpoints
+

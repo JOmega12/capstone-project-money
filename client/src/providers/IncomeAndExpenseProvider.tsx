@@ -147,7 +147,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
 
   const fixTransaction = async(id:number, {transactionName,
-    transactionAmount, transactionType}:Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType'>): Promise<Transaction | undefined> => {
+    transactionAmount, transactionType, category}:Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType' | 'category'>): Promise<Transaction | undefined> => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/transactions/api/${id}/update/`, {
         method: 'PATCH',
@@ -155,7 +155,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + String(authToken?.access)
         },
-        body: JSON.stringify({transactionName, transactionAmount,transactionType})
+        body: JSON.stringify({transactionName, transactionAmount,transactionType, category})
       });
 
       console.log(response, 'response in fix Transactions')
