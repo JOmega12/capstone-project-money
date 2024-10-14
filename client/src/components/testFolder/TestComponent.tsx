@@ -25,6 +25,16 @@ export const TestComponent = () => {
     }
   }
   
+  // using a helper function to find the name of the associated id of the category name 
+  const getCategoryName = (categoryId: number) => {
+    if(Array.isArray(categories)){
+      const category = categories.find((category) => category.id === categoryId);
+      return category ? category.name : "No Category";
+    }
+
+  }
+
+
   return (
     <>
       <div>
@@ -67,7 +77,7 @@ export const TestComponent = () => {
                   <p className="text-xl">{item.transactionAmount}</p>
                   <p>{item.transactionType}</p>
                   <p>{item.createdAt}</p>
-                  <p>**category name**</p>
+                  <p>{getCategoryName(item.category)}</p>
                   <div>
                     <p className="text-green-700 hover:cursor-pointer"
                     onClick={() => setEditingId(item.id)}
@@ -110,8 +120,24 @@ export const TestComponent = () => {
           <div>
             <p className="m-6">Categories for user</p>
             
-            {Array.isArray(categories) && user ? categories.map((item)=> (
-              <p>{item.transactions}</p>
+            {Array.isArray(categories) && user ? categories.map((category)=> (
+              <>              
+                <p>Category Name: {category.name}</p>
+                <h4>Transaction name:</h4>
+                <ul>
+                  {Array.isArray(money) && user ? (
+                    money.filter((transaction) => transaction.category === category.id)
+                    .map((transaction) => (
+                      <li key={transaction.id}>
+                        <p>{transaction.transactionName}</p>
+                      </li>
+                    ))
+                  ): (
+                    <p>No Transactions Available</p>
+                  )}
+
+                </ul>
+              </>
             )): 
             (<>
              <p>No categories </p>

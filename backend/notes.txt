@@ -197,3 +197,49 @@ Curent problem:
 
 
 Curent problem, how to add the transaction to the category and then also show the transactions when youre looking inside the category
+
+
+
+10/14/2024
+New Notes on adding Category names that is associated on transactions.
+
+In the Transactions, I had a hard time trying to get the name of the category that the transaction is in.
+
+For example, Transaction would have this data point:
+    {
+        "id": 15,
+        "transactionName": "Freelance1",
+        "transactionAmount": "1000.00",
+        "transactionType": "income",
+        "createdAt": "2024-10-09",
+        "user": 4,
+        "category": 1
+    },
+
+As you can see, category is only 1. 
+But in the category section is shows:
+    {
+        "id": 1,
+        "name": "Food",
+        "user": 4,
+        "is_custom": false,
+        "transactions": [
+            {
+                "id": 15,
+                "transactionName": "Freelance1",
+                "transactionAmount": "1000.00",
+                "transactionType": "income",
+                "createdAt": "2024-10-09",
+                "user": 4,
+                "category": 1
+            }
+        ]
+    },
+
+Meaning the id of the category in the transaction is associated to this data point
+
+And I was having a hard time trying to get the name associated with the NUMBER
+
+So, I created a helper function that would compare the id of the categories id and the categoryId so that if they were equal, it would show the category name
+
+I am going to do the same for the transactions as well
