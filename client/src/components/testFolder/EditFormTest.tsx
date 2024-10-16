@@ -1,5 +1,5 @@
 import {useState } from "react";
-import { Transaction } from "../../types/types";
+import { Budget_categories, Transaction } from "../../types/types";
 
 
 
@@ -7,7 +7,7 @@ type editFormType = {
     item: Transaction;
     onSave:(id: number, updatedItem: Transaction) => void;
     onCancel: () => void;
-    categories: Transaction[];
+    categories: Budget_categories[];
 }
 
 
@@ -60,14 +60,18 @@ export const EditFormTest = ({item, onSave, onCancel, categories}: editFormType)
                 Expense
             </label>
             {/* How do i change this with the choices of the categories i created than the id that is associated with the category name */}
+
+            {/* in addition, can't I incorporate the change in the category name by incorporating category PATCH in to the transaction?
+            But how would that work?
+            */}
             <label htmlFor="">
-                <input type="text" 
-                    name="category"
-                    value={editForm.category}
-                    onChange={handleFormChange}
-                />
-                Category Name:
+                Category:
             </label>
+            <select name="category" value={editForm.category} onChange={handleFormChange}>
+                categories.map((item) => (
+                    <option value=""></option>
+                ))
+            </select>
             {/* props */}
             <button onClick={handleSave}>Save</button>
             <button onClick={onCancel}>Cancel</button>

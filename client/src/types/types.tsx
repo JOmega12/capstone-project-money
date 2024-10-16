@@ -11,7 +11,7 @@ export type Transaction = {
     transactionName: string;
     transactionAmount: number;
     transactionType?: string;
-    category?: [];
+    category?: number | undefined;
     createdAt?: string;
 }
 

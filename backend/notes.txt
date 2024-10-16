@@ -251,3 +251,7 @@ Things that are currently being worked on:
 - Trying to change/PATCH the Categories within the transactions
 - Create, Patch, and Delete Category endpoints
 
+
+10/15-16/2024
+
+Still working on creating the edit for transaction and category
