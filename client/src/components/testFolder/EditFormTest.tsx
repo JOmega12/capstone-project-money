@@ -13,6 +13,8 @@ type editFormType = {
 
 export const EditFormTest = ({item, onSave, onCancel, categories}: editFormType) => {
 
+    const test = categories.map((item) => item.name)
+    console.log(test, 'this is in editFormTest')
     const [editForm, setEditForm] = useState({
         transactionName: item.transactionName || "",
         transactionAmount: item.transactionAmount || 0,
@@ -21,7 +23,7 @@ export const EditFormTest = ({item, onSave, onCancel, categories}: editFormType)
         category: item.category || 0,
     })
 
-    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setEditForm({
             ...editForm,
             [e.target.name]: e.target.value,
@@ -68,9 +70,9 @@ export const EditFormTest = ({item, onSave, onCancel, categories}: editFormType)
                 Category:
             </label>
             <select name="category" value={editForm.category} onChange={handleFormChange}>
-                categories.map((item) => (
-                    <option value=""></option>
-                ))
+                {categories.map((item) => (
+                    <option key={item.id} value={item.id}> {item.name}</option>
+                ))}
             </select>
             {/* props */}
             <button onClick={handleSave}>Save</button>
