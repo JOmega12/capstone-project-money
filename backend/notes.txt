@@ -255,3 +255,12 @@ Things that are currently being worked on:
 10/15-16/2024
 
 Still working on creating the edit for transaction and category
+
+
+Need to work on: 
+- how to tie in adding in a category in transaction
+- might need to create a category separately then tie it back in when creating a transaction
+
+
+10/18/2024
+Still working on code

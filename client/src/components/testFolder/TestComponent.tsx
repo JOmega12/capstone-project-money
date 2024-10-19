@@ -69,7 +69,7 @@ export const TestComponent = () => {
                     item={item}
                     onSave={handleSaveChanges}
                     onCancel={() => setEditingId(null)}
-                    categories={categories || null}
+                    categories={Array.isArray(categories) ? categories: []}
                   />
                 ): 
                 (
