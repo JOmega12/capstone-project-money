@@ -13,8 +13,8 @@ type editFormType = {
 
 export const EditFormTest = ({item, onSave, onCancel, categories}: editFormType) => {
 
-    const test = categories.map((item) => item.name)
-    console.log(test, 'this is in editFormTest')
+    // const test = categories.map((item) => item.name)
+    // console.log(test, 'this is in editFormTest')
     const [editForm, setEditForm] = useState({
         transactionName: item.transactionName || "",
         transactionAmount: item.transactionAmount || 0,

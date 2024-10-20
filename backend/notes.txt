@@ -240,7 +240,7 @@ Meaning the id of the category in the transaction is associated to this data poi
 
 And I was having a hard time trying to get the name of the category in Transaction associated with the NUMBER of the category id
 
-So, I created a helper function that would compare the id of the categories id and the categoryId so that if they were equal, it would show the category name
+So, I created a helper function that would compare the id of the categories id and the categoryId so that if they were equal, it would show the category name by mapping the category state from the category provider that was already in the api
 
 I am going to do the same for the transactions as well
 
@@ -264,3 +264,9 @@ Need to work on:
 
 10/18/2024
 Still working on code
+
+10/19/ 2024
+Fixed:
+In createTest folder, I added and fixed a feature where it would create a Transaction without a category. What I did was that I would use a category to select the already existing catalog of categories to be put inside the Transaction.
+
+In addition , even if the user doesnt add the category on its own, it would automatically use the first category as a default
