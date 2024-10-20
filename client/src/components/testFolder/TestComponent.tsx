@@ -6,6 +6,7 @@ import { CreateTest } from "./CreateTest";
 import { EditFormTest } from "./EditFormTest";
 import { Transaction } from "../../types/types";
 import { useCategory } from "../../providers/CategoriesProvider";
+import { CreateCategory } from "./categoryTest/CreateCategory";
 
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
@@ -148,7 +149,9 @@ export const TestComponent = () => {
             }
           </div>
 
-          <p className="m-6" >Create Your Category</p>
+          <p className="m-6" >Create Your Category:
+            <CreateCategory/>
+          </p>
         </div>
       </div>
     </>

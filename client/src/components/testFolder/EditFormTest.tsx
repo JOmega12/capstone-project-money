@@ -61,11 +61,7 @@ export const EditFormTest = ({item, onSave, onCancel, categories}: editFormType)
                 />
                 Expense
             </label>
-            {/* How do i change this with the choices of the categories i created than the id that is associated with the category name */}
 
-            {/* in addition, can't I incorporate the change in the category name by incorporating category PATCH in to the transaction?
-            But how would that work?
-            */}
             <label htmlFor="">
                 Category:
             </label>

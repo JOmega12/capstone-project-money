@@ -10,7 +10,7 @@ type CategoryContextType = {
     setCategories: Dispatch<SetStateAction<Budget_categories | null>>;
 
 
-    createNewCategory: ({name, userId, is_custom}: Pick<Budget_categories, "name" | "userId" | "is_custom" >) => Promise<Budget_categories | undefined>;
+    createNewCategory: ({name, is_custom}: Pick<Budget_categories, "name" | "is_custom" >) => Promise<Budget_categories | undefined>;
 }
 
 
@@ -61,7 +61,7 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
     }, [])
 
 
-    const createNewCategory = async({name, userId, is_custom}: Pick<Budget_categories, "name" | "userId" | "is_custom" >): Promise<Budget_categories | undefined> => {
+    const createNewCategory = async({name, is_custom}: Pick<Budget_categories, "name" | "is_custom" >): Promise<Budget_categories | undefined> => {
 
         try{
             const response = await fetch("http://127.0.0.1:8000/budget_categories/api/create/", {
@@ -70,7 +70,7 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + String(authToken?.access)
                 },
-                body: JSON.stringify({name, userId, is_custom})
+                body: JSON.stringify({name, is_custom})
             });
             if(!response.ok) {
                 throw new Error(`HTTP Error!: ${response.status}`)

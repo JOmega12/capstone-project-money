@@ -57,7 +57,6 @@ export const CreateTest = () => {
                     Expense
                 </label>
                 {/* using this to add them into a category using a select */}
-                {/* Having trouble with seleected category id default */}
                 <div>Category:
                     <select name="category" value={categoryType} id="" onChange={(e) => setCategoryType(Number(e.target.value))}>
                         {
