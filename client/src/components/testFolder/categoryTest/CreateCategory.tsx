@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { useCategory } from "../../../providers/CategoriesProvider";
-import { useAuth } from "../../../providers/AuthProvider";
-
-
 
 
 
@@ -10,17 +7,15 @@ import { useAuth } from "../../../providers/AuthProvider";
 
 export const CreateCategory = () => {
     const {createNewCategory} = useCategory();
-
-
-    // !need to add isCustom 
-    // const {user} = useAuth();
+``
     const [categoryName , setCategoryName] = useState("");
-    // const [userId, setUserId] = useState<number | "">("");
+    const isCustom = true;
+
     const handleSubmit = (e: { preventDefault: () => void}) => {
       e.preventDefault();
 
-      createNewCategory(categoryName)
-      // setUserId("")
+      setCategoryName("");
+      createNewCategory({name: categoryName, is_custom: isCustom})
     }
 
   return (

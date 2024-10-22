@@ -270,3 +270,5 @@ Fixed:
 In createTest folder, I added and fixed a feature where it would create a Transaction without a category. What I did was that I would use a category to select the already existing catalog of categories to be put inside the Transaction.
 
 In addition , even if the user doesnt add the category on its own, it would automatically use the first category as a default
+
+
