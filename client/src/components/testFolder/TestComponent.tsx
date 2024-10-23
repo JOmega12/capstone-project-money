@@ -4,18 +4,22 @@ import { RegisterTest } from "./RegisterTest";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 import { CreateTest } from "./CreateTest";
 import { EditFormTest } from "./EditFormTest";
-import { Transaction } from "../../types/types";
+import { Budget_categories, Transaction } from "../../types/types";
 import { useCategory } from "../../providers/CategoriesProvider";
 import { CreateCategory } from "./categoryTest/CreateCategory";
 
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
   const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId, deleteTransaction } = useMoney();
-  const { categories } = useCategory();
+  const { categories, fixCategory } = useCategory();
 
   const handleSaveChanges = async(id:number, updatedItem: Transaction) => {
     await fixTransaction(id, updatedItem);
     setEditingId(null);
+  }
+
+  const handleSaveCategoryChanges = async(id:number, updatedItem: Budget_categories) => {
+    await fixCategory(id, updatedItem)
   }
 
   const deleteThisTransaction = (id: number) => {
@@ -155,7 +159,10 @@ export const TestComponent = () => {
           </div>
           <div className="m-2">
             <p>Fix Category?</p>
-            <p></p>
+              {Array.isArray(categories) && user 
+              ? (<></>) 
+              : (<></>)}
+
           </div>
         </div>
       </div>

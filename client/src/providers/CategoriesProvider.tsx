@@ -8,9 +8,14 @@ type CategoryContextType = {
     
     categories: Budget_categories | null;
     setCategories: Dispatch<SetStateAction<Budget_categories | null>>;
-
+    editingId: number | null;
+    setEditingId: Dispatch<SetStateAction<number | null>> ;
 
     createNewCategory: ({name, is_custom}: Pick<Budget_categories, "name" | "is_custom" >) => Promise<Budget_categories | undefined>;
+    
+    fixCategory: (id: number, {name}: Pick<Budget_categories, 'name' >) => Promise<Budget_categories | undefined>;
+
+    deleteCategory: (id:number) => Promise<Response>;
 }
 
 
@@ -26,6 +31,8 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
     const {authToken} = useAuth();
     
     const [categories, setCategories] = useState<Budget_categories | null>(null);
+
+    const [editingId, setEditingId] = useState<number | null>(null)
 
     const getCategoryForUser = async() => {
         try{
@@ -86,36 +93,57 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
 
     }
 
-    // const fixCategory = async(id: number) => {
+    const fixCategory = async(id: number, {name}: Pick<Budget_categories, 'name' >):Promise<Budget_categories | undefined> => {
 
-    //     try {
-    //         const response = await fetch('http://127.0.0.1:8000/budget_categories/api/update/', {
-    //             method: 'PATCH',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': 'Bearer ' + String(authToken?.access)
-    //             },
-    //             body: JSON.stringify({});
-    //         });
-    //         console.log(response, 'response in fix Categories')
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/budget_categories/api/${id}/update/`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + String(authToken?.access)
+                },
+                body: JSON.stringify({name})
+            });
+            console.log(response, 'response in fix Categories')
 
-    //         if(!response.ok){
-    //             throw new Error(`HTTP error: ${response.status}`)
-    //         }
+            if(!response.ok){
+                throw new Error(`HTTP error: ${response.status}`)
+            }
 
-    //         const data = await response.json();
-    //         console.log(data, 'data in fix category')
-    //     }catch(e) {
-    //         console.log(e)
-    //     }
-    // }
+            const data = await response.json();
+            console.log(data, 'data in fix category');
+            return data;
+        }catch(e) {
+            console.log(e)
+            return undefined
+        }
+    }
+
+    const deleteCategory = async(id: number) => {
+        return fetch(`http://127.0.0.1:8000/budget_categories/api/${id}/delete/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + String(authToken?.access)
+            }
+        }).then((res) => {
+            if(!res.ok){
+                throw new Error("Failed to delete a Category" + id);
+            }
+            console.log("The Category has been deleted!");
+            return res;
+        })
+    }
 
     return(
         <CategoryContext.Provider
             value={{
                 categories,
                 setCategories,
+                editingId,
+                setEditingId,
                 createNewCategory,
+                fixCategory,
+                deleteCategory
             }}
         >
             {children}
