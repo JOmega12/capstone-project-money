@@ -275,4 +275,4 @@ In addition , even if the user doesnt add the category on its own, it would auto
 10/21/2024
 Added and fixed isCustom for when creating a new category
 
-Need to add the fixCategory(PATCH) and deleteCategory endpoints
+Need to add the fixCategory(PATCH) and deleteCategory endpoints 

@@ -148,10 +148,15 @@ export const TestComponent = () => {
             )
             }
           </div>
-
-          <p className="m-6" >Create Your Category:
-            <CreateCategory/>
-          </p>
+          <div>
+            <p className="m-6" >Create Your Category:
+              <CreateCategory/>
+            </p>
+          </div>
+          <div className="m-2">
+            <p>Fix Category?</p>
+            <p></p>
+          </div>
         </div>
       </div>
     </>
