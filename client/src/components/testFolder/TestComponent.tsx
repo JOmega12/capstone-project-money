@@ -7,11 +7,12 @@ import { EditFormTest } from "./EditFormTest";
 import { Budget_categories, Transaction } from "../../types/types";
 import { useCategory } from "../../providers/CategoriesProvider";
 import { CreateCategory } from "./categoryTest/CreateCategory";
+import { ChangeCategory } from "./categoryTest/ChangeCategory";
 
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
   const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId, deleteTransaction } = useMoney();
-  const { categories, fixCategory } = useCategory();
+  const { categories, fixCategory, editingIdCat, setEditingIdCat} = useCategory();
 
   const handleSaveChanges = async(id:number, updatedItem: Transaction) => {
     await fixTransaction(id, updatedItem);
@@ -19,7 +20,8 @@ export const TestComponent = () => {
   }
 
   const handleSaveCategoryChanges = async(id:number, updatedItem: Budget_categories) => {
-    await fixCategory(id, updatedItem)
+    await fixCategory(id, updatedItem);
+    setEditingIdCat(null);
   }
 
   const deleteThisTransaction = (id: number) => {
@@ -158,10 +160,28 @@ export const TestComponent = () => {
             </p>
           </div>
           <div className="m-2">
-            <p>Fix Category?</p>
-              {Array.isArray(categories) && user 
-              ? (<></>) 
-              : (<></>)}
+            <div>Fix Category? </div>
+
+            {/* !This right here  */}
+            {Array.isArray(categories) && user 
+            ? (    
+              categories.map((item) => (
+                <div key={item.id} className="m-2">
+                  {editingIdCat === item.id ? (
+                    <ChangeCategory 
+                    item={}
+                    onSave={}
+                    onCancel={}
+                    categories={Array.isArray(categories) ? categories:[]}
+                    />
+                  ): (
+
+                  )}
+                </div>
+              ))
+            ) 
+            : (<></>)
+            }
 
           </div>
         </div>

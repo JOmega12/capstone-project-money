@@ -8,8 +8,8 @@ type CategoryContextType = {
     
     categories: Budget_categories | null;
     setCategories: Dispatch<SetStateAction<Budget_categories | null>>;
-    editingId: number | null;
-    setEditingId: Dispatch<SetStateAction<number | null>> ;
+    editingIdCat: number | null;
+    setEditingIdCat: Dispatch<SetStateAction<number | null>> ;
 
     createNewCategory: ({name, is_custom}: Pick<Budget_categories, "name" | "is_custom" >) => Promise<Budget_categories | undefined>;
     
@@ -32,7 +32,7 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
     
     const [categories, setCategories] = useState<Budget_categories | null>(null);
 
-    const [editingId, setEditingId] = useState<number | null>(null)
+    const [editingIdCat, setEditingIdCat] = useState<number | null>(null)
 
     const getCategoryForUser = async() => {
         try{
@@ -139,8 +139,8 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
             value={{
                 categories,
                 setCategories,
-                editingId,
-                setEditingId,
+                editingIdCat,
+                setEditingIdCat,
                 createNewCategory,
                 fixCategory,
                 deleteCategory
