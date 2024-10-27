@@ -31,6 +31,12 @@ export const TestComponent = () => {
       window.location.reload();
     }
   }
+
+  const deleteThisCategory = (id:number) => {
+    if(id){
+      // delete
+    }
+  }
   
   // using a helper function to find the name of the associated id of the category name 
   const getCategoryName = (categoryId: number) => {
@@ -129,11 +135,44 @@ export const TestComponent = () => {
             <p className="m-6">Categories for user</p>
             
             {Array.isArray(categories) && user ? categories.map((category)=> (
-              <>              
+              <>
+                            
                 <p>Category Name: {category.name}</p>
-                <div>
-                  <ul>
-                    {Array.isArray(money) && user ? (
+                <div key={category.id}>
+                  {editingIdCat === category.id ? (
+                    <ChangeCategory 
+                    item={category}
+                    onSave={handleSaveCategoryChanges}
+                    onCancel={()=> setEditingIdCat(null)}
+                    categories={Array.isArray(categories) ? categories:[]}
+                    />
+                  ): (
+                    <>
+                    <ul>
+                      {Array.isArray(money) && user ? (
+                        money.filter((transaction) => transaction.category === category.id)
+                        .map((transaction) => (
+                          <li key={transaction.id}>
+                            <p>Transaction Name: {transaction.transactionName}</p>
+                          </li>
+                        ))
+                      ): (
+                        <p>No Transactions Available</p>
+                      )}
+                    </ul>
+                    <div>
+                    <p className="text-green-700 hover:cursor-pointer"
+                    onClick={() => setEditingId(category.id)}
+                    >
+                      CHANGE
+                    </p>
+                    <p className="text-red-700 hover:cursor-pointer"
+                      onClick={()=> deleteThisTransaction(category.id)}
+                    >DELETE</p>
+                    </div>
+                    </>
+                  )}
+                    {/* {Array.isArray(money) && user ? (
                       money.filter((transaction) => transaction.category === category.id)
                       .map((transaction) => (
                         <li key={transaction.id}>
@@ -142,9 +181,7 @@ export const TestComponent = () => {
                       ))
                     ): (
                       <p>No Transactions Available</p>
-                    )}
-
-                  </ul>
+                    )} */}
                 </div>
               </>
             )): 
@@ -163,25 +200,26 @@ export const TestComponent = () => {
             <div>Fix Category? </div>
 
             {/* !This right here  */}
-            {Array.isArray(categories) && user 
+            {/* {Array.isArray(categories) && user 
             ? (    
               categories.map((item) => (
                 <div key={item.id} className="m-2">
                   {editingIdCat === item.id ? (
-                    <ChangeCategory 
-                    item={}
-                    onSave={}
-                    onCancel={}
-                    categories={Array.isArray(categories) ? categories:[]}
-                    />
+                    <></>
+                    // <ChangeCategory 
+                    // // item={}
+                    // // onSave={}
+                    // // onCancel={}
+                    // // categories={Array.isArray(categories) ? categories:[]}
+                    // />
                   ): (
-
+                    <></>
                   )}
                 </div>
               ))
             ) 
             : (<></>)
-            }
+            } */}
 
           </div>
         </div>
