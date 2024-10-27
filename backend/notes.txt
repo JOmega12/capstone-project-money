@@ -276,3 +276,15 @@ In addition , even if the user doesnt add the category on its own, it would auto
 Added and fixed isCustom for when creating a new category
 
 Need to add the fixCategory(PATCH) and deleteCategory endpoints 
+
+
+10/27/2024
+Fixed PATCH Backend because the view was not picking up the object on the PATCH endpoint which shows a 400 error every time i click the change user_budget_categories_junction.
+
+As a result, I fixed it by adding the method .objects (explain why it's important to have this when calling the model later) in the PATCH backend 
+
+I also fixed the POST Backend because it was not creating the category in the frontend despite being able to to create a category in the backend which shows me that the problem wasn't in the backend but the frontend.
+
+After looking at the component responsible for creating the category, I realized that it wasn't the component where the input lives was the problem. Rather, the problem was in the provider where the calling the API from the backend was.
+
+It was the smallest problem that one could mistake. In the method, I accidentally wrote "CREATE" rather than "POST" in the code. After changing it, I was able to create my category

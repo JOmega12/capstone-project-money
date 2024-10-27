@@ -41,7 +41,7 @@ def createCategory(request):
 @permission_classes([IsAuthenticated])
 def updateCategory(request, pk):
     try:
-        budget_category = Budget_categories.get(pk = pk, user=request.user)
+        budget_category = Budget_categories.objects.get(pk = pk, user=request.user)
     except Budget_categories.DoesNotExist:
         Response({"Error": "Budget is not found or no Permission"})
         

@@ -12,7 +12,7 @@ import { ChangeCategory } from "./categoryTest/ChangeCategory";
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
   const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId, deleteTransaction } = useMoney();
-  const { categories, fixCategory, editingIdCat, setEditingIdCat} = useCategory();
+  const { categories, fixCategory, editingIdCat, setEditingIdCat, deleteCategory} = useCategory();
 
   const handleSaveChanges = async(id:number, updatedItem: Transaction) => {
     await fixTransaction(id, updatedItem);
@@ -22,6 +22,7 @@ export const TestComponent = () => {
   const handleSaveCategoryChanges = async(id:number, updatedItem: Budget_categories) => {
     await fixCategory(id, updatedItem);
     setEditingIdCat(null);
+    window.location.reload();
   }
 
   const deleteThisTransaction = (id: number) => {
@@ -34,7 +35,8 @@ export const TestComponent = () => {
 
   const deleteThisCategory = (id:number) => {
     if(id){
-      // delete
+      deleteCategory(id);
+      window.location.reload();
     }
   }
   
@@ -56,10 +58,11 @@ export const TestComponent = () => {
         {user ? (
           <h3>Hi {`${user.username}`}</h3>
         ) : (
-          <>
-            <div className="flex flex-col"> Please Login</div>
-            <LoginTest />
-          </>
+            <div className="flex flex-col"> Please Login
+              <div>
+                <LoginTest />
+              </div>
+            </div>
         )}
         <div className="mt-10">
           <h2>New User?</h2>
@@ -133,41 +136,38 @@ export const TestComponent = () => {
         <div className="mt-10">
           <div>
             <p className="m-6">Categories for user</p>
-            
-            {Array.isArray(categories) && user ? categories.map((category)=> (
-              <>
-                            
-                <p>Category Name: {category.name}</p>
+            {Array.isArray(categories) && user ? categories.map((category)=> (      
                 <div key={category.id}>
                   {editingIdCat === category.id ? (
                     <ChangeCategory 
                     item={category}
                     onSave={handleSaveCategoryChanges}
                     onCancel={()=> setEditingIdCat(null)}
-                    categories={Array.isArray(categories) ? categories:[]}
+                    // categories={Array.isArray(categories) ? categories:[]}
                     />
                   ): (
                     <>
-                    <ul>
-                      {Array.isArray(money) && user ? (
-                        money.filter((transaction) => transaction.category === category.id)
-                        .map((transaction) => (
-                          <li key={transaction.id}>
-                            <p>Transaction Name: {transaction.transactionName}</p>
-                          </li>
-                        ))
-                      ): (
-                        <p>No Transactions Available</p>
-                      )}
-                    </ul>
+                    <p>Category Name: {category.name}</p>
+                      <ul>
+                        {Array.isArray(money) && user ? (
+                          money.filter((transaction) => transaction.category === category.id)
+                          .map((transaction) => (
+                            <li key={transaction.id}>
+                              <p>Transaction Name: {transaction.transactionName}</p>
+                            </li>
+                          ))
+                        ): (
+                          <p>No Transactions Available</p>
+                        )}
+                      </ul>
                     <div>
                     <p className="text-green-700 hover:cursor-pointer"
-                    onClick={() => setEditingId(category.id)}
+                    onClick={() => setEditingIdCat(category.id)}
                     >
                       CHANGE
                     </p>
                     <p className="text-red-700 hover:cursor-pointer"
-                      onClick={()=> deleteThisTransaction(category.id)}
+                      onClick={()=> deleteThisCategory(category.id)}
                     >DELETE</p>
                     </div>
                     </>
@@ -183,7 +183,6 @@ export const TestComponent = () => {
                       <p>No Transactions Available</p>
                     )} */}
                 </div>
-              </>
             )): 
             (<>
              <p>No categories </p>
@@ -192,34 +191,13 @@ export const TestComponent = () => {
             }
           </div>
           <div>
-            <p className="m-6" >Create Your Category:
+            <div className="m-6" >Create Your Category:
               <CreateCategory/>
-            </p>
+            </div>
           </div>
+
           <div className="m-2">
             <div>Fix Category? </div>
-
-            {/* !This right here  */}
-            {/* {Array.isArray(categories) && user 
-            ? (    
-              categories.map((item) => (
-                <div key={item.id} className="m-2">
-                  {editingIdCat === item.id ? (
-                    <></>
-                    // <ChangeCategory 
-                    // // item={}
-                    // // onSave={}
-                    // // onCancel={}
-                    // // categories={Array.isArray(categories) ? categories:[]}
-                    // />
-                  ): (
-                    <></>
-                  )}
-                </div>
-              ))
-            ) 
-            : (<></>)
-            } */}
 
           </div>
         </div>

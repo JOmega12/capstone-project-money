@@ -71,8 +71,8 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
     const createNewCategory = async({name, is_custom}: Pick<Budget_categories, "name" | "is_custom" >): Promise<Budget_categories | undefined> => {
 
         try{
-            const response = await fetch("http://127.0.0.1:8000/budget_categories/api/create/", {
-                method: 'CREATE',
+            const response = await fetch("http://localhost:8000/budget_categories/api/create/", {
+                method: 'POST',
                 headers:{
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + String(authToken?.access)
@@ -84,12 +84,11 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
             }
 
             const data = await response.json();
-            // await refetch();
+            await refetch();
             return data
         }catch(e) {
             console.log(e, 'Error in createNewCategory')
         }
-
 
     }
 
@@ -112,6 +111,7 @@ export const CategoriesProvider = ({children}: CategoryProviderProps) => {
 
             const data = await response.json();
             console.log(data, 'data in fix category');
+            await refetch();
             return data;
         }catch(e) {
             console.log(e)

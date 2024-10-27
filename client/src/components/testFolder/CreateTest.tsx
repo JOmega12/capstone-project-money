@@ -62,14 +62,10 @@ export const CreateTest = () => {
                         {
                             Array.isArray(categories) ? (
                                 categories.map((item) => (
-                                    <>
-                                        <option key={item.id} value={item.id}>{item.name}</option>
-                                    </>
+                                    <option key={item.id} value={item.id}>{item.name}</option>
                                 ))
                             ):
-                            (
-                                <div>No Categories Available</div>
-                            )
+                            (null)
                             
                         }
                     </select>

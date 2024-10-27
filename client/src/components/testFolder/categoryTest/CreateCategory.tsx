@@ -7,7 +7,6 @@ import { useCategory } from "../../../providers/CategoriesProvider";
 
 export const CreateCategory = () => {
     const {createNewCategory} = useCategory();
-``
     const [categoryName , setCategoryName] = useState("");
     const isCustom = true;
 
@@ -19,7 +18,6 @@ export const CreateCategory = () => {
     }
 
   return (
-    <>
       <form action="" onSubmit={handleSubmit} className="gap-1">
         <input
           type="text"
@@ -30,6 +28,5 @@ export const CreateCategory = () => {
         <br />
         <input className="hover:cursor-pointer" type="submit" value="Enter" />
       </form>
-    </>
   );
 };
