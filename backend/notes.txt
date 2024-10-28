@@ -288,3 +288,8 @@ I also fixed the POST Backend because it was not creating the category in the fr
 After looking at the component responsible for creating the category, I realized that it wasn't the component where the input lives was the problem. Rather, the problem was in the provider where the calling the API from the backend was.
 
 It was the smallest problem that one could mistake. In the method, I accidentally wrote "CREATE" rather than "POST" in the code. After changing it, I was able to create my category
+
+
+Need to:
+-fix the props in the Fix Component
+- then begin the styling process

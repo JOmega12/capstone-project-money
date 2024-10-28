@@ -2,7 +2,7 @@ import { useState } from "react"
 // import { Budget_categories } from "../../../types/types";
 
 
-type editFormType = {
+type editCatType = {
     item: {
         id: number,
         name: string,
@@ -11,11 +11,9 @@ type editFormType = {
         // id: number,
         name: string
     }) => void;
-    onCancel: () => void;
-    // categories: Budget_categories[];
-}
+    onCancel: () => void;}
 
-export const ChangeCategory = ({item, onSave, onCancel}: editFormType) => {
+export const ChangeCategory = ({item, onSave, onCancel}: editCatType) => {
 
 
     
@@ -35,7 +33,7 @@ export const ChangeCategory = ({item, onSave, onCancel}: editFormType) => {
 
     const handleSave = () => {
         if(onSave){
-            onSave(item.id, {name:categoryName})
+            onSave(item.id, {name: categoryName})
         }
     }  
 
@@ -43,7 +41,6 @@ export const ChangeCategory = ({item, onSave, onCancel}: editFormType) => {
     return(
         <>
             <div>
-                {/* <input type="text" name="name" value={editForm.name} onChange={handleFormChange} placeholder="Change Name"/> */}
                 <input type="text" name="name" value={categoryName} onChange={(e)=>setCategoryName(e.target.value)} placeholder="Change Name"/>
                 <button onClick={handleSave}>Save</button>
                 <button onClick={onCancel}>Cancel</button>

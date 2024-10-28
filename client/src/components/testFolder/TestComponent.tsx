@@ -4,7 +4,7 @@ import { RegisterTest } from "./RegisterTest";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 import { CreateTest } from "./CreateTest";
 import { EditFormTest } from "./EditFormTest";
-import { Budget_categories, Transaction } from "../../types/types";
+import { Transaction } from "../../types/types";
 import { useCategory } from "../../providers/CategoriesProvider";
 import { CreateCategory } from "./categoryTest/CreateCategory";
 import { ChangeCategory } from "./categoryTest/ChangeCategory";
@@ -19,14 +19,13 @@ export const TestComponent = () => {
     setEditingId(null);
   }
 
-  const handleSaveCategoryChanges = async(id:number, updatedItem: Budget_categories) => {
-    await fixCategory(id, updatedItem);
+  const handleSaveCategoryChanges = async(id:number, updatedItem: {name: string}) => {
+    await fixCategory(id, {...updatedItem});
     setEditingIdCat(null);
     window.location.reload();
   }
 
   const deleteThisTransaction = (id: number) => {
-
     if(id){
       deleteTransaction(id)
       window.location.reload();
@@ -143,7 +142,6 @@ export const TestComponent = () => {
                     item={category}
                     onSave={handleSaveCategoryChanges}
                     onCancel={()=> setEditingIdCat(null)}
-                    // categories={Array.isArray(categories) ? categories:[]}
                     />
                   ): (
                     <>
