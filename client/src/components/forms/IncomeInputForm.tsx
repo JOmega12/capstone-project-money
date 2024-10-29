@@ -16,7 +16,7 @@ const transactionAmountErrorMessage = "There must be number";
 
 export const IncomeInputForm = () => {
 
-  const {transactionName, setTransactionName, transactionAmount, setTransactionAmount, transactionType, setTransactionType, createNewTransactionForm} = useMoney();
+  const {transactionName, setTransactionName, transactionAmount, setTransactionAmount, setTransactionType, createNewTransactionForm} = useMoney();
 
   const {categories} = useCategory();
 
@@ -52,47 +52,61 @@ export const IncomeInputForm = () => {
 
   return ( 
     <section className="flex flex-col md:flex-row w-full min-h-screen gap-6">
-    <header className="flex flex-col md:w-1/4 md:bg-[#87cb8b] md:text-white text-2xl">
-      <h2 className="text-black text-center pt-10 hidden md:block">
-        WalletWhiz
-      </h2>
-      <Navbar />
-    </header>
-    <div className="py-2 flex flex-col justify-center w-full">
-      <div className="flex flex-col md:flex-row gap-10 justify-center items-center mb-10">
-        <Link to={"/income"}>
-          <FontAwesomeIcon
-            icon={faArrowCircleLeft}
-            className="text-red-500 text-3xl" 
-          />
-        </Link>
-        <h2 className="text-3xl ">Add Income</h2>
-      </div>
-      <form 
-      onSubmit={handleSubmit}
-      className="flex flex-col justify-center items-center w-full"
-      >
-          <IncomeAndExpenseInputs 
-          type={'text'}
-          label={`Income Name`}
-          value={transactionName}
-          onChange={(e) => setTransactionName(e.target.value)}
-          show={transactionNameValid}
-          message={transactionNameErrorMessage}
-          />
-          <IncomeAndExpenseInputs 
-          type={"number"}
-          label={`Income Amount`}
-          value={transactionAmount}
-          onChange={handleTransactionAmountChange}
-          show={transactionAmountValid}
-          message={transactionAmountErrorMessage}
-          />
-          {/* add income expense */}
+      <header className="flex flex-col md:w-1/4 md:bg-[#87cb8b] md:text-white text-2xl">
+        <h2 className="text-black text-center pt-10 hidden md:block">
+          WalletWhiz
+        </h2>
+        <Navbar />
+      </header>
+      <div className="py-2 flex flex-col justify-center w-full">
+        <div className="flex flex-col md:flex-row gap-10 justify-center items-center mb-10">
+          <Link to={"/income"}>
+            <FontAwesomeIcon
+              icon={faArrowCircleLeft}
+              className="text-red-500 text-3xl" 
+            />
+          </Link>
+          <h2 className="text-3xl ">Add Income</h2>
+        </div>
+        <form 
+        onSubmit={handleSubmit}
+        className="flex flex-col justify-center items-center w-full"
+        >
+            <IncomeAndExpenseInputs 
+            type={'text'}
+            label={`Income Name`}
+            value={transactionName}
+            onChange={(e) => setTransactionName(e.target.value)}
+            show={transactionNameValid}
+            message={transactionNameErrorMessage}
+            />
+            <IncomeAndExpenseInputs 
+            type={"number"}
+            label={`Income Amount`}
+            value={transactionAmount}
+            onChange={handleTransactionAmountChange}
+            show={transactionAmountValid}
+            message={transactionAmountErrorMessage}
+            />
+            {/* add income and category  */}
+            {/* reference the createTest form */}
 
-          <input className="hover:cursor-pointer" type="submit"/>
-      </form>
-    </div>
+            <div>Category:
+                <select name="category" value={categoryType} id="" onChange={(e) => setCategoryType(Number(e.target.value))}>
+                    {
+                        Array.isArray(categories) ? (
+                            categories.map((item) => (
+                                <option key={item.id} value={item.id}>{item.name}</option>
+                            ))
+                        ):
+                        (null)
+                        
+                    }
+                </select>
+            </div>
+            <input className="hover:cursor-pointer" type="submit" value="Submit "/>
+        </form>
+      </div>
   </section>
 
   );
