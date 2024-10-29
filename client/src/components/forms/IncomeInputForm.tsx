@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { Navbar } from "../../Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons/faArrowCircleLeft";
-import { ChangeEvent, useState} from "react";
+import { ChangeEvent, useEffect, useState} from "react";
 import { IncomeAndExpenseInputs } from "../IncomeAndExpense/IncomeAndExpenseInputs";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
+import { useCategory } from "../../providers/CategoriesProvider";
 
 
 
@@ -17,28 +18,36 @@ export const IncomeInputForm = () => {
 
   const {transactionName, setTransactionName, transactionAmount, setTransactionAmount, transactionType, setTransactionType, createNewTransactionForm} = useMoney();
 
-  // const [transactionName, setTransactionName] = useState("");
-  // const [transactionAmount, setTransactionAmount] = useState(0);
-  // const [categoryInput, setCategoryInput] = useState("");
+  const {categories} = useCategory();
 
 
-  const showIncomeType = 'income';
+  const [categoryType, setCategoryType] = useState<number | undefined>(undefined);
 
   const transactionNameValid = transactionName.length > 3;
   const transactionAmountValid = isNaN(transactionAmount) && transactionAmount > 0; 
 
-
+  const incomeTypeTransaction = 'income';
 
   const handleTransactionAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
     setTransactionAmount(isNaN(value) ? 0 : value);
   };
 
+  useEffect(()=> {
+    if(categories){
+      if(Array.isArray(categories)) {
+        setCategoryType(categories[0].id)
+      }
+    }
+  }, [categories])
+
   const handleSubmit = (e:{preventDefault: () => void;}) => {
     e.preventDefault();
-    createNewTransactionForm({});
+    createNewTransactionForm({transactionName, transactionAmount, transactionType: incomeTypeTransaction, category: categoryType});
     setTransactionName("");
     setTransactionAmount(0);
+    setTransactionType(undefined);
+    setCategoryType(undefined);
   }
 
   return ( 
@@ -59,7 +68,10 @@ export const IncomeInputForm = () => {
         </Link>
         <h2 className="text-3xl ">Add Income</h2>
       </div>
-      <div className="flex flex-col justify-center items-center w-full">
+      <form 
+      onSubmit={handleSubmit}
+      className="flex flex-col justify-center items-center w-full"
+      >
           <IncomeAndExpenseInputs 
           type={'text'}
           label={`Income Name`}
@@ -76,7 +88,10 @@ export const IncomeInputForm = () => {
           show={transactionAmountValid}
           message={transactionAmountErrorMessage}
           />
-      </div>
+          {/* add income expense */}
+
+          <input className="hover:cursor-pointer" type="submit"/>
+      </form>
     </div>
   </section>
 
