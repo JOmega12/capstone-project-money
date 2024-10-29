@@ -12,6 +12,7 @@ import { ChangeCategory } from "./categoryTest/ChangeCategory";
 export const TestComponent = () => {
   const { user, logoutUser } = useAuth();
   const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId, deleteTransaction } = useMoney();
+  
   const { categories, fixCategory, editingIdCat, setEditingIdCat, deleteCategory} = useCategory();
 
   const handleSaveChanges = async(id:number, updatedItem: Transaction) => {

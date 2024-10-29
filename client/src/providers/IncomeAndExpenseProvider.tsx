@@ -30,6 +30,8 @@ type IncomeAndExpenseContextType = {
   setTransactionName: Dispatch<SetStateAction<string>>;
   transactionAmount: number;
   setTransactionAmount: Dispatch<SetStateAction<number>>;
+  transactionType: string | undefined;
+  setTransactionType: Dispatch<SetStateAction<"income" | "expense" | undefined>>;
 
   totalIncome: number | undefined;
   totalExpense: number | undefined;
@@ -62,8 +64,11 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const [transactionName, setTransactionName] = useState<string>("");
   const [transactionAmount, setTransactionAmount] = useState<number>(0);
 
+  const [transactionType, setTransactionType] = useState<"income" | "expense"| undefined>(undefined);
+
   const [editingId, setEditingId] = useState<number | null>(null);
   // const userId = user?.id;
+
   // date functions
   const dateObj = new Date();
   const day = dateObj.getUTCDate();
@@ -229,6 +234,8 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         setTransactionName,
         transactionAmount,
         setTransactionAmount,
+        transactionType,
+        setTransactionType,
 
         editingId,
         setEditingId,

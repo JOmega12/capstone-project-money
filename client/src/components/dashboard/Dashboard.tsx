@@ -8,11 +8,11 @@ import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 import { useCategory } from "../../providers/CategoriesProvider";
 
 export const Dashboard = () => {
-  const { isRegister, user, logoutUser } = useAuth();
+  const { isRegister } = useAuth();
 
   const navigate = useNavigate();
 
-  const { money, totalIncome, totalExpense, netAmount,fixTransaction, editingId, setEditingId, deleteTransaction } = useMoney();
+  const {fixTransaction } = useMoney();
 
   const { categories, fixCategory, editingIdCat, setEditingIdCat, deleteCategory} = useCategory();
 
@@ -20,20 +20,6 @@ export const Dashboard = () => {
     await fixCategory(id, {...updatedItem});
     setEditingIdCat(null);
     window.location.reload();
-  }
-
-  const deleteThisTransaction = (id: number) => {
-    if(id){
-      deleteTransaction(id)
-      window.location.reload();
-    }
-  }
-
-  const deleteThisCategory = (id:number) => {
-    if(id){
-      deleteCategory(id);
-      window.location.reload();
-    }
   }
 
 

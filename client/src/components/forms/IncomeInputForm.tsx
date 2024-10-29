@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Navbar } from "../../Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons/faArrowCircleLeft";
-import { ChangeEvent} from "react";
+import { ChangeEvent, useState} from "react";
 import { IncomeAndExpenseInputs } from "../IncomeAndExpense/IncomeAndExpenseInputs";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 
@@ -15,12 +15,14 @@ const transactionAmountErrorMessage = "There must be number";
 
 export const IncomeInputForm = () => {
 
-  const {transactionName, setTransactionName, transactionAmount, setTransactionAmount} = useMoney();
+  const {transactionName, setTransactionName, transactionAmount, setTransactionAmount, transactionType, setTransactionType, createNewTransactionForm} = useMoney();
 
   // const [transactionName, setTransactionName] = useState("");
   // const [transactionAmount, setTransactionAmount] = useState(0);
   // const [categoryInput, setCategoryInput] = useState("");
 
+
+  const showIncomeType = 'income';
 
   const transactionNameValid = transactionName.length > 3;
   const transactionAmountValid = isNaN(transactionAmount) && transactionAmount > 0; 
@@ -31,6 +33,13 @@ export const IncomeInputForm = () => {
     const value = parseFloat(e.target.value);
     setTransactionAmount(isNaN(value) ? 0 : value);
   };
+
+  const handleSubmit = (e:{preventDefault: () => void;}) => {
+    e.preventDefault();
+    createNewTransactionForm({});
+    setTransactionName("");
+    setTransactionAmount(0);
+  }
 
   return ( 
     <section className="flex flex-col md:flex-row w-full min-h-screen gap-6">
