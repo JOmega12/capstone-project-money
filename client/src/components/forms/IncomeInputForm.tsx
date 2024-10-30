@@ -91,12 +91,16 @@ export const IncomeInputForm = () => {
             {/* add income and category  */}
             {/* reference the createTest form */}
 
-            <div>Category:
-                <select name="category" value={categoryType} id="" onChange={(e) => setCategoryType(Number(e.target.value))}>
+            <div className="mb-4 flex flex-row items-center text-xl gap-2">Category:
+                <select name="category" value={categoryType} id="" onChange={(e) => setCategoryType(Number(e.target.value))}
+                className="text-xl mb-2 py-3 mx-2 focus:border-blue-500 border border-gray-500 rounded-lg"  
+                >
                     {
                         Array.isArray(categories) ? (
                             categories.map((item) => (
-                                <option key={item.id} value={item.id}>{item.name}</option>
+                                <option key={item.id} value={item.id}
+                                className="border border-gray-500 rounded-lg py-2 focus:outline-none focus:border-blue-500 text-center"
+                                >{item.name}</option>
                             ))
                         ):
                         (null)
@@ -104,7 +108,7 @@ export const IncomeInputForm = () => {
                     }
                 </select>
             </div>
-            <input className="hover:cursor-pointer" type="submit" value="Submit "/>
+            <input className="hover:cursor-pointer border border-green-400 px-6 py-2 rounded-xl bg-white hover:bg-green-400 hover:text-black" type="submit" value="Submit "/>
         </form>
       </div>
   </section>
