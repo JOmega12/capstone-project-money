@@ -3,9 +3,6 @@ import { useCategory } from "../../../providers/CategoriesProvider";
 import { useNavigate } from "react-router-dom";
 
 
-
-
-
 export const CreateCategory = () => {
     const {createNewCategory} = useCategory();
     const [categoryName , setCategoryName] = useState("");

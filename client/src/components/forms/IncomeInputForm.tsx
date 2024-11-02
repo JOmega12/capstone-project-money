@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "../../Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons/faArrowCircleLeft";
@@ -22,6 +22,8 @@ export const IncomeInputForm = () => {
 
 
   const [categoryType, setCategoryType] = useState<number | undefined>(undefined);
+
+  const navigation = useNavigate();
 
   const transactionNameValid = transactionName.length < 3 && transactionName.length > 0;
   const transactionAmountValid = isNaN(transactionAmount) && Number(transactionAmount) > 0; 
@@ -48,6 +50,8 @@ export const IncomeInputForm = () => {
     setTransactionAmount(0);
     setTransactionType(undefined);
     setCategoryType(undefined);
+    navigation("/expense");
+    window.location.reload();
   }
 
   return ( 

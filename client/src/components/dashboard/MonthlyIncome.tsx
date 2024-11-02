@@ -11,12 +11,12 @@ export const MonthlyIncome = () => {
                 <div className="">
                     <h3>Monthly Income</h3>
                     <div>
-                        <p>{totalIncome}</p>
+                        <p>${totalIncome}</p>
                     </div>
                 </div>
                 <div className="">
                     <h3>Your Savings</h3>
-                    <p>{netAmount}</p>
+                    <p>${netAmount}</p>
                 </div>
             </div>
         </div>

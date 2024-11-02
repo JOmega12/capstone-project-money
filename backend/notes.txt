@@ -303,3 +303,14 @@ Need to:
 -finish the income and expense dashboard with create, fix, delete endpoints
 - hook up the transactions amounts to the dashboard in both income and expense
 - hook up all categories in category component
+
+
+11/1/2024
+Finished income transactionType for creating and fixing 
+
+Need to :
+- fix up expense transactionType for creating and fixing
+- hook up category endpoints and front end
+- add chart.js in the dashboard and total net income
+- Design the Login and Signup 
+
