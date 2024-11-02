@@ -23,14 +23,14 @@ export const IncomeInputForm = () => {
 
   const [categoryType, setCategoryType] = useState<number | undefined>(undefined);
 
-  const transactionNameValid = transactionName.length > 3;
-  const transactionAmountValid = isNaN(transactionAmount) && transactionAmount > 0; 
+  const transactionNameValid = transactionName.length < 3 && transactionName.length > 0;
+  const transactionAmountValid = isNaN(transactionAmount) && Number(transactionAmount) > 0; 
 
   const incomeTypeTransaction = 'income';
 
   const handleTransactionAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setTransactionAmount(isNaN(value) ? 0 : value);
+    const value = e.target.value ? Math.max(0, parseFloat(e.target.value)) : "";
+    setTransactionAmount(Number(value));
   };
 
   useEffect(()=> {
@@ -81,9 +81,9 @@ export const IncomeInputForm = () => {
             message={transactionNameErrorMessage}
             />
             <IncomeAndExpenseInputs 
-            type={"number"}
+            type={"text"}
             label={`Income Amount`}
-            value={transactionAmount}
+            value={Number(transactionAmount)}
             onChange={handleTransactionAmountChange}
             show={transactionAmountValid}
             message={transactionAmountErrorMessage}

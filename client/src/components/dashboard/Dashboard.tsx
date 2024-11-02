@@ -4,23 +4,21 @@ import { useAuth } from "../../providers/AuthProvider";
 import { Goal } from "./Goal";
 import { MonthlyIncome } from "./MonthlyIncome";
 import { Transactions } from "./Transactions";
-import { useMoney } from "../../providers/IncomeAndExpenseProvider";
-import { useCategory } from "../../providers/CategoriesProvider";
+// import { useMoney } from "../../providers/IncomeAndExpenseProvider";
+// import { useCategory } from "../../providers/CategoriesProvider";
 
 export const Dashboard = () => {
   const { isRegister } = useAuth();
 
   const navigate = useNavigate();
 
-  const {fixTransaction } = useMoney();
+  // const { categories, fixCategory, editingIdCat, setEditingIdCat, deleteCategory} = useCategory();
 
-  const { categories, fixCategory, editingIdCat, setEditingIdCat, deleteCategory} = useCategory();
-
-  const handleSaveCategoryChanges = async(id:number, updatedItem: {name: string}) => {
-    await fixCategory(id, {...updatedItem});
-    setEditingIdCat(null);
-    window.location.reload();
-  }
+  // const handleSaveCategoryChanges = async(id:number, updatedItem: {name: string}) => {
+  //   await fixCategory(id, {...updatedItem});
+  //   setEditingIdCat(null);
+  //   window.location.reload();
+  // }
 
 
   return (

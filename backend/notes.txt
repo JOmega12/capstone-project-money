@@ -293,3 +293,13 @@ It was the smallest problem that one could mistake. In the method, I accidentall
 Need to:
 -fix the props in the Fix Component
 - then begin the styling process
+
+
+10/29/24
+Finished the test components for endpoints
+Finished the dashboard to add the transactions
+
+Need to:
+-finish the income and expense dashboard with create, fix, delete endpoints
+- hook up the transactions amounts to the dashboard in both income and expense
+- hook up all categories in category component
