@@ -314,3 +314,7 @@ Need to :
 - add chart.js in the dashboard and total net income
 - Design the Login and Signup 
 
+
+
+11/2/2024:
+Current problem in category is routing to a different urls other than createCategory component

@@ -23,13 +23,13 @@ export const CreateCategory = () => {
       </header>
       <div className="py-2 flex flex-col justify-center w-full">
         <div className="flex flex-col md:flex-row gap-10 justify-center items-center mb-10">
-          <Link to={"/income"}>
+          <Link to={"/categories"}>
             <FontAwesomeIcon
               icon={faArrowCircleLeft}
               className="text-red-500 text-3xl" 
             />
           </Link>
-          <h2 className="text-3xl ">Add Income</h2>
+          <h2 className="text-3xl ">Create Category</h2>
         </div>
         <form 
         // onSubmit={handleSubmit}

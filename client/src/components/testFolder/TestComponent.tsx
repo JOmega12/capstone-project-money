@@ -6,7 +6,7 @@ import { CreateTest } from "./CreateTest";
 import { EditFormTest } from "./EditFormTest";
 import { Transaction } from "../../types/types";
 import { useCategory } from "../../providers/CategoriesProvider";
-import { CreateCategory } from "./categoryTest/CreateCategory";
+import { CreateCategoryTest } from "./categoryTest/CreateCategoryTest";
 import { ChangeCategory } from "./categoryTest/ChangeCategory";
 
 export const TestComponent = () => {
@@ -191,7 +191,7 @@ export const TestComponent = () => {
           </div>
           <div>
             <div className="m-6" >Create Your Category:
-              <CreateCategory/>
+              <CreateCategoryTest/>
             </div>
           </div>
 

@@ -39,12 +39,10 @@ function App() {
               <Route path="/add-income" element={<IncomeInputForm/>}></Route>
               <Route path="expense" element={<ExpenseDash/>}></Route>
               <Route path="/add-expense" element={<ExpenseInputForm/>}></Route>
-              <Route path="/add-category" element={<CreateCategory/>}></Route>
+              
+              <Route path="/create-category" element={<CreateCategory/>}></Route>
               <Route path="/categories" element={<Categories/>}></Route>
               <Route path="/category/:categoryId" element={<CategoryDashboard/>}></Route>
-
-
-
 
               <Route path="/dashboard" element={<Dashboard />}></Route>
               {/* Test Routes in the bottom */}
