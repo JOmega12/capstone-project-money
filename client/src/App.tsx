@@ -14,6 +14,8 @@ import { IncomeDash } from "./components/IncomeAndExpense/IncomeDash"
 import { ExpenseDash } from "./components/IncomeAndExpense/ExpenseDash"
 import { TestComponent } from "./components/testFolder/TestComponent"
 import { CategoriesProvider } from "./providers/CategoriesProvider"
+import { CreateCategory } from "./components/categories/CreateCategory"
+import { CategoryDashboard } from "./components/categories/CategoryDashboard"
 
 // import { Navbar } from "./Navbar"
 // import { AuthProvider } from "./providers/AuthProvider"
@@ -37,7 +39,13 @@ function App() {
               <Route path="/add-income" element={<IncomeInputForm/>}></Route>
               <Route path="expense" element={<ExpenseDash/>}></Route>
               <Route path="/add-expense" element={<ExpenseInputForm/>}></Route>
+              <Route path="/add-category" element={<CreateCategory/>}></Route>
               <Route path="/categories" element={<Categories/>}></Route>
+              <Route path="/category/:categoryId" element={<CategoryDashboard/>}></Route>
+
+
+
+
               <Route path="/dashboard" element={<Dashboard />}></Route>
               {/* Test Routes in the bottom */}
               <Route path="/test-server" element={<TestComponent/>}></Route>

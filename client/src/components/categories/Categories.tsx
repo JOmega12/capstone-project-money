@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Navbar } from "../../Navbar";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
 import { useCategory } from "../../providers/CategoriesProvider";
 
@@ -10,6 +10,13 @@ export const Categories = () => {
   const { user } = useAuth();
     
   const { categories } = useCategory();
+
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (categoryId: number) => {
+    navigate(`/category/:${categoryId}`);
+  }
+
 
   return (
     <section className="flex flex-col md:flex-row w-full min-h-screen gap-6">
@@ -23,29 +30,38 @@ export const Categories = () => {
         <div className="m-10 text-center flex flex-col md:flex-row gap-10 justify-center mb-1">
           <h2 className="text-3xl ">Categories</h2>
           <Link
-            to={"/add-income"}
-            className="border border-blue-700 font-bold "
+            to={"/"}
+          >ClickMe</Link>
+          {/* <Link
+            to={"/add-category"}
+            className="border border-red-700 font-bold "
           >
             <FontAwesomeIcon
               icon={faPlus}
               className="p-2 text-4xl text-blue-700"
             />
-          </Link>
+          </Link> */}
         </div>
 
-        {Array.isArray(categories) && user ? (
-            categories.map((item) => (
-                <div
-                className="flex md:flex-row gap-10 justify-between mt-4"
-                key={item.id}
-                >
+        <div className="flex flex-row gap-6 justify-center items-center mt-10 text-xl ">
 
-                </div>
-            ))
-        ) : (
-            <></>
-        
-        )}
+          {Array.isArray(categories) && user ? (
+              categories.map((item) => (
+                  <div
+                  className="flex md:flex-row gap-10 justify-between mt-4 border border-[#d0d0d0] px-4 py-2 rounded-xl hover:bg-[#7cc681] hover:cursor-pointer"
+                  key={item.id}
+                  onClick={()=> handleCategoryClick(item.id)}
+                  >
+                    <div>{item.name}</div>
+                  </div>
+              ))
+          ) : (
+              <div>
+                No Categories Created
+              </div>
+          
+          )}
+        </div>
 
 
 
