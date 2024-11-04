@@ -72,7 +72,8 @@ export const ExpenseInputForm = () => {
         <Navbar />
       </header>
       <form
-        className="py-2 flex flex-col justify-center w-full"
+        // className="py-2 flex flex-col justify-center w-full"
+        className="py-2 lg:px-2 mt-20 md:w-3/4"
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col md:flex-row gap-10 justify-center items-center mb-10">
