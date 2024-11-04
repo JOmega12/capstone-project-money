@@ -3,8 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router";
 import { Navbar } from "../../Navbar";
 import { Link } from "react-router-dom";
+import { useCategory } from "../../providers/CategoriesProvider";
 
 export const CategoryDashboard = () => {
+  
+  const {categories} = useCategory();
+  // filter categories by its id and then if the same as the parameter id, then show the transactions
   const { categoryId } = useParams();
 
   return (
@@ -15,8 +19,8 @@ export const CategoryDashboard = () => {
         </h2>
         <Navbar />
       </header>
-      <div className="py-2 flex flex-col justify-center w-full">
-        <div className="flex flex-col md:flex-row gap-10 justify-center items-center mb-10">
+      <div className="py-2 lg:px-2 mt-5 md:w-3/4">
+        <div className="m-10 text-center flex flex-col md:flex-row gap-10 justify-center mb-1">
           <Link to={"/categories"}>
             <FontAwesomeIcon
               icon={faArrowCircleLeft}
@@ -26,9 +30,11 @@ export const CategoryDashboard = () => {
           <h2 className="text-3xl ">Current Category Name</h2>
         </div>
 
-        <div>
-          Single category Id
+        <div className="flex flex-row gap-6 justify-center items-center mt-10 text-xl ">
+          <div>
+            Single category Id
           {`${categoryId}`}
+          </div>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Navbar } from "../../Navbar"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons"
@@ -9,9 +9,26 @@ import { useState } from "react"
 
 export const CreateCategory = () => {
 
-    const {categories} = useCategory();
-    const [categoryType, setCategoryType] = useState<number | undefined>(undefined);
+  const {createNewCategory} = useCategory();
+  const [categoryName , setCategoryName] = useState("");
+  const isCustom = true;
 
+    const navigate = useNavigate();
+
+    const handleSubmit = (e: { preventDefault: () => void}) => {
+      e.preventDefault();
+      setCategoryName("");
+      createNewCategory({name: categoryName, is_custom: isCustom});
+      navigate("/income");
+      window.location.reload();
+    }
+  
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+      if(e.key === "Enter") {
+        e.preventDefault();
+        handleSubmit(e);
+      }
+    }
 
     return(
         <section className="flex flex-col md:flex-row w-full min-h-screen gap-6">
@@ -34,26 +51,20 @@ export const CreateCategory = () => {
         <form 
         // onSubmit={handleSubmit}
         className="flex flex-col justify-center items-center w-full"
+        onSubmit={handleSubmit}
+        onKeyDown={handleKeyDown}
+
         >
             {/* add income and category  */}
             {/* reference the createTest form */}
 
             <div className="mb-4 flex flex-row items-center text-xl gap-2">Category:
-                <select name="category" value={categoryType} id="" onChange={(e) => setCategoryType(Number(e.target.value))}
-                className="text-xl mb-2 py-3 mx-2 focus:border-blue-500 border border-gray-500 rounded-lg"  
-                >
-                    {
-                        Array.isArray(categories) ? (
-                            categories.map((item) => (
-                                <option key={item.id} value={item.id}
-                                className="border border-gray-500 rounded-lg py-2 focus:outline-none focus:border-blue-500 text-center"
-                                >{item.name}</option>
-                            ))
-                        ):
-                        (null)
-                        
-                    }
-                </select>
+              <input type="text" 
+              value={categoryName}
+              onChange={(e) => setCategoryName(e.target.value)}
+              placeholder="Category Name"
+              className="border border-gray-300 rounded-lg py-2 px-4 w-full focus:outline-none focus:border-blue-500"
+              />
             </div>
             <input className="hover:cursor-pointer border border-green-400 px-6 py-2 rounded-xl bg-white hover:bg-green-400 hover:text-black" type="submit" value="Submit "/>
         </form>

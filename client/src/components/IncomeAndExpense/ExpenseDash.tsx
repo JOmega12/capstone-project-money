@@ -44,7 +44,7 @@ export const ExpenseDash = () => {
                 <h2 className="text-black text-center pt-10 hidden md:block">WalletWhiz</h2>
                 <Navbar />
             </header>
-            <div className="py-2 md:w-full lg:px-2">
+            <div className="py-2 lg:px-2 mt-5 md:w-3/4">
                 <div className="m-10 text-center flex justify-center items-center gap-10">
                     <h2 className="text-3xl ">Expense</h2>
                     <Link to={"/add-expense"} className="border border-blue-700 font-bold ">

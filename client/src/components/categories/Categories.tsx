@@ -17,7 +17,6 @@ export const Categories = () => {
     navigate(`/category/:${categoryId}`);
   }
 
-
   return (
     <section className="flex flex-col md:flex-row w-full min-h-screen gap-6">
       <header className="flex flex-col md:w-1/4 md:bg-[#87cb8b] md:text-white text-2xl">
@@ -29,12 +28,9 @@ export const Categories = () => {
       <div className="py-2 lg:px-2 mt-5 md:w-3/4">
         <div className="m-10 text-center flex flex-col md:flex-row gap-10 justify-center mb-1">
           <h2 className="text-3xl ">Categories</h2>
-          {/* <Link
-            to={"/create-category"}
-          >ClickMe</Link> */}
           <Link
             to={"/create-category"}
-            className="border border-red-700 font-bold "
+            className="border border-blue-700 font-bold "
           >
             <FontAwesomeIcon
               icon={faPlus}
@@ -44,7 +40,6 @@ export const Categories = () => {
         </div>
 
         <div className="flex flex-row gap-6 justify-center items-center mt-10 text-xl ">
-
           {Array.isArray(categories) && user ? (
               categories.map((item) => (
                   <div
@@ -59,12 +54,8 @@ export const Categories = () => {
               <div>
                 No Categories Created
               </div>
-          
           )}
         </div>
-
-
-
       </div>
     </section>
   );

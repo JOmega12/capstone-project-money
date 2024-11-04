@@ -318,3 +318,5 @@ Need to :
 
 11/2/2024:
 Current problem in category is routing to a different urls other than createCategory component
+
+Update: Current problem had two components that are named CreateCategory. One was in the Test Component File and the Other is in the 
