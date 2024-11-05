@@ -13,7 +13,6 @@ const transactionNameErrorMessage = "There must be a name";
 const transactionAmountErrorMessage = "There must be number";
 // const categoryErrorMessage = "There must be a category"
 
-
 export const IncomeInputForm = () => {
 
   const {transactionName, setTransactionName, transactionAmount, setTransactionAmount, setTransactionType, createNewTransactionForm} = useMoney();

@@ -1,4 +1,4 @@
-import { faArrowCircleLeft, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router";
 import { Navbar } from "../../Navbar";
@@ -10,6 +10,12 @@ export const CategoryDashboard = () => {
   const {categories} = useCategory();
   // filter categories by its id and then if the same as the parameter id, then show the transactions
   const { categoryId } = useParams();
+
+  // console.log(categories)
+
+  const matchCategory = Array.isArray(categories) ? categories.filter((item) => item.id === Number(categoryId) ? item.transactions : null): null
+
+  console.log(matchCategory, 'test')
 
   return (
     <section className="flex flex-col md:flex-row w-full min-h-screen gap-6">
