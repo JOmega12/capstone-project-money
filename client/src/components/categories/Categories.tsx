@@ -14,7 +14,7 @@ export const Categories = () => {
   const navigate = useNavigate();
 
   const handleCategoryClick = (categoryId: number) => {
-    navigate(`/category/:${categoryId}`);
+    navigate(`/category/${categoryId}`);
   }
 
   return (

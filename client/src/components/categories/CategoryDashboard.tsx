@@ -4,6 +4,9 @@ import { useParams } from "react-router";
 import { Navbar } from "../../Navbar";
 import { Link } from "react-router-dom";
 import { useCategory } from "../../providers/CategoriesProvider";
+import { div } from "framer-motion/client";
+import { Budget_categories, Transaction } from "../../types/types";
+import { useEffect, useState } from "react";
 
 export const CategoryDashboard = () => {
   
@@ -11,11 +14,28 @@ export const CategoryDashboard = () => {
   // filter categories by its id and then if the same as the parameter id, then show the transactions
   const { categoryId } = useParams();
 
+  const [singleCategoryState, setSingleCategoryState] = useState<Budget_categories | undefined[]>([])
+
   // console.log(categories)
 
-  const matchCategory = Array.isArray(categories) ? categories.filter((item) => item.id === Number(categoryId) ? item.transactions : null): null
+  // const matchCategory= categories?.find((item) => {
+  //   return item.id ===Number(categoryId)
+  // })
 
-  console.log(matchCategory, 'test')
+  useEffect(() => {
+    if(Array.isArray(categories)){
+      const matchCategory = categories?.find((item) => {
+        return item.id ===Number(categoryId)
+      })
+
+      setSingleCategoryState(matchCategory)
+    } else {
+      null
+    }
+  }, [categories, categoryId])
+
+console.log(singleCategoryState, 'singleCatState')
+
 
   return (
     <section className="flex flex-col md:flex-row w-full min-h-screen gap-6">
@@ -37,10 +57,24 @@ export const CategoryDashboard = () => {
         </div>
 
         <div className="flex flex-row gap-6 justify-center items-center mt-10 text-xl ">
-          <div>
-            Single category Id
+          {/* <div>
+            Single category Id Test:
           {`${categoryId}`}
+          </div> */}
+          <div>
+            {singleCategoryState.length > 0
+            ? (singleCategoryState.map((item) => (
+              <div>{item.name}</div>
+            ))) 
+            : (null)}
           </div>
+          {/* <div>
+          {Array.isArray(matchCategory)
+            ?? (matchCategory.map((item: Budget_categories[]) => (
+              <div>{item.transactions}</div>
+            )))
+          }
+          </div> */}
         </div>
       </div>
     </section>

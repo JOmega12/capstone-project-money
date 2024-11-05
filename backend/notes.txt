@@ -319,4 +319,14 @@ Need to :
 11/2/2024:
 Current problem in category is routing to a different urls other than createCategory component
 
-Update: Current problem had two components that are named CreateCategory. One was in the Test Component File and the Other is in the 
+Update: Current problem had two components that are named CreateCategory. One was in the Test Component File and the Other is in the root directory. Change the test component file to createcategoryTest
+
+
+
+11/4/2024
+Fixed UI on navbar across all component for laptop
+
+Need to work on trying to show the transactions where only the category id is equal 
+to the parameter of the number. try looking at favorites component on coffee project
+
+Basically, transactions will only show if the category id is the same of the category id from the parameter
