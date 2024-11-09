@@ -22,5 +22,5 @@ export type Budget_categories = {
     name: string;
     // userId: number | undefined;
     is_custom: boolean;
-    transaction: [] | undefined;
+    transactions: [] | undefined;
 }

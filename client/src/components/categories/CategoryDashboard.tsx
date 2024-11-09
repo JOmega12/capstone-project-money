@@ -4,23 +4,34 @@ import { useParams } from "react-router";
 import { Navbar } from "../../Navbar";
 import { Link } from "react-router-dom";
 import { useCategory } from "../../providers/CategoriesProvider";
-import { div } from "framer-motion/client";
 import { Budget_categories, Transaction } from "../../types/types";
 import { useEffect, useState } from "react";
+import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 
 export const CategoryDashboard = () => {
-  
+
+  const { deleteTransaction, editingId, setEditingId, fixTransaction } =
+  useMoney();
+
   const {categories} = useCategory();
-  // filter categories by its id and then if the same as the parameter id, then show the transactions
   const { categoryId } = useParams();
 
-  const [singleCategoryState, setSingleCategoryState] = useState<Budget_categories | undefined[]>([])
 
-  // console.log(categories)
+  const [singleCategoryState, setSingleCategoryState] = useState<Budget_categories | undefined>(undefined)
 
-  // const matchCategory= categories?.find((item) => {
-  //   return item.id ===Number(categoryId)
-  // })
+  const deleteThisTransaction = (id: number) => {
+    if (id) {
+      deleteTransaction(id);
+      window.location.reload();
+    }
+  };
+
+  const handleSaveChanges = async (id: number, updatedItem: Transaction) => {
+    await fixTransaction(id, updatedItem);
+    setEditingId(null);
+  };
+
+
 
   useEffect(() => {
     if(Array.isArray(categories)){
@@ -53,28 +64,54 @@ console.log(singleCategoryState, 'singleCatState')
               className="text-red-500 text-3xl"
             />
           </Link>
-          <h2 className="text-3xl ">Current Category Name</h2>
+          {singleCategoryState && (
+            <h2 className="text-3xl ">{singleCategoryState.name}</h2>)}
         </div>
 
         <div className="flex flex-row gap-6 justify-center items-center mt-10 text-xl ">
-          {/* <div>
-            Single category Id Test:
-          {`${categoryId}`}
-          </div> */}
-          <div>
-            {singleCategoryState.length > 0
-            ? (singleCategoryState.map((item) => (
-              <div>{item.name}</div>
-            ))) 
-            : (null)}
+          <div className="flex md:flex-row gap-10 justify-between mt-4">
+            {singleCategoryState?.transactions && singleCategoryState.transactions.length > 0
+            ? (
+              singleCategoryState.transactions.map((item) => (
+                <>
+                {/* <div key={item.id} className="border p-4 rounded-lg">{item.transactionName}</div>
+                <div className="border p-4 rounded-lg">{item.id}</div> */}
+
+
+                <div className="flex-1 text-center">
+                    <p>{item.transactionName}</p>
+                  </div>
+                  <div className="flex-1 text-center">
+                    <p>
+                      {item.transactionType === "expense"
+                        ? `-${item.transactionAmount}`
+                        : `${item.transactionAmount}`}
+                    </p>
+                  </div>
+                  <div className="flex-1 text-center hidden md:block">
+                    <p>{item.createdAt}</p>
+                  </div>
+                  {/* <div className="flex gap-5 mr-10">
+                    <FontAwesomeIcon
+                      className="hover:cursor-pointer
+                                            text-xl text-amber-600
+                                            "
+                      icon={faPencil}
+                      onClick={() => setEditingId(item.id)}
+                    />
+                    <FontAwesomeIcon
+                      className="hover:cursor-pointer
+                                        text-xl text-red-600
+                                        "
+                      icon={faTrash}
+                      onClick={() => deleteThisTransaction(item.id)}
+                    />
+                  </div> */}
+                </>
+              )
+            )) 
+            : (<div>No Transactions Available</div>)}
           </div>
-          {/* <div>
-          {Array.isArray(matchCategory)
-            ?? (matchCategory.map((item: Budget_categories[]) => (
-              <div>{item.transactions}</div>
-            )))
-          }
-          </div> */}
         </div>
       </div>
     </section>

@@ -330,3 +330,7 @@ Need to work on trying to show the transactions where only the category id is eq
 to the parameter of the number. try looking at favorites component on coffee project
 
 Basically, transactions will only show if the category id is the same of the category id from the parameter
+
+
+11/4/2024
+Currently having trouble returning the data once the params are equal to the category id. For some reason, it doesn't show in the html when mapped out and rather shows either null or no transactions
