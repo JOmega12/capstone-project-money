@@ -25,6 +25,8 @@ export const Categories = () => {
         </h2>
         <Navbar />
       </header>
+
+
       <div className="py-2 lg:px-2 mt-5 md:w-3/4">
         <div className="m-10 text-center flex flex-col md:flex-row gap-10 justify-center mb-1">
           <h2 className="text-3xl ">Categories</h2>
@@ -39,7 +41,7 @@ export const Categories = () => {
           </Link>
         </div>
 
-        <div className="flex flex-row gap-6 justify-center items-center mt-10 text-xl ">
+        <div className="flex max-[768px]:flex-col lg:flex-row gap-6 justify-center items-center mt-10 text-xl max-[768px]:mb-8">
           {Array.isArray(categories) && user ? (
               categories.map((item) => (
                   <div
