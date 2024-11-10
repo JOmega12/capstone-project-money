@@ -1,4 +1,5 @@
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
+// import { IncomeExpenseCharts } from "../charts/IncomeExpenseCharts";
 
 
 
@@ -14,6 +15,7 @@ export const Goal = () => {
                 </div>
                 <div className="">
                     Chart **add chart js**
+                    {/* <IncomeExpenseCharts /> */}
                 </div>
             </div>
         </div>

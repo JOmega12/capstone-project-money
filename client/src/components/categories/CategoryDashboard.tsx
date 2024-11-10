@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 
 export const CategoryDashboard = () => {
-  const { deleteTransaction, setEditingId, fixTransaction } =
+  const { deleteTransaction } =
     useMoney();
 
   const { categories } = useCategory();

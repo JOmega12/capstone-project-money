@@ -42,7 +42,16 @@ export const EditTransaction = ({element, onSave, onCancel, categories}: editFor
         <input type="text" className="w-[120px] text-center" name="transactionAmount" value={editForm.transactionAmount} onChange={handleFormChange} placeholder="Transaction Amount"/>
       </div>
 
-      <label htmlFor="">
+      <div className="flex-1 text-center hidden md:block">
+        <select name="transactionType" id="" onChange={handleFormChange} value={editForm.transactionType}>
+          <option value=''>Select Type</option>
+          <option value='income'>Income</option>
+          <option value='expense'>Expense</option>
+        </select>
+      </div>
+
+
+      {/* <label htmlFor="">
             <input type="radio"
                 name="transactionType"
                 value={'income'}
@@ -59,7 +68,7 @@ export const EditTransaction = ({element, onSave, onCancel, categories}: editFor
                 onChange={handleFormChange}
             />
             Expense
-        </label>
+        </label> */}
 
       <div className="flex-1 text-center hidden md:block">
         <select name="category" value={editForm.category} onChange={handleFormChange}>

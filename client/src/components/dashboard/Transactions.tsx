@@ -70,16 +70,12 @@ export const Transactions = () => {
                   </div>
                   <div className="flex gap-5 mr-10">
                     <FontAwesomeIcon
-                      className="hover:cursor-pointer
-                                            text-xl text-amber-600
-                                            "
+                      className="hover:cursor-pointer text-xl text-amber-600"
                       icon={faPencil}
                       onClick={() => setEditingId(item.id)}
                     />
                     <FontAwesomeIcon
-                      className="hover:cursor-pointer
-                                        text-xl text-red-600
-                                        "
+                      className="hover:cursor-pointer text-xl text-red-600"
                       icon={faTrash}
                       onClick={() => deleteThisTransaction(item.id)}
                     />
