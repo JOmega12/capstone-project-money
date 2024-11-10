@@ -334,3 +334,15 @@ Basically, transactions will only show if the category id is the same of the cat
 
 11/4/2024
 Currently having trouble returning the data once the params are equal to the category id. For some reason, it doesn't show in the html when mapped out and rather shows either null or no transactions
+
+
+11/9/2024
+
+Fixed 11/4 problem. It didn't need mapped out data since it was already mapped out to begin with. Instead, it just needed to be labeled like singleTransaction.transactions
+
+Also fixed ui on editing Transactions from radio to select options
+
+Currently working on chart where the income and expense should show the relation over time
+
+
+added chart into goal and still need to fix recent transactions to only 4 items instead of all the items

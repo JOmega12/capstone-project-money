@@ -36,7 +36,6 @@ type IncomeAndExpenseContextType = {
   totalIncome: number | undefined;
   totalExpense: number | undefined;
   netAmount: number | undefined;
-  dates: string | undefined;
 
   newPaddedDate: string | undefined;
   payHistory: (Transaction | undefined) [];
@@ -97,7 +96,7 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
 
       const data = await response.json();
       // console.log(response, 'response in item and expense provider');
-      console.log(data, 'data in income and expense provider')
+      // console.log(data, 'data in income and expense provider')
       return data;
     }catch(e) {
       console.log(e);
@@ -198,7 +197,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   // * this also would help for later chart
   let totalIncome = 0;
   let totalExpense = 0;
-  let dates;
 
   if (user && money) {
     if (!Array.isArray(money)) {
@@ -217,8 +215,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         .filter((item) => item.transactionType === "expense")
         .reduce((acc, item) => acc + parseFloat(item.transactionAmount), 0) ||
       0;
-
-    dates = money.map((item) => item?.createdAt);
 
   }
 
@@ -247,7 +243,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         totalIncome,
         totalExpense,
         netAmount,
-        dates,
         newPaddedDate,
 
         payHistory,

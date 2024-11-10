@@ -16,6 +16,7 @@ import { TestComponent } from "./components/testFolder/TestComponent"
 import { CategoriesProvider } from "./providers/CategoriesProvider"
 import { CreateCategory } from "./components/categories/CreateCategory"
 import { CategoryDashboard } from "./components/categories/CategoryDashboard"
+import { IncomeExpenseCharts } from "./components/charts/IncomeExpenseCharts"
 
 // import { Navbar } from "./Navbar"
 // import { AuthProvider } from "./providers/AuthProvider"
@@ -48,6 +49,7 @@ function App() {
               {/* Test Routes in the bottom */}
               <Route path="/test-server" element={<TestComponent/>}></Route>
 
+              <Route path="/test-chart" element={<IncomeExpenseCharts />} ></Route>
             </Routes>
             </CategoriesProvider>
           </IncomeAndExpenseProvider>

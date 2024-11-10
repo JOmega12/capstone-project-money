@@ -5,29 +5,35 @@ import { useMoney } from '../../providers/IncomeAndExpenseProvider';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export const IncomeExpenseCharts = () => {
-  const { money, totalIncome, totalExpense, dates } = useMoney();
+  const { money } = useMoney();
 
-  // Extract dates and amounts for income and expenses separately
-//   const dates = money.map(item => item.createdAt);
-//   const incomeData = money.filter(item => item.transactionType === 'income').map(item => item.transactionAmount);
-//   const expenseData = money.filter(item => item.transactionType === 'expense').map(item => item.transactionAmount);
+
+let expenseData: number[] = [];
+let incomeData: number[] = [];
+let dates: string[] = [];
+
+  if(Array.isArray(money)) {
+    dates = money.map(item => item.createdAt);
+    incomeData = money.filter(item => item.transactionType === 'income').map(item => item.transactionAmount);
+    expenseData = money.filter(item => item.transactionType === 'expense').map(item => item.transactionAmount);
+}
 
   const data = {
     labels: dates,
     datasets: [
       {
         label: 'Income',
-        data: totalIncome,
-        fill: true,
+        data: incomeData,
+        fill: false,
         borderColor: 'green',
         tension: 0.1
       },
       {
         label: 'Expense',
-        data: totalExpense,
-        fill: true,
+        data: expenseData,
+        fill: false,
         borderColor: 'red',
-        tension: 0.1
+        tension:0.1
       }
     ]
   };
@@ -36,7 +42,7 @@ export const IncomeExpenseCharts = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'top' as const,
       },
       title: {
         display: true,
@@ -53,12 +59,14 @@ export const IncomeExpenseCharts = () => {
       y: {
         title: {
           display: true,
-          text: 'Amount'
+          text: 'Money Gained/Lost'
         },
         beginAtZero: true
       }
     }
   };
 
-  return <Line data={data} options={options} />;
+  return <Line data={data} 
+//   options={options} 
+  />;
 };
