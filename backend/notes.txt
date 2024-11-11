@@ -346,3 +346,7 @@ Currently working on chart where the income and expense should show the relation
 
 
 added chart into goal and still need to fix recent transactions to only 4 items instead of all the items
+
+11/11/2024
+
+fixed chart ui still working on monthly goals
