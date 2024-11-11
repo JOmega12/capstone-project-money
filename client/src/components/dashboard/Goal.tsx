@@ -13,7 +13,7 @@ export const Goal = () => {
                 <div className="font-bold text-4xl md:text-6xl">
                     <h1>${`${netAmount}`}</h1>
                 </div>
-                <div className="w-1/2">
+                <div className="w-1/2 max-[765px]:w-full">
                     <IncomeExpenseCharts />
                 </div>
             </div>

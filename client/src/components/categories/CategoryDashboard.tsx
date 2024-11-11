@@ -9,8 +9,7 @@ import { useEffect, useState } from "react";
 import { useMoney } from "../../providers/IncomeAndExpenseProvider";
 
 export const CategoryDashboard = () => {
-  const { deleteTransaction } =
-    useMoney();
+  const { deleteTransaction } = useMoney();
 
   const { categories } = useCategory();
   const { categoryId } = useParams();
@@ -38,8 +37,6 @@ export const CategoryDashboard = () => {
     }
   }, [categories, categoryId]);
 
-  console.log(singleCategoryState, "singleCatState");
-
   return (
     <section className="flex flex-col md:flex-row w-full min-h-screen gap-6">
       <header className="flex flex-col md:w-1/4 md:bg-[#87cb8b] md:text-white text-2xl">
@@ -66,8 +63,6 @@ export const CategoryDashboard = () => {
           singleCategoryState.transactions.length > 0 ? (
             singleCategoryState.transactions.map((item: Transaction) => (
               <div className="flex mr-2 border-b p-2">
-                {/* <div key={item.id} className="border p-4 rounded-lg">{item.transactionName}</div>
-                <div className="border p-4 rounded-lg">{item.id}</div> */}
                 <div className="flex-1 text-center">
                   <p>{item.transactionName}</p>
                 </div>
@@ -81,19 +76,9 @@ export const CategoryDashboard = () => {
                 <div className="flex-1 text-center hidden md:block">
                   <p>{item.createdAt}</p>
                 </div>
-
                 <div className="flex gap-5 mr-10">
-                    {/* <FontAwesomeIcon
-                      className="hover:cursor-pointer
-                                            text-xl text-amber-600
-                                            "
-                      icon={faPencil}
-                      onClick={() => setEditingId(item.id)}
-                    /> */}
                     <FontAwesomeIcon
-                      className="hover:cursor-pointer
-                                        text-xl text-red-600
-                                        "
+                      className="hover:cursor-pointer text-xl text-red-600"
                       icon={faTrash}
                       onClick={() => deleteThisTransaction(item.id)}
                     />

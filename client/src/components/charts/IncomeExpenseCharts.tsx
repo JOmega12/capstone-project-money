@@ -67,6 +67,6 @@ let dates: string[] = [];
   };
 
   return <Line data={data} 
-//   options={options} 
+  options={options} 
   />;
 };

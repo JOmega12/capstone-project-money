@@ -35,7 +35,7 @@ export const CreateCategory = () => {
         </h2>
         <Navbar />
       </header>
-      <div className="py-2 lg:px-2 mt-20 md:w-3/4">
+      <div className="py-2 lg:px-2 mt-20 md:w-3/4 max-[765px]:mx-4">
         <div className="flex flex-col md:flex-row gap-10 justify-center items-center mb-10">
           <Link to={"/categories"}>
             <FontAwesomeIcon
@@ -46,7 +46,6 @@ export const CreateCategory = () => {
           <h2 className="text-3xl ">Create Category</h2>
         </div>
           <form
-            // onSubmit={handleSubmit}
             className="flex flex-col justify-center items-center w-full"
             onSubmit={handleSubmit}
             onKeyDown={handleKeyDown}
