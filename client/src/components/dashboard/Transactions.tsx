@@ -40,7 +40,7 @@ export const Transactions = () => {
       <h2 className="text-3xl text-center">Recent Transactions</h2>
       <div className="py-2 md:w-full lg:px-2">
         {Array.isArray(money) ? (
-          money.map((item) => (
+          money.slice(-4).map((item) => (
             <div
               className="flex md:flex-row gap-6 justify-between border-b mt-6 pb-2"
               key={item.id}
