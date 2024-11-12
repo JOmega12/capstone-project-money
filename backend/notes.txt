@@ -356,3 +356,9 @@ Working on:
 - design the ui and functionality of signup/login components 
 
 
+
+11/12/2024
+Fixed random bugs while testing as well as implementing ui for login/signup
+
+Working on:
+creating monthly income and total amount goals for chartJS
