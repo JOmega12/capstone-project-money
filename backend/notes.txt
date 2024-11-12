@@ -349,4 +349,10 @@ added chart into goal and still need to fix recent transactions to only 4 items 
 
 11/11/2024
 
-fixed chart ui still working on monthly goals
+fixed chart ui still 
+
+Working on: 
+- creating monthly income and total amount goals for ChartJS
+- design the ui and functionality of signup/login components 
+
+

@@ -9,7 +9,7 @@ const passwordErrorMessage = "Password not found";
 const confirmPasswordErrorMessage = "Passwords are not the same";
 
 export const SignUp = () => {
-  const {registerUser} = useAuth();
+  const { registerUser } = useAuth();
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
@@ -28,22 +28,22 @@ export const SignUp = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try{
+    try {
       registerUser({
         username: usernameInput,
-        password: passwordInput
-      })
+        password: passwordInput,
+      });
 
-      if(!usernameValid || !passwordValid || !confirmPasswordValid){
+      if (!usernameValid || !passwordValid || !confirmPasswordValid) {
         setError(true);
       } else {
         setError(false);
-        navigate("/dashboard")
+        navigate("/dashboard");
       }
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
     if (e.key === "Enter") {
@@ -53,15 +53,13 @@ export const SignUp = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      onKeyDown={(e) => handleKeyDown(e)}
-    >
-      <div>
-        <div>
-          <h2>SignUp</h2>
+    <form onSubmit={handleSubmit} onKeyDown={(e) => handleKeyDown(e)}
+    className="">
+      <div className="flex flex-col">
+        <div className="text-center m-2 text-xl">
+          <h2 className="font-bold">SignUp</h2>
         </div>
-        <div>
+        <div className="flex flex-col items-center gap-1">
           <TextInputs
             type="text"
             label="Username"
@@ -87,12 +85,11 @@ export const SignUp = () => {
             message={confirmPasswordErrorMessage}
           />
 
-          
-<div className="flex flex-row gap-10 text-center cursor-pointer">
+          <div className="flex flex-row m-2 text-center cursor-pointer">
             <input
               type="submit"
-              value="Sign Up"
-              className="items-center h-14 w-full max-w-md border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-500 bg-green-500 hover:bg-green-600"
+              value="Login"
+              className="items-center h-14 w-full max-w-md border border-gray-300 rounded-lg py-2 px-10 focus:outline-none focus:border-blue-500 bg-green-500 hover:bg-green-600"
             />
           </div>
         </div>

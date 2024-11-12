@@ -49,7 +49,7 @@ export const IncomeInputForm = () => {
     setTransactionAmount(0);
     setTransactionType(undefined);
     setCategoryType(undefined);
-    navigation("/expense");
+    navigation("/income");
     window.location.reload();
   }
 

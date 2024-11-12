@@ -67,7 +67,6 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const [transactionType, setTransactionType] = useState<"income" | "expense"| undefined>(undefined);
 
   const [editingId, setEditingId] = useState<number | null>(null);
-  // const userId = user?.id;
 
   // date functions
   const dateObj = new Date();

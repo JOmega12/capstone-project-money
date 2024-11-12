@@ -41,7 +41,6 @@ export const Login = () => {
       }
     })
 
-
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
@@ -53,17 +52,16 @@ export const Login = () => {
 
   return (
     <form
-
       onSubmit={(e) => handleSubmit(e)}
       onKeyDown={(e) => {
         handleKeyDown(e)
       }}
     >
-      <div>
-        <div >
-          <h2 >Login</h2>
+      <div className="flex flex-col">
+        <div className="text-center m-2 text-xl">
+          <h2 className="font-bold">Login</h2>
         </div>
-        <div className="items-center">
+        <div className="flex flex-col items-center gap-1 ">
           <TextInputs
             type="text"
             label="Username:"
@@ -87,12 +85,11 @@ export const Login = () => {
             </div>
           ) : null}
 
-
-          <div className="flex flex-row gap-10 text-center cursor-pointer">
+          <div className="flex flex-row m-2 text-center cursor-pointer">
             <input
               type="submit"
               value="Login"
-              className="items-center h-14 w-full max-w-md border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-500 bg-green-500 hover:bg-green-600"
+              className="items-center h-14 w-full max-w-md border border-gray-300 rounded-lg py-2 px-10 focus:outline-none focus:border-blue-500 bg-green-500 hover:bg-green-600"
             />
           </div>
         </div>

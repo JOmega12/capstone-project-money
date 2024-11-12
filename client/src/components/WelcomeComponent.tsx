@@ -29,11 +29,12 @@ export const WelcomeComponent = () => {
 
 
     return(
-        <div className="flex flex-col "> 
+        <div className="flex flex-col border border-green-300 rounded-2xl max-[768px]:border-none max-[768px]:text-3xl
+        lg:px-10 lg:py-2"> 
             <div className="text-center">
                 <h1 className="text-4xl m-6">WalletWhiz</h1>
             </div>
-            <div className="text-center">
+            <div className="text-center gap-2 flex flex-row justify-center text-xl">
                 {inputRadio.map((item) => (
                     <label htmlFor="" key={item.id}>
                         <input 

@@ -10,6 +10,7 @@ import {
 import { UserInformation } from "../types/types";
 // import { getUserFromServer, registerFetch } from "../api/UserAPI";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router";
 
 
 type AuthTokenType = {
@@ -50,6 +51,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const [loading, setLoading] = useState(true);
   const isRegister = !!user;
+
+  const navigate = useNavigate();
 
   const registerUser = async ({username, password} : UserInformation) => {
     const response = await fetch("http://localhost:8000/users/api/register/", {
@@ -99,9 +102,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   const logoutUser = () => {
-    console.log("You've been logged out")
-    setAuthToken(null)
+    console.log("You've been logged out");
+    setAuthToken(null);
     setUser(null);
+    navigate('/');
     localStorage.removeItem("authToken");
   }
 
