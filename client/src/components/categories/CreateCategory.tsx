@@ -16,7 +16,7 @@ export const CreateCategory = () => {
     e.preventDefault();
     setCategoryName("");
     createNewCategory({ name: categoryName, is_custom: isCustom });
-    navigate("/income");
+    navigate("/categories");
     window.location.reload();
   };
 

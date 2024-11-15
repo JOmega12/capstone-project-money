@@ -1,6 +1,6 @@
 # WalletWhiz Capstone Project
 
-**Hi there! Welcome to my Capstone Project: WalletWhiz** :smile:
+**Hi there! Welcome to my Capstone Project: WalletWhiz** 
 
 
 The aim of the project is to track how much money you take in and what are your expenses with each transaction having its own category with Monthly graphs and over time graphs.

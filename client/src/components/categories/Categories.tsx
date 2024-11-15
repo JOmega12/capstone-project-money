@@ -39,7 +39,7 @@ export const Categories = () => {
           </Link>
         </div>
 
-        <div className="flex max-[768px]:flex-col lg:flex-row gap-6 justify-center items-center mt-10 text-xl max-[768px]:mb-8">
+        <div className="flex max-[768px]:flex-col lg:flex-row gap-6 justify-center items-center mt-10 text-xl max-[768px]:mb-8 flex-wrap">
           {Array.isArray(categories) && user ? (
             categories.map((item) => (
               <div
