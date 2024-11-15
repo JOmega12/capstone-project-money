@@ -24,23 +24,27 @@ export const Login = () => {
   const showPasswordError = !passwordValid && error;
   const showLoginError = !loginValid && error;
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     loginUser({
       password: passwordInput,
-      username: usernameInput
-    })
-    .then((user) => {
-      if(!user) {
+      username: usernameInput,
+    }).then((user) => {
+      if (!user) {
         setError(true);
         return;
       } else {
         setError(false);
-        navigate("/dashboard")
+        navigate("/dashboard");
       }
-    })
-
+    });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
@@ -54,7 +58,7 @@ export const Login = () => {
     <form
       onSubmit={(e) => handleSubmit(e)}
       onKeyDown={(e) => {
-        handleKeyDown(e)
+        handleKeyDown(e);
       }}
     >
       <div className="flex flex-col">
@@ -70,19 +74,19 @@ export const Login = () => {
             show={showUsernameError}
             message={usernameErrorMessage}
           />
-          <TextInputs
-            type="text"
-            label="Password:"
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
-            show={showPasswordError}
-            message={passwordErrorMessage}
-          />
-
+          <div className="flex items-center">
+            <TextInputs
+              type={showPassword ? "text" : "password"}
+              label="Password:"
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+              show={showPasswordError}
+              message={passwordErrorMessage}
+              togglePassword={togglePassword}
+            />
+          </div>
           {showLoginError ? (
-            <div className="text-red-500 text-center">
-              {loginErrorMessage}
-            </div>
+            <div className="text-red-500 text-center">{loginErrorMessage}</div>
           ) : null}
 
           <div className="flex flex-row m-2 text-center cursor-pointer">

@@ -21,21 +21,36 @@ ChartJS.register(
   Legend
 );
 
-export const IncomeExpenseCharts = () => {
+export const MonthlyIncomeChart = () => {
   const { money } = useMoney();
 
   let expenseData: number[] = [];
   let incomeData: number[] = [];
   let dates: string[] = [];
 
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+
   if (Array.isArray(money)) {
-    dates = money.map((item) => item.createdAt);
-    incomeData = money
+    const monthlyData = money.filter((item) => {
+      const itemDate = new Date(item.createdAt);
+      return (
+        itemDate.getMonth() === currentMonth &&
+        itemDate.getFullYear() === currentYear
+      );
+    });
+
+    incomeData = monthlyData
       .filter((item) => item.transactionType === "income")
       .map((item) => item.transactionAmount);
-    expenseData = money
+
+    expenseData = monthlyData
       .filter((item) => item.transactionType === "expense")
       .map((item) => item.transactionAmount);
+
+    dates = monthlyData.map((item) =>
+      new Date(item.createdAt).toLocaleDateString()
+    );
   }
 
   const data = {
@@ -58,33 +73,5 @@ export const IncomeExpenseCharts = () => {
     ],
   };
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top" as const,
-      },
-      title: {
-        display: true,
-        text: "Income vs Expense Over Time",
-      },
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: "Date",
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: "Money Gained/Lost",
-        },
-        beginAtZero: true,
-      },
-    },
-  };
-
-  return <Line data={data} options={options} />;
+  return <Line data={data}></Line>;
 };

@@ -33,8 +33,6 @@ export const Transactions = () => {
     }
   };
 
-  
-
   return (
     <div className="flex flex-col max-[768px]:justify-center items-center py-8 ">
       <h2 className="text-3xl text-center">Recent Transactions</h2>

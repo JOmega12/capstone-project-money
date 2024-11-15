@@ -28,7 +28,8 @@ export const ExpenseInputForm = () => {
 
   const navigation = useNavigate();
 
-  const transactionNameValid = transactionName.length < 3 && transactionName.length > 0;
+  const transactionNameValid =
+    transactionName.length < 3 && transactionName.length > 0;
   const transactionAmountValid =
     isNaN(transactionAmount) && transactionAmount > 0;
 
@@ -71,11 +72,7 @@ export const ExpenseInputForm = () => {
         </h2>
         <Navbar />
       </header>
-      <form
-        // className="py-2 flex flex-col justify-center w-full"
-        className="py-2 lg:px-2 mt-20 md:w-3/4"
-        onSubmit={handleSubmit}
-      >
+      <form className="py-2 lg:px-2 mt-20 md:w-3/4" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row gap-10 justify-center items-center mb-10">
           <Link to={"/expense"}>
             <FontAwesomeIcon

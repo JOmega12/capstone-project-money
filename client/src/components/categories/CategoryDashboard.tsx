@@ -77,16 +77,18 @@ export const CategoryDashboard = () => {
                   <p>{item.createdAt}</p>
                 </div>
                 <div className="flex gap-5 mr-10">
-                    <FontAwesomeIcon
-                      className="hover:cursor-pointer text-xl text-red-600"
-                      icon={faTrash}
-                      onClick={() => deleteThisTransaction(item.id)}
-                    />
-                  </div>
+                  <FontAwesomeIcon
+                    className="hover:cursor-pointer text-xl text-red-600"
+                    icon={faTrash}
+                    onClick={() => deleteThisTransaction(item.id)}
+                  />
+                </div>
               </div>
             ))
           ) : (
-            <div className="text-center m-10 text-3xl">No Transactions Available</div>
+            <div className="text-center m-10 text-3xl">
+              No Transactions Available
+            </div>
           )}
         </div>
       </div>

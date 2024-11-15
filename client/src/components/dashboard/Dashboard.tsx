@@ -10,7 +10,6 @@ export const Dashboard = () => {
 
   const navigate = useNavigate();
 
-
   return (
     <>
       {isRegister ? (
@@ -29,10 +28,12 @@ export const Dashboard = () => {
         </section>
       ) : (
         <div className=" text-center flex flex-col gap-6">
-          <h2 className="text-red-600 text-3xl">You need to login/ signup first</h2>
-          <button 
-            onClick={()=> {
-              navigate("/")
+          <h2 className="text-red-600 text-3xl">
+            You need to login/ signup first
+          </h2>
+          <button
+            onClick={() => {
+              navigate("/");
             }}
             className="cursor-auto bg-lime-300 mx-20 p-2 rounded-xl hover:text-red-400"
           >

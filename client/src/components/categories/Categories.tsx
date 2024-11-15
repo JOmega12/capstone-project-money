@@ -6,16 +6,15 @@ import { useAuth } from "../../providers/AuthProvider";
 import { useCategory } from "../../providers/CategoriesProvider";
 
 export const Categories = () => {
-
   const { user } = useAuth();
-    
+
   const { categories } = useCategory();
 
   const navigate = useNavigate();
 
   const handleCategoryClick = (categoryId: number) => {
     navigate(`/category/${categoryId}`);
-  }
+  };
 
   return (
     <section className="flex flex-col md:flex-row w-full min-h-screen gap-6">
@@ -25,7 +24,6 @@ export const Categories = () => {
         </h2>
         <Navbar />
       </header>
-
 
       <div className="py-2 lg:px-2 mt-5 md:w-3/4">
         <div className="m-10 text-center flex flex-col md:flex-row gap-10 justify-center mb-1">
@@ -43,19 +41,17 @@ export const Categories = () => {
 
         <div className="flex max-[768px]:flex-col lg:flex-row gap-6 justify-center items-center mt-10 text-xl max-[768px]:mb-8">
           {Array.isArray(categories) && user ? (
-              categories.map((item) => (
-                  <div
-                  className="flex md:flex-row gap-10 justify-between mt-4 border border-[#d0d0d0] px-4 py-2 rounded-xl hover:bg-[#7cc681] hover:cursor-pointer"
-                  key={item.id}
-                  onClick={()=> handleCategoryClick(item.id)}
-                  >
-                    <div>{item.name}</div>
-                  </div>
-              ))
-          ) : (
-              <div>
-                No Categories Created
+            categories.map((item) => (
+              <div
+                className="flex md:flex-row gap-10 justify-between mt-4 border border-[#d0d0d0] px-4 py-2 rounded-xl hover:bg-[#7cc681] hover:cursor-pointer"
+                key={item.id}
+                onClick={() => handleCategoryClick(item.id)}
+              >
+                <div>{item.name}</div>
               </div>
+            ))
+          ) : (
+            <div>No Categories Created</div>
           )}
         </div>
       </div>

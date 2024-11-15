@@ -17,31 +17,40 @@ type IncomeAndExpenseContextType = {
   setMoney: Dispatch<SetStateAction<Transaction | null>>;
 
   createNewTransactionForm: (
-    transactionInfo: Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType' | 'category'>
-  ) => Promise<Transaction | undefined>,
+    transactionInfo: Pick<
+      Transaction,
+      "transactionName" | "transactionAmount" | "transactionType" | "category"
+    >
+  ) => Promise<Transaction | undefined>;
 
-  fixTransaction: ( id:number,
-    transactionInfo: Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType' | 'category'>
-  ) => Promise<Transaction | undefined>
+  fixTransaction: (
+    id: number,
+    transactionInfo: Pick<
+      Transaction,
+      "transactionName" | "transactionAmount" | "transactionType" | "category"
+    >
+  ) => Promise<Transaction | undefined>;
 
-  deleteTransaction: (id: number) => Promise<Response>,
+  deleteTransaction: (id: number) => Promise<Response>;
 
-  transactionName: string ;
+  transactionName: string;
   setTransactionName: Dispatch<SetStateAction<string>>;
   transactionAmount: number;
   setTransactionAmount: Dispatch<SetStateAction<number>>;
   transactionType: string | undefined;
-  setTransactionType: Dispatch<SetStateAction<"income" | "expense" | undefined>>;
+  setTransactionType: Dispatch<
+    SetStateAction<"income" | "expense" | undefined>
+  >;
 
   totalIncome: number | undefined;
   totalExpense: number | undefined;
   netAmount: number | undefined;
 
   newPaddedDate: string | undefined;
-  payHistory: (Transaction | undefined) [];
+  payHistory: (Transaction | undefined)[];
 
   editingId: number | null;
-  setEditingId: Dispatch<SetStateAction<number | null>> ;
+  setEditingId: Dispatch<SetStateAction<number | null>>;
 
   setPayHistory: Dispatch<SetStateAction<Transaction[]>>;
 };
@@ -55,16 +64,17 @@ const MoneyContext = createContext<IncomeAndExpenseContextType | undefined>(
 );
 
 export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
-  
   // getting the user authToken to get the items
-  const {authToken, logoutUser, user } = useAuth();
+  const { authToken, logoutUser, user } = useAuth();
 
   const [money, setMoney] = useState<Transaction | null>(null);
   const [payHistory, setPayHistory] = useState<Transaction[]>([]);
   const [transactionName, setTransactionName] = useState<string>("");
   const [transactionAmount, setTransactionAmount] = useState<number>(0);
 
-  const [transactionType, setTransactionType] = useState<"income" | "expense"| undefined>(undefined);
+  const [transactionType, setTransactionType] = useState<
+    "income" | "expense" | undefined
+  >(undefined);
 
   const [editingId, setEditingId] = useState<number | null>(null);
 
@@ -76,37 +86,36 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
   const pDay = day.toString().padStart(2, "0");
   const newPaddedDate = `${monthName} ${pDay}, ${year}`;
 
-
-  const getUserMoney = async() => {
+  const getUserMoney = async () => {
     try {
       const response = await fetch("http://localhost:8000/transactions/api/", {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': "Bearer " + String(authToken?.access)
-        }
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authToken?.access),
+        },
       });
-      if(!response.ok) {
-        throw new Error(`HTTP error!: ${response.status}`)
+      if (!response.ok) {
+        throw new Error(`HTTP error!: ${response.status}`);
       }
-      if(response.statusText === 'Unauthorized'){
-        logoutUser()
+      if (response.statusText === "Unauthorized") {
+        logoutUser();
       }
 
       const data = await response.json();
       // console.log(response, 'response in item and expense provider');
       // console.log(data, 'data in income and expense provider')
       return data;
-    }catch(e) {
+    } catch (e) {
       console.log(e);
       return null;
     }
-  }
+  };
 
-  const refetch = async() => {
+  const refetch = async () => {
     const data = await getUserMoney();
-    if(data){
-      setMoney(data)
+    if (data) {
+      setMoney(data);
     }
   };
 
@@ -114,83 +123,105 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
     refetch();
   }, []);
 
-
   // *this creates new income/expense
   const createNewTransactionForm = async ({
     transactionName,
     transactionAmount,
-    transactionType, category
+    transactionType,
+    category,
   }: Pick<
     Transaction,
-    "transactionName" | "transactionAmount" | "transactionType" | 'category'
+    "transactionName" | "transactionAmount" | "transactionType" | "category"
   >): Promise<Transaction | undefined> => {
-
     try {
-      const response = await fetch('http://127.0.0.1:8000/transactions/api/create/', {
-        method : 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + String(authToken?.access)
-        },
-        body: JSON.stringify({transactionName, transactionAmount, transactionType, category})
-      });
+      const response = await fetch(
+        "http://127.0.0.1:8000/transactions/api/create/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authToken?.access),
+          },
+          body: JSON.stringify({
+            transactionName,
+            transactionAmount,
+            transactionType,
+            category,
+          }),
+        }
+      );
 
-      if(!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`)
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
       }
 
       const data = await response.json();
       await refetch();
-      return data
-
+      return data;
     } catch (err) {
       console.log("Could not create Transaction In Provider", err);
       return undefined;
     }
   };
 
-
-  const fixTransaction = async(id:number, {transactionName,
-    transactionAmount, transactionType, category}:Pick<Transaction, 'transactionName' | 'transactionAmount' | 'transactionType' | 'category'>): Promise<Transaction | undefined> => {
+  const fixTransaction = async (
+    id: number,
+    {
+      transactionName,
+      transactionAmount,
+      transactionType,
+      category,
+    }: Pick<
+      Transaction,
+      "transactionName" | "transactionAmount" | "transactionType" | "category"
+    >
+  ): Promise<Transaction | undefined> => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/transactions/api/${id}/update/`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + String(authToken?.access)
-        },
-        body: JSON.stringify({transactionName, transactionAmount,transactionType, category})
-      });
+      const response = await fetch(
+        `http://127.0.0.1:8000/transactions/api/${id}/update/`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authToken?.access),
+          },
+          body: JSON.stringify({
+            transactionName,
+            transactionAmount,
+            transactionType,
+            category,
+          }),
+        }
+      );
 
-      console.log(response, 'response in fix Transactions')
-      if(!response.ok){
-        throw new Error(`HTTP error: ${response.status}`)
+      console.log(response, "response in fix Transactions");
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log(data, 'data in fix Transactions')
+      console.log(data, "data in fix Transactions");
       await refetch();
       return data;
-    } catch(e){
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
 
-  const deleteTransaction = async(id: number) => {
+  const deleteTransaction = async (id: number) => {
     return fetch(`http://127.0.0.1:8000/transactions/api/${id}/delete/`, {
       method: "DELETE",
       headers: {
-        'Authorization': 'Bearer ' + String(authToken?.access)
-      }
+        Authorization: "Bearer " + String(authToken?.access),
+      },
     }).then((res) => {
-      if(!res.ok){
+      if (!res.ok) {
         throw new Error("Failed to delete a transaction" + id);
       }
-      console.log("The Transaction has been deleted!")
-      return res
-    })
-  }
-
+      console.log("The Transaction has been deleted!");
+      return res;
+    });
+  };
 
   // * this code block is used to calculate the amount of income and expense
   // * this also would help for later chart
@@ -214,11 +245,9 @@ export const IncomeAndExpenseProvider = ({ children }: MoneyProviderProps) => {
         .filter((item) => item.transactionType === "expense")
         .reduce((acc, item) => acc + parseFloat(item.transactionAmount), 0) ||
       0;
-
   }
 
   const netAmount = totalIncome - totalExpense;
-
 
   return (
     <MoneyContext.Provider

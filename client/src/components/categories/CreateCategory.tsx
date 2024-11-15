@@ -45,29 +45,27 @@ export const CreateCategory = () => {
           </Link>
           <h2 className="text-3xl ">Create Category</h2>
         </div>
-          <form
-            className="flex flex-col justify-center items-center w-full"
-            onSubmit={handleSubmit}
-            onKeyDown={handleKeyDown}
-          >
-            {/* add income and category  */}
-            {/* reference the createTest form */}
-            <div className="mb-4 flex flex-row items-center text-xl gap-2">
-              Category:
-              <input
-                type="text"
-                value={categoryName}
-                onChange={(e) => setCategoryName(e.target.value)}
-                placeholder="Category Name"
-                className="border border-gray-300 rounded-lg py-2 px-4 w-full focus:outline-none focus:border-blue-500"
-              />
-            </div>
+        <form
+          className="flex flex-col justify-center items-center w-full"
+          onSubmit={handleSubmit}
+          onKeyDown={handleKeyDown}
+        >
+          <div className="mb-4 flex flex-row items-center text-xl gap-2">
+            Category:
             <input
-              className="hover:cursor-pointer border border-green-400 px-6 py-2 rounded-xl bg-white hover:bg-green-400 hover:text-black"
-              type="submit"
-              value="Submit "
+              type="text"
+              value={categoryName}
+              onChange={(e) => setCategoryName(e.target.value)}
+              placeholder="Category Name"
+              className="border border-gray-300 rounded-lg py-2 px-4 w-full focus:outline-none focus:border-blue-500"
             />
-          </form>
+          </div>
+          <input
+            className="hover:cursor-pointer border border-green-400 px-6 py-2 rounded-xl bg-white hover:bg-green-400 hover:text-black"
+            type="submit"
+            value="Submit "
+          />
+        </form>
       </div>
     </section>
   );

@@ -53,8 +53,11 @@ export const SignUp = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} onKeyDown={(e) => handleKeyDown(e)}
-    className="">
+    <form
+      onSubmit={handleSubmit}
+      onKeyDown={(e) => handleKeyDown(e)}
+      className=""
+    >
       <div className="flex flex-col">
         <div className="text-center m-2 text-xl">
           <h2 className="font-bold">SignUp</h2>

@@ -7,12 +7,12 @@ import { useAuth } from "./providers/AuthProvider";
 const NavLinks = () => {
   const activeUnderline = "active:underline hover:underline";
 
-  const {user, logoutUser} = useAuth();
+  const { user, logoutUser } = useAuth();
   return (
     <nav className="flex flex-col items-center justify-between gap-10 p-6 mt-6">
-      {user? (
+      {user ? (
         <h2 className="text-center">Hello {user.username}!</h2>
-      ): (
+      ) : (
         <h2>Hello, please login</h2>
       )}
 
@@ -29,7 +29,9 @@ const NavLinks = () => {
         Categories
       </NavLink>
       <div>
-        <button className="mt-10 hover:underline" onClick={logoutUser}>Sign Out</button>
+        <button className="mt-10 hover:underline" onClick={logoutUser}>
+          Sign Out
+        </button>
       </div>
     </nav>
   );
@@ -62,7 +64,7 @@ export const Navbar = () => {
       {isOpen && (
         <div className="pt-10 fixed inset-0 bg-white z-50 flex flex-col items-center md:hidden">
           <button onClick={() => toggleNavbar()}>
-              <FontAwesomeIcon icon={faTimes} className="p-2 text-3xl"/>
+            <FontAwesomeIcon icon={faTimes} className="p-2 text-3xl" />
           </button>
           <NavLinks />
         </div>

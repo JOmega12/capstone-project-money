@@ -10,7 +10,8 @@ import { EditTransaction } from "../forms/EditTransaction";
 
 export const IncomeDash = () => {
   const { user } = useAuth();
-  const { money, deleteTransaction, editingId, setEditingId, fixTransaction } = useMoney();
+  const { money, deleteTransaction, editingId, setEditingId, fixTransaction } =
+    useMoney();
 
   const { categories } = useCategory();
 

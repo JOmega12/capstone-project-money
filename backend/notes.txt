@@ -362,3 +362,15 @@ Fixed random bugs while testing as well as implementing ui for login/signup
 
 Working on:
 creating monthly income and total amount goals for chartJS
+
+
+
+11/13/2024
+
+Still working on trying to get monthly data instead of over time data on charts
+
+11/14/2024 
+fixed ui on login and show password login
+created monthly chart on dashboard
+
+Project Done. Will be doing Readme
