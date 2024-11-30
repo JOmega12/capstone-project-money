@@ -21,12 +21,14 @@ The aim of the project is to track how much money you take in and what are your 
     
 #### **Backend:**
 - cd backend
+- then type ` pip freeze > requirements.txt `
 - type this: `  .\.venv\Scripts\activate  `
 - then ` py manage.py runserver `
 
 
 #### **Frontend:** 
 - cd client
+- then type ` npm i`
 - type this: ` npm run dev ` then press ` o `
 
 
