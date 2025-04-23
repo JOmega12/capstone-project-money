@@ -21,7 +21,7 @@ The aim of the project is to track how much money you take in and what are your 
     
 #### **Backend:**
 - cd backend
-- then type ` pip freeze > requirements.txt `
+- then type ` pip install -r requirements.txt `
 - type this: `  .\.venv\Scripts\activate  `
 - then ` py manage.py runserver `
 
