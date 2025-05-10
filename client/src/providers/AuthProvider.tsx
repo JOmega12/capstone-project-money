@@ -62,8 +62,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     });
 
     const data = await response.json();
-
-    if (response.status === 200) {
+  console.log(response, "response");
+    if (response.status === 200 || response.status === 201) {
       setAuthToken(data);
       setUser(jwtDecode(data.access));
       localStorage.setItem("authToken", JSON.stringify(data));

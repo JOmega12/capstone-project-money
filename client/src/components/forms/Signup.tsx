@@ -91,7 +91,7 @@ export const SignUp = () => {
           <div className="flex flex-row m-2 text-center cursor-pointer">
             <input
               type="submit"
-              value="Login"
+              value="Signup"
               className="items-center h-14 w-full max-w-md border border-gray-300 rounded-lg py-2 px-10 focus:outline-none focus:border-blue-500 bg-green-500 hover:bg-green-600"
             />
           </div>
