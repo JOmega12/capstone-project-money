@@ -15,14 +15,17 @@ The aim of the project is to track how much money you take in and what are your 
 - Python
 - Django
 - Jwt Authentication 
+- AES256 Encryption
 
+## Databse:
+- SQL
 
 ##  To Start This Project: 
     
 #### **Backend:**
 - cd backend
 - then type ` pip install -r requirements.txt `
-- type this: `  .\.venv\Scripts\activate  `
+- type this: `  py manage.py migrate ` for the database
 - then ` py manage.py runserver `
 
 
