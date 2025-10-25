@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Login } from "./forms/Login";
-import { SignUp } from "./forms/SignUp";
+import { SignUp } from "./forms/Signup";
 
+// import { SignUp } from "./forms/signup";
 export const WelcomeComponent = () => {
   const [isLogin, setIsLogin] = useState(false);
   const onButtonClick = (bool: boolean) => {
